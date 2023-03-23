@@ -1,13 +1,13 @@
-package io.skai.accounting;
+package io.skai.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AccountingApplication {
+public class NotificationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AccountingApplication.class, args);
+		SpringApplication.run(NotificationApplication.class, args);
 	}
 
 }
