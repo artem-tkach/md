@@ -2,3 +2,12 @@ rootProject.name = 'md'
 include 'accounting',
         'notification'
 
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            library('openapi', 'org.springdoc:springdoc-openapi-ui:1.6.15')
+            library('lombok', 'org.projectlombok:lombok:1.18.26')
+        }
+    }
+}
+
