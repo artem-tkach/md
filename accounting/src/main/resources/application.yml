@@ -2,6 +2,18 @@ server:
   port: 8080
 
 spring:
-  springdoc:
-    swagger-ui:
-      path: /swagger-ui.html
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/mobile_accounting?createDatabaseIfNotExist=TRUE&currentSchema=mobile_accounting
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  application:
+    name: md
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

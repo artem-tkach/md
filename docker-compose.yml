@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  docker-mysql:
+    container_name: my_db
+    image: mysql
+    environment:
+      MYSQL_DATABASE: 'mobile_accounting'
+      MYSQL_USER: artem
+      MYSQL_PASSWORD: '12345'
+      MYSQL_ROOT_PASSWORD: '12345'
+    ports:
+        - '3307:3306'
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  db-data:
