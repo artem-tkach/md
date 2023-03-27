@@ -7,7 +7,6 @@ dependencies{
     implementation libs.openapi
     implementation libs.mysql
     implementation libs.jpa
-    implementation 'org.springframework.boot:spring-boot-configuration-processor:3.0.5'
     implementation libs.mapstruct
     annotationProcessor libs.mapstruct.annotation.processor
 }
