@@ -13,6 +13,8 @@ spring:
 
   application:
     name: md
+  liquibase:
+    change-log: classpath:config/liquibase/master.xml
 
 springdoc:
   swagger-ui:

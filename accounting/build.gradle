@@ -9,4 +9,5 @@ dependencies{
     implementation libs.jpa
     implementation libs.mapstruct
     annotationProcessor libs.mapstruct.annotation.processor
+    implementation libs.liquibase
 }
