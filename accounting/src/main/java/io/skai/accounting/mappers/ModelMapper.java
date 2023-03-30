@@ -16,6 +16,6 @@ import java.util.List;
 public interface ModelMapper {
     @Mapping(source = "brandId", target = "brand")
     ModelResponseDto toModelResponseDto(ModelRecord modelRecord);
-
+    @Mapping(source = "brandId", target = "brand")
     List<ModelResponseDto> toModelResponseDtoList(List<Model> models);
 }
