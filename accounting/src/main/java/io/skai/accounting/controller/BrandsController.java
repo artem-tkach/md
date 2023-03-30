@@ -3,6 +3,7 @@ package io.skai.accounting.controller;
 import io.skai.accounting.dto.brand.BrandRequestDto;
 import io.skai.accounting.dto.brand.BrandResponseDto;
 import io.skai.accounting.service.BrandService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,8 @@ import java.util.List;
 public class BrandsController {
     private final BrandService brandService;
     @PostMapping
-    public String create(@RequestBody BrandRequestDto dto){
-        brandService.create(dto);
-        return "aaaa";
+    public BrandResponseDto create(final @Valid @RequestBody BrandRequestDto dto){
+        return brandService.create(dto);
     }
     @GetMapping
     public List<BrandResponseDto> getAll(){

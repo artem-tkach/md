@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BrandService {
-    BrandResponseDto create(BrandRequestDto dto);
+    BrandResponseDto create(final BrandRequestDto dto);
 
     List<BrandResponseDto> getAll();
 
-    Optional<Brand> findById(Long id);
+    Optional<Brand> findOptionalById(final Long id);
+
+    Brand findById(final Long id);
 }

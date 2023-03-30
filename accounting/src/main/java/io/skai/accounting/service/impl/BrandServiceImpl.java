@@ -2,9 +2,7 @@ package io.skai.accounting.service.impl;
 
 import io.skai.accounting.dto.brand.BrandRequestDto;
 import io.skai.accounting.dto.brand.BrandResponseDto;
-import io.skai.accounting.jooq.Tables;
 import io.skai.accounting.jooq.tables.pojos.Brand;
-import io.skai.accounting.jooq.tables.records.BrandRecord;
 import io.skai.accounting.mappers.BrandMapper;
 import io.skai.accounting.service.BrandService;
 import lombok.RequiredArgsConstructor;
@@ -24,15 +22,16 @@ public class BrandServiceImpl implements BrandService {
     private final DSLContext dslContext;
     private final BrandMapper brandMapper;
     @Override
-    public BrandResponseDto create(BrandRequestDto dto) {
+    public BrandResponseDto create(final BrandRequestDto dto) {
         log.trace("Call create brand");
-        BrandRecord brandRecord = dslContext.insertInto(BRAND)
-                .columns(BRAND.NAME)
+
+        return brandMapper.toBrandResponseDto(
+                dslContext.insertInto(BRAND, BRAND.NAME)
                 .values(dto.getName())
                 .returning()
-                .fetchOne();
-
-        return brandMapper.totoBrandResponseDto(brandRecord);
+                .fetchOptional()
+                .orElseThrow()
+                .into(Brand.class));
     }
 
     @Override
@@ -43,10 +42,18 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Optional<Brand> findById(Long id) {
-        log.trace("Call find brand by id, id={id}", id);
+    public Optional<Brand> findOptionalById(final Long id) {
+        log.trace("Call find optional<Brand> by id, id={}", id);
         return dslContext.selectFrom(BRAND)
                 .where(BRAND.ID.eq(id))
                 .fetchOptionalInto(Brand.class);
+    }
+
+    @Override
+    public Brand findById(final Long id) {
+        log.trace("Call find brand by id, id={}", id);
+        return dslContext.selectFrom(BRAND)
+                .where(BRAND.ID.eq(id))
+                .fetchOneInto(Brand.class);
     }
 }
