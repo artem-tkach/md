@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 
-    <changeSet id="00001" author="Artem Tkach">
-        <createTable tableName="clients">
+    <changeSet id="00001_init_table_client" author="artem-tkach">
+        <createTable tableName="client">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -19,8 +17,11 @@
                 <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
+    </changeSet>
 
-        <createTable tableName="brands">
+
+    <changeSet id="00002_init_table_brand" author="artem-tkach">
+        <createTable tableName="brand">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -28,17 +29,20 @@
                 <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
+    </changeSet>
 
-        <createTable tableName="models">
+    <changeSet id="00003_init_table_model" author="artem-tkach">
+        <createTable tableName="model">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="brand_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_brand_model" references="brands(id)"/>
+            <column name="brand_id" type="bigint" >
+                <constraints nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
+
 </databaseChangeLog>

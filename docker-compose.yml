@@ -11,7 +11,7 @@ services:
     ports:
         - '3307:3306'
     volumes:
-      - db-data:/var/lib/mysql
+     - db-data:/var/lib/mysql
 
   zookeeper-1:
     image: confluentinc/cp-zookeeper:latest

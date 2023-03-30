@@ -1,0 +1,47 @@
+import org.jooq.codegen.GenerationTool
+import org.jooq.meta.jaxb.Database
+import org.jooq.meta.jaxb.Generate
+import org.jooq.meta.jaxb.Generator
+import org.jooq.meta.jaxb.Jdbc
+import org.jooq.meta.jaxb.Target
+import org.jooq.meta.jaxb.Configuration
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath libs.jooqCodegen
+        classpath libs.mysql
+    }
+}
+ext.genpath = new File("${projectDir}/src/main/java")
+
+tasks.register('generateAccountingClasses') {
+    description 'Generate classes for accounting project.'
+    group 'custom'
+    doLast {
+        println("JOOQ::starting generating classes for accounting project")
+        GenerationTool.generate(new Configuration()
+                .withJdbc(new Jdbc()
+                        .withDriver('com.mysql.cj.jdbc.Driver')
+                        .withUrl('jdbc:mysql://localhost:3307/mobile_accounting')
+                        .withUser('artem')
+                        .withPassword('12345'))
+                .withGenerator(new Generator()
+                        .withDatabase(new Database()
+                                .withName("org.jooq.meta.mysql.MySQLDatabase")
+                                .withIncludes(".*")
+                                .withExcludes("DATABASECHANGELOG|DATABASECHANGELOGLOCK")
+                                .withInputSchema('mobile_accounting'))
+                        .withGenerate(new Generate()
+                                .withPojos(true)
+                                .withDaos(true))
+                        .withTarget(new Target()
+                                .withPackageName('io.skai.accounting.jooq')
+                                .withDirectory(genpath.toString()))))
+        println('JOOQ::finished generating classes for accounting project')
+    }
+}
