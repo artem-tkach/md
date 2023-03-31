@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ClientsController {
     private final ClientService clientService;
     @PostMapping

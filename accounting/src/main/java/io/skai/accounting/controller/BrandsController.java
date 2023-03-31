@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/brands")
 @RequiredArgsConstructor
+@CrossOrigin
 public class BrandsController {
     private final BrandService brandService;
     @PostMapping
