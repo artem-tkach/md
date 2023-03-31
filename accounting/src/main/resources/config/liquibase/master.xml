@@ -4,12 +4,5 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
-    <includeAll path="com/example/db/changelog/"/>
-
-
-    <include file="classpath:config/liquibase/changelog/00001_initial_schema.xml" relativeToChangelogFile="false" />
-    <!--TODO: include all !-->
-    <!--
-    <include file="classpath:liquibase/changelog/20170503041524_added_entity_Car.xml" relativeToChangelogFile="false" />
-    -->
+    <includeAll path="classpath:config/liquibase/changelog/"/>
 </databaseChangeLog>
