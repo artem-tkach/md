@@ -11,4 +11,5 @@ dependencies{
     implementation libs.liquibase
     compileOnly libs.jooq
     implementation libs.jooqCodegen
+    implementation libs.openfeign
 }
