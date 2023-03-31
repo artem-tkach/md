@@ -2,7 +2,6 @@ package io.skai.accounting.mappers;
 
 import io.skai.accounting.dto.model.ModelResponseDto;
 import io.skai.accounting.jooq.tables.pojos.Model;
-import io.skai.accounting.jooq.tables.records.ModelRecord;
 import io.skai.accounting.service.BrandService;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -15,7 +14,7 @@ import java.util.List;
         uses = {BrandMapper.class, BrandService.class})
 public interface ModelMapper {
     @Mapping(source = "brandId", target = "brand")
-    ModelResponseDto toModelResponseDto(ModelRecord modelRecord);
+    ModelResponseDto toModelResponseDto(Model model);
     @Mapping(source = "brandId", target = "brand")
     List<ModelResponseDto> toModelResponseDtoList(List<Model> models);
 }
