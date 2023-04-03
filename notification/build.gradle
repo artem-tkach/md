@@ -3,4 +3,5 @@ dependencies{
     compileOnly libs.lombok
     implementation libs.openapi
     annotationProcessor libs.lombok
+    implementation libs.springMail
 }

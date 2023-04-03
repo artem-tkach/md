@@ -19,7 +19,8 @@ dependencyResolutionManagement {
             library('jooqCodegen', 'org.jooq:jooq-codegen:3.17.10')
             // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
             library('openfeign','org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2')
-
+            // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+            library('springMail','org.springframework.boot:spring-boot-starter-mail:3.0.5')
         }
     }
 }
