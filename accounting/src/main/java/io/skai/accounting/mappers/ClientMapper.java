@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface ClientMapper {
     @Mapping(target = "id", ignore = true)
     Client toClient(ClientRequestDto dto);
