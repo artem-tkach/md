@@ -42,6 +42,7 @@ tasks.register('generateAccountingClasses') {
                         .withTarget(new Target()
                                 .withPackageName('io.skai.accounting.jooq')
                                 .withDirectory(genpath.toString()))))
+        println(genpath.toString())
         println('JOOQ::finished generating classes for accounting project')
     }
 }
