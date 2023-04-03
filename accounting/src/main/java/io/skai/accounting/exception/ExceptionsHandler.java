@@ -32,7 +32,7 @@ public class ExceptionsHandler {
 
     private ErrorResponseBody buildErrorResponseBody(final Exception exception,final WebRequest request,final HttpStatus httpStatus){
         return ErrorResponseBody.builder()
-                .message(exception.getLocalizedMessage())
+                .message(exception.getMessage())
                 .timeStamp(System.currentTimeMillis())
                 .exception(exception.getClass().getName())
                 .description(request.getDescription(false))

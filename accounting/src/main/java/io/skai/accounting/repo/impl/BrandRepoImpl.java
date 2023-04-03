@@ -32,7 +32,7 @@ public class BrandRepoImpl implements BrandRepo {
     }
 
     @Override
-    public Optional<Brand> findOneOptional(Long id) {
+    public Optional<Brand> findOneOptional(final Long id) {
         return dslContext.selectFrom(BRAND)
                 .where(BRAND.ID.eq(id))
                 .fetchOptionalInto(Brand.class);
