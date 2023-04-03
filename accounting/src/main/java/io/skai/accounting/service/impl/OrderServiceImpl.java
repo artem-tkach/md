@@ -1,0 +1,29 @@
+package io.skai.accounting.service.impl;
+
+import io.skai.accounting.dto.order.OrderRequestDto;
+import io.skai.accounting.dto.order.OrderResponseDto;
+import io.skai.accounting.feignClients.NotificationClient;
+import io.skai.accounting.jooq.tables.pojos.Order;
+import io.skai.accounting.mappers.OrderMapper;
+import io.skai.accounting.repo.OrderRepo;
+import io.skai.accounting.service.OrderService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Service;
+
+@Service
+@Log4j2
+@RequiredArgsConstructor
+public class OrderServiceImpl implements OrderService {
+    private final OrderRepo orderRepo;
+    private final OrderMapper orderMapper;
+    private final NotificationClient notificationClient;
+
+    @Override
+    public OrderResponseDto createAndNotify(final OrderRequestDto dto) {
+        //Todo: add order validation
+        Order order = orderMapper.toOrder(dto);
+        notificationClient.notifyAboutNewOrder();
+        return orderMapper.toResponseDto(orderRepo.create(order));
+    }
+}
