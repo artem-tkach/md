@@ -12,4 +12,5 @@ dependencies{
     compileOnly libs.jooq
     implementation libs.jooqCodegen
     implementation libs.openfeign
+    implementation libs.redis
 }
