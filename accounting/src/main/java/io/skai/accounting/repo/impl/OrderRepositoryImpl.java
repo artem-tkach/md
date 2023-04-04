@@ -1,7 +1,7 @@
 package io.skai.accounting.repo.impl;
 
 import io.skai.accounting.jooq.tables.pojos.Order;
-import io.skai.accounting.repo.OrderRepo;
+import io.skai.accounting.repo.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import static io.skai.accounting.jooq.Tables.ORDER;
 @Repository
 @RequiredArgsConstructor
-public class OrderRepoImpl implements OrderRepo {
+public class OrderRepositoryImpl implements OrderRepository {
     private final DSLContext dslContext;
     @Override
     public Order create(Order order) {

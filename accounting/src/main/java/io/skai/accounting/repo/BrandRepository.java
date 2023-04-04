@@ -5,7 +5,7 @@ import io.skai.accounting.jooq.tables.pojos.Brand;
 import java.util.List;
 import java.util.Optional;
 
-public interface BrandRepo {
+public interface BrandRepository {
     Brand create(String name);
     List<Brand> findAll();
     Optional<Brand> findOneOptional(Long id);

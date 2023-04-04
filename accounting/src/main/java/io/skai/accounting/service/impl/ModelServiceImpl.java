@@ -5,7 +5,7 @@ import io.skai.accounting.dto.model.ModelResponseDto;
 import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.jooq.tables.pojos.Model;
 import io.skai.accounting.mappers.ModelMapper;
-import io.skai.accounting.repo.ModelRepo;
+import io.skai.accounting.repo.ModelRepository;
 import io.skai.accounting.service.BrandService;
 import io.skai.accounting.service.ModelService;
 import io.skai.accounting.validators.impl.brand.BrandExistsValidator;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ModelServiceImpl implements ModelService {
     private final ModelMapper modelMapper;
     private final BrandExistsValidator brandExistsValidator;
-    private final ModelRepo modelRepo;
+    private final ModelRepository modelRepository;
     private final BrandService brandService;
 
     @Override
@@ -29,21 +29,23 @@ public class ModelServiceImpl implements ModelService {
         log.debug("brand id is {}", dto.getBrandId());
 
         brandExistsValidator.validate(new Brand(dto.getBrandId(), null));
-        Model model = modelRepo.create(dto.getBrandId(), dto.getName());
+        Model model = modelRepository.create(dto.getBrandId(), dto.getName());
         return modelMapper.toModelResponseDto(model);
     }
 
     @Override
     public List<ModelResponseDto> findAllDtoByBrandId(final Long brandId) {
         log.trace("Find all models DTO by brand id call");
-        List<Model> models = modelRepo.findAllByBrandId(brandId);
+        List<Model> models = modelRepository.findAllByBrandId(brandId);
         //return modelMapper.toModelResponseDtoList(models);
         return mapModelList(models);
     }
 
-    private List<ModelResponseDto> mapModelList(List<Model> models){
+    private List<ModelResponseDto> mapModelList(List<Model> models) {
+        //Todo:: move brands query in map<Long, Brand>
+        //Todo::Look redis
         return models.stream()
-                .map(model->modelMapper.toModelResponseDto(model, brandService.findById(model.getBrandId())))
+                .map(model -> modelMapper.toModelResponseDto(model, brandService.findById(model.getBrandId())))
                 .toList();
     }
 }

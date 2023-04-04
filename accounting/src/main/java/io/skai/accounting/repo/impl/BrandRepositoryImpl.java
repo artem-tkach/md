@@ -1,7 +1,7 @@
 package io.skai.accounting.repo.impl;
 
 import io.skai.accounting.jooq.tables.pojos.Brand;
-import io.skai.accounting.repo.BrandRepo;
+import io.skai.accounting.repo.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -13,7 +13,7 @@ import static io.skai.accounting.jooq.Tables.BRAND;
 
 @Repository
 @RequiredArgsConstructor
-public class BrandRepoImpl implements BrandRepo {
+public class BrandRepositoryImpl implements BrandRepository {
     private final DSLContext dslContext;
     @Override
     public Brand create(final String name) {

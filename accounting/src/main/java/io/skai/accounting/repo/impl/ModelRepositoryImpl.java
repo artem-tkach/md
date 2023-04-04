@@ -1,7 +1,7 @@
 package io.skai.accounting.repo.impl;
 
 import io.skai.accounting.jooq.tables.pojos.Model;
-import io.skai.accounting.repo.ModelRepo;
+import io.skai.accounting.repo.ModelRepository;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import static io.skai.accounting.jooq.Tables.MODEL;
 
 @Repository
 @RequiredArgsConstructor
-public class ModelRepoImpl implements ModelRepo {
+public class ModelRepositoryImpl implements ModelRepository {
     private final DSLContext dslContext;
 
     @Override
