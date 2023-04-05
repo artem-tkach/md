@@ -5,7 +5,7 @@ import io.skai.accounting.dto.model.ModelResponseDto;
 import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.jooq.tables.pojos.Model;
 import io.skai.accounting.mappers.ModelMapper;
-import io.skai.accounting.repo.ModelRepository;
+import io.skai.accounting.repository.ModelRepository;
 import io.skai.accounting.service.BrandService;
 import io.skai.accounting.service.ModelService;
 import io.skai.accounting.validators.impl.brand.BrandExistsValidator;
@@ -34,18 +34,15 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<ModelResponseDto> findAllDtoByBrandId(final Long brandId) {
+    public List<ModelResponseDto> findAllDto(Long brandId) {
         log.trace("Find all models DTO by brand id call");
-        List<Model> models = modelRepository.findAllByBrandId(brandId);
-        //return modelMapper.toModelResponseDtoList(models);
+        List<Model> models = modelRepository.findAll(brandId);
         return mapModelList(models);
     }
 
     private List<ModelResponseDto> mapModelList(List<Model> models) {
-        //Todo:: move brands query in map<Long, Brand>
-        //Todo::Look redis
         return models.stream()
-                .map(model -> modelMapper.toModelResponseDto(model, brandService.findById(model.getBrandId())))
+                .map(model -> modelMapper.toModelResponseDto(model, brandService.findOne(model.getBrandId())))
                 .toList();
     }
 }

@@ -1,5 +1,6 @@
 package io.skai.accounting.service.impl;
 
+import io.skai.accounting.dto.notificationDto.NewOrderDto;
 import io.skai.accounting.feignClients.NotificationClient;
 import io.skai.accounting.jooq.tables.pojos.Order;
 import io.skai.accounting.service.NotificationService;
@@ -16,6 +17,11 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Async
     public void notifyAboutNewOrder(final Order order) {
-        notificationClient.notifyAboutNewOrder();
+        NewOrderDto dto = NewOrderDto.builder()
+                .orderId(order.getId())
+                .model("Some model")
+                .defect(order.getDefect())
+                .build();
+        notificationClient.notifyAboutNewOrder(dto);
     }
 }

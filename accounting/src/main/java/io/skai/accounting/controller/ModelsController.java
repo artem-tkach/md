@@ -22,6 +22,6 @@ public class ModelsController {
 
     @GetMapping
     public List<ModelResponseDto> findAllById(final @RequestParam Long brandId){
-        return modelService.findAllDtoByBrandId(brandId);
+        return modelService.findAllDto(brandId);
     }
 }

@@ -4,7 +4,7 @@ import io.skai.accounting.dto.client.ClientRequestDto;
 import io.skai.accounting.dto.client.ClientResponseDto;
 import io.skai.accounting.jooq.tables.pojos.Client;
 import io.skai.accounting.mappers.ClientMapper;
-import io.skai.accounting.repo.ClientRepository;
+import io.skai.accounting.repository.ClientRepository;
 import io.skai.accounting.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

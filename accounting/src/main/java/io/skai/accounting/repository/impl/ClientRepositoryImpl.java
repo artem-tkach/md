@@ -1,7 +1,7 @@
-package io.skai.accounting.repo.impl;
+package io.skai.accounting.repository.impl;
 
 import io.skai.accounting.jooq.tables.pojos.Client;
-import io.skai.accounting.repo.ClientRepository;
+import io.skai.accounting.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;

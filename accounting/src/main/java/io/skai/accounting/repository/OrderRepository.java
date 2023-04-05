@@ -1,4 +1,4 @@
-package io.skai.accounting.repo;
+package io.skai.accounting.repository;
 
 import io.skai.accounting.jooq.tables.pojos.Order;
 

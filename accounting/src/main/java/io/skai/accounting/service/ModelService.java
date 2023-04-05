@@ -6,7 +6,7 @@ import io.skai.accounting.dto.model.ModelResponseDto;
 import java.util.List;
 
 public interface ModelService {
-    ModelResponseDto create(final ModelRequestDto dto);
+    ModelResponseDto create(ModelRequestDto dto);
 
-    List<ModelResponseDto> findAllDtoByBrandId(final Long brandId);
+    List<ModelResponseDto> findAllDto(Long brandId);
 }

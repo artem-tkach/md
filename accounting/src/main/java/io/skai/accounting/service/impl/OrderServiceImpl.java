@@ -4,7 +4,7 @@ import io.skai.accounting.dto.order.OrderRequestDto;
 import io.skai.accounting.dto.order.OrderResponseDto;
 import io.skai.accounting.jooq.tables.pojos.Order;
 import io.skai.accounting.mappers.OrderMapper;
-import io.skai.accounting.repo.OrderRepository;
+import io.skai.accounting.repository.OrderRepository;
 import io.skai.accounting.service.NotificationService;
 import io.skai.accounting.service.OrderService;
 import lombok.RequiredArgsConstructor;

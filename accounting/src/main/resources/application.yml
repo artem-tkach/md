@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  cache:
+    type: redis
   jpa:
     show-sql: true
     hibernate:
@@ -17,6 +19,10 @@ spring:
     name: md
   liquibase:
     change-log: classpath:config/liquibase/master.xml
+  data:
+    redis:
+      port: 6379
+      host: localhost
 
 springdoc:
   swagger-ui:

@@ -2,6 +2,7 @@ package io.skai.accounting.controller;
 
 import io.skai.accounting.dto.brand.BrandRequestDto;
 import io.skai.accounting.dto.brand.BrandResponseDto;
+import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.service.BrandService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +23,10 @@ public class BrandsController {
     @GetMapping
     public List<BrandResponseDto> getAll(){
         return brandService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Brand get(@PathVariable Long id){
+        return brandService.findOne(id);
     }
 }

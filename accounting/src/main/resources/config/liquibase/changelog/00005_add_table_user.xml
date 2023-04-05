@@ -16,7 +16,7 @@
             </column>
             <column name="phone" type="varchar(255)"/>
             <column name="password" type="varchar(255)"/>
-            <column name="role" type="varchar(20)"/>
+            <column name="role" type="int"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

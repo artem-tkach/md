@@ -1,7 +1,7 @@
-package io.skai.accounting.repo.impl;
+package io.skai.accounting.repository.impl;
 
 import io.skai.accounting.jooq.tables.pojos.Model;
-import io.skai.accounting.repo.ModelRepository;
+import io.skai.accounting.repository.ModelRepository;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,7 @@ public class ModelRepositoryImpl implements ModelRepository {
     private final DSLContext dslContext;
 
     @Override
-    public Model create(final Long brandId, final String name) {
+    public Model create(Long brandId, String name) {
         return dslContext.insertInto(MODEL)
                 .set(MODEL.BRAND_ID, brandId)
                 .set(MODEL.NAME, name)
@@ -27,7 +27,7 @@ public class ModelRepositoryImpl implements ModelRepository {
     }
 
     @Override
-    public List<Model> findAllByBrandId(Long brandId) {
+    public List<Model> findAll(Long brandId) {
         return dslContext.selectFrom(MODEL)
                 .where(MODEL.BRAND_ID.eq(brandId))
                 .fetchInto(Model.class);
