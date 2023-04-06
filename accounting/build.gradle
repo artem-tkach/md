@@ -15,4 +15,5 @@ dependencies{
     implementation libs.redis
     testImplementation libs.springTests
     testImplementation libs.assertJ
+    testImplementation libs.hamcrest
 }

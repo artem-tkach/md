@@ -27,6 +27,9 @@ dependencyResolutionManagement {
             library('springTests', 'org.springframework.boot:spring-boot-starter-test:3.0.5')
             // https://mvnrepository.com/artifact/org.assertj/assertj-core
             library('assertJ', 'org.assertj:assertj-core:3.24.2')
+            // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all
+            library('hamcrest', 'org.hamcrest:hamcrest-all:1.3')
+
         }
     }
 }
