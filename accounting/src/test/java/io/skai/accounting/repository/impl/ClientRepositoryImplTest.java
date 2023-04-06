@@ -7,12 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
 import static io.skai.accounting.jooq.Tables.CLIENT;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -68,5 +70,12 @@ class ClientRepositoryImplTest {
                 .hasFieldOrPropertyWithValue("email", "bill@somemail.com")
                 .satisfies(c -> assertThat(c.getId())
                         .isPositive());
+    }
+
+        @Test
+    void whenDataInsertedCreateDuplicateThenThrownException() {
+        Client client = new Client(null, "Sara", "sara@somemail.com");
+        assertThatThrownBy(()->clientRepository.create(client))
+                .isInstanceOf(DuplicateKeyException.class);
     }
 }

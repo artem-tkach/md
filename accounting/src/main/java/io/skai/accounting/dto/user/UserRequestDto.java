@@ -1,6 +1,7 @@
 package io.skai.accounting.dto.user;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
 
 @Value

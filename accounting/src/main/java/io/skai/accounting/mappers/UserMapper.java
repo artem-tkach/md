@@ -1,10 +1,6 @@
 package io.skai.accounting.mappers;
 
-import io.skai.accounting.dto.user.UserRequestDto;
-import io.skai.accounting.dto.user.UserResponseDto;
 import org.mapstruct.Mapper;
-
-import java.util.List;
 
 @Mapper
 public interface UserMapper {

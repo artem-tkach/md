@@ -27,7 +27,7 @@ public class BrandServiceImpl implements BrandService {
     public BrandResponseDto create(BrandRequestDto dto) {
         //Todo::Cache evict doesn't works
         log.trace("Call create brand");
-        return brandMapper.toBrandResponseDto(brandRepository.create(dto.getName()));
+        return brandMapper.toBrandResponseDto(brandRepository.create(dto.name()));
     }
 
     @Override

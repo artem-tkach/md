@@ -26,10 +26,10 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public ModelResponseDto create(final ModelRequestDto dto) {
-        log.debug("brand id is {}", dto.getBrandId());
+        log.debug("brand id is {}", dto.brandId());
 
-        brandExistsValidator.validate(new Brand(dto.getBrandId(), null));
-        Model model = modelRepository.create(dto.getBrandId(), dto.getName());
+        brandExistsValidator.validate(new Brand(dto.brandId(), null));
+        Model model = modelRepository.create(dto.brandId(), dto.name());
         return modelMapper.toModelResponseDto(model);
     }
 
