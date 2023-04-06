@@ -9,6 +9,8 @@ import lombok.extern.jackson.Jacksonized;
 @Builder
 @Jacksonized
 public class ModelResponseDto {
+    //TODO rename into ModelDto
+    //TODO rename package with out camelCase
     Long id;
     String name;
     BrandResponseDto brand;

@@ -13,4 +13,6 @@ dependencies{
     implementation libs.jooqCodegen
     implementation libs.openfeign
     implementation libs.redis
+    testImplementation libs.springTests
+    testImplementation libs.assertJ
 }

@@ -33,14 +33,14 @@ public class BrandRepositoryImpl implements BrandRepository {
     }
 
     @Override
-    public Optional<Brand> findOneOptional(final Long id) {
+    public Optional<Brand> findOneOptional(Long id) {
         return dslContext.selectFrom(BRAND)
                 .where(BRAND.ID.eq(id))
                 .fetchOptionalInto(Brand.class);
     }
 
     @Override
-    public Brand findOne(final Long id) {
+    public Brand findOne(Long id) {
         return dslContext.selectFrom(BRAND)
                 .where(BRAND.ID.eq(id))
                 .fetchOneInto(Brand.class);

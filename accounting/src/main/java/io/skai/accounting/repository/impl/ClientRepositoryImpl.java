@@ -16,7 +16,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     private final DSLContext dslContext;
 
     @Override
-    public Client create(final Client client) {
+    public Client create(Client client) {
         return dslContext.insertInto(CLIENT)
                 .set(CLIENT.NAME, client.getName())
                 .set(CLIENT.EMAIL, client.getEmail())

@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface OrderMapper {
     @Mapping(target = "id", ignore = true)
-    Order toOrder(final OrderRequestDto dto);
+    Order toOrder(OrderRequestDto dto);
 
-    OrderResponseDto toResponseDto(final Order order);
+    OrderResponseDto toResponseDto(Order order);
 }
