@@ -10,8 +10,10 @@ import java.util.List;
 
 @Mapper
 public interface ClientMapper {
+
     @Mapping(target = "id", ignore = true)
     Client toClient(ClientRequestDto dto);
+
     ClientDto toResponseDto(Client client);
 
     List<ClientDto> toResponseDtoList(List<Client> clients);

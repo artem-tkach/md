@@ -17,7 +17,7 @@ public class BrandRepositoryImpl implements BrandRepository {
     private final DSLContext dslContext;
 
     @Override
-    public Brand create(final String name) {
+    public Brand create(String name) {
         return dslContext.insertInto(BRAND, BRAND.NAME)
                 .values(name)
                 .returning()

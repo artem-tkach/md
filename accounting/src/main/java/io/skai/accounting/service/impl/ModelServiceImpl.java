@@ -25,7 +25,7 @@ public class ModelServiceImpl implements ModelService {
     private final BrandService brandService;
 
     @Override
-    public ModelDto create(final ModelRequestDto dto) {
+    public ModelDto create(ModelRequestDto dto) {
         log.debug("brand id is {}", dto.brandId());
 
         brandExistsValidator.validate(new Brand(dto.brandId(), null));

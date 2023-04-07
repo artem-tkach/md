@@ -20,7 +20,7 @@ public class ClientServiceImpl implements ClientService {
     private final ClientMapper clientMapper;
 
     @Override
-    public ClientDto create(final ClientRequestDto dto) {
+    public ClientDto create(ClientRequestDto dto) {
         log.trace("Create client call");
         Client client = clientMapper.toClient(dto);
         return clientMapper.toResponseDto(clientRepository.create(client));

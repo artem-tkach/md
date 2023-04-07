@@ -8,6 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface BrandMapper {
+
     List<BrandDto> toBrandResponseDtoList(List<Brand> brands);
 
     BrandDto toBrandResponseDto(Brand brand);
