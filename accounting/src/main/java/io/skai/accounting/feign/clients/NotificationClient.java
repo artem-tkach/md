@@ -1,4 +1,4 @@
-package io.skai.accounting.feignClients;
+package io.skai.accounting.feign.clients;
 
 import feign.RequestLine;
 import io.skai.accounting.dto.notificationDto.NewOrderDto;
@@ -8,10 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
         url = "http://localhost:8081/",
         configuration = NotificationConfig.class)
 public interface NotificationClient {
-    @RequestLine("GET /notify")
-    String getNotifyGreeting();
-
     @RequestLine("POST /notify/newOrder")
-    String notifyAboutNewOrder(NewOrderDto dto);
+    void notifyAboutNewOrder(NewOrderDto dto);
 }
 

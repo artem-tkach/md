@@ -1,7 +1,7 @@
 package io.skai.accounting.service.impl;
 
 import io.skai.accounting.dto.model.ModelRequestDto;
-import io.skai.accounting.dto.model.ModelResponseDto;
+import io.skai.accounting.dto.model.ModelDto;
 import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.jooq.tables.pojos.Model;
 import io.skai.accounting.mappers.ModelMapper;
@@ -25,7 +25,7 @@ public class ModelServiceImpl implements ModelService {
     private final BrandService brandService;
 
     @Override
-    public ModelResponseDto create(final ModelRequestDto dto) {
+    public ModelDto create(final ModelRequestDto dto) {
         log.debug("brand id is {}", dto.brandId());
 
         brandExistsValidator.validate(new Brand(dto.brandId(), null));
@@ -34,13 +34,13 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<ModelResponseDto> findAllDto(Long brandId) {
+    public List<ModelDto> findAllDto(Long brandId) {
         log.trace("Find all models DTO by brand id call");
         List<Model> models = modelRepository.findAll(brandId);
         return mapModelList(models);
     }
 
-    private List<ModelResponseDto> mapModelList(List<Model> models) {
+    private List<ModelDto> mapModelList(List<Model> models) {
         return models.stream()
                 .map(model -> modelMapper.toModelResponseDto(model, brandService.findOne(model.getBrandId())))
                 .toList();

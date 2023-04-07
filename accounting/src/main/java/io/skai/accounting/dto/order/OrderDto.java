@@ -7,7 +7,7 @@ import lombok.extern.jackson.Jacksonized;
 @Value
 @Builder
 @Jacksonized
-public class OrderResponseDto {
+public class OrderDto {
     Long id;
     Long clientId;
     Long modelId;

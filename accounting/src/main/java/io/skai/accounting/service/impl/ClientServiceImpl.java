@@ -1,7 +1,7 @@
 package io.skai.accounting.service.impl;
 
 import io.skai.accounting.dto.client.ClientRequestDto;
-import io.skai.accounting.dto.client.ClientResponseDto;
+import io.skai.accounting.dto.client.ClientDto;
 import io.skai.accounting.jooq.tables.pojos.Client;
 import io.skai.accounting.mappers.ClientMapper;
 import io.skai.accounting.repository.ClientRepository;
@@ -20,14 +20,14 @@ public class ClientServiceImpl implements ClientService {
     private final ClientMapper clientMapper;
 
     @Override
-    public ClientResponseDto create(final ClientRequestDto dto) {
+    public ClientDto create(final ClientRequestDto dto) {
         log.trace("Create client call");
         Client client = clientMapper.toClient(dto);
         return clientMapper.toResponseDto(clientRepository.create(client));
     }
 
     @Override
-    public List<ClientResponseDto> getAllDto() {
+    public List<ClientDto> getAllDto() {
         log.trace("Get all clients as dto call");
         List<Client> clients = clientRepository.findAll();
         return clientMapper.toResponseDtoList(clients);

@@ -11,8 +11,6 @@ import org.springframework.web.context.request.WebRequest;
 @RestControllerAdvice
 @Log4j2
 public class ExceptionsHandler {
-    //TODO: do messages in readable look
-    //https://blog.payara.fish/returning-beautiful-validation-error-messages-in-jakarta-rest-with-exception-mappers
     @ExceptionHandler({Exception.class})
     protected ResponseEntity<Object> handleAllExceptions(Exception exception, WebRequest request) {
         log.error("Exception type::{}, message::{}, description::{}",

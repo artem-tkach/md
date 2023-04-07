@@ -1,7 +1,7 @@
 package io.skai.accounting.controller;
 
 import io.skai.accounting.dto.order.OrderRequestDto;
-import io.skai.accounting.dto.order.OrderResponseDto;
+import io.skai.accounting.dto.order.OrderDto;
 import io.skai.accounting.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class OrdersController {
     }
 
     @PostMapping
-    public OrderResponseDto create(final @Valid @RequestBody OrderRequestDto dto) {
+    public OrderDto create(final @Valid @RequestBody OrderRequestDto dto) {
         return orderService.createAndNotify(dto);
     }
 

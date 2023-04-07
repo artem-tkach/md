@@ -1,7 +1,7 @@
 package io.skai.accounting.service.impl;
 
 import io.skai.accounting.dto.notificationDto.NewOrderDto;
-import io.skai.accounting.feignClients.NotificationClient;
+import io.skai.accounting.feign.clients.NotificationClient;
 import io.skai.accounting.jooq.tables.pojos.Order;
 import io.skai.accounting.service.NotificationService;
 import lombok.RequiredArgsConstructor;

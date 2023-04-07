@@ -1,9 +1,9 @@
 package io.skai.accounting.service;
 
 import io.skai.accounting.dto.order.OrderRequestDto;
-import io.skai.accounting.dto.order.OrderResponseDto;
+import io.skai.accounting.dto.order.OrderDto;
 
 
 public interface OrderService {
-    OrderResponseDto createAndNotify(OrderRequestDto dto);
+    OrderDto createAndNotify(OrderRequestDto dto);
 }

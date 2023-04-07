@@ -1,7 +1,7 @@
 package io.skai.accounting.controller;
 
 import io.skai.accounting.dto.brand.BrandRequestDto;
-import io.skai.accounting.dto.brand.BrandResponseDto;
+import io.skai.accounting.dto.brand.BrandDto;
 import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.service.BrandService;
 import jakarta.validation.Valid;
@@ -17,11 +17,11 @@ import java.util.List;
 public class BrandsController {
     private final BrandService brandService;
     @PostMapping
-    public BrandResponseDto create(final @Valid @RequestBody BrandRequestDto dto){
+    public BrandDto create(final @Valid @RequestBody BrandRequestDto dto){
         return brandService.create(dto);
     }
     @GetMapping
-    public List<BrandResponseDto> getAll(){
+    public List<BrandDto> getAll(){
         return brandService.getAll();
     }
 

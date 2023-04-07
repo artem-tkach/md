@@ -1,7 +1,7 @@
 package io.skai.accounting.controller;
 
 import io.skai.accounting.dto.user.UserRequestDto;
-import io.skai.accounting.dto.user.UserResponseDto;
+import io.skai.accounting.dto.user.UserDto;
 import io.skai.accounting.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +16,12 @@ public class UsersController {
     private final UserService userService;
 
     @GetMapping
-    List<UserResponseDto> getAll() {
+    List<UserDto> getAll() {
         return userService.getAll();
     }
 
     @PostMapping
-    UserResponseDto createUser(@RequestBody UserRequestDto dto) {
+    UserDto createUser(@RequestBody UserRequestDto dto) {
         return userService.create(dto);
     }
 }

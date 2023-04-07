@@ -8,7 +8,7 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @Builder
 @Value
-public class UserResponseDto {
+public class UserDto {
     Long id;
     String name;
 }

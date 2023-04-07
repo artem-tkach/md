@@ -1,4 +1,4 @@
-package io.skai.accounting.feignClients;
+package io.skai.accounting.feign.clients;
 
 import feign.Contract;
 import org.springframework.context.annotation.Bean;
