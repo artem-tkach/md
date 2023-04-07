@@ -46,7 +46,7 @@ class BrandRepositoryImplTest {
     }
 
     @Test
-    void whenDataInsertedThenFindAllReturnThemTest() {
+    void whenDataInsertedThenFindAllReturnThem() {
         List<Brand> brands = brandRepository.findAll();
         assertThat(brands)
                 .hasSize(2)
@@ -58,20 +58,20 @@ class BrandRepositoryImplTest {
     }
 
     @Test
-    void whenDataInsertedThenFindOneReturnItTest() {
+    void whenDataInsertedThenFindOneReturnIt() {
         assertThat(brandRepository.findOne(1L))
                 .hasFieldOrPropertyWithValue("id", 1L)
                 .hasFieldOrPropertyWithValue("name", "Samsung");
     }
 
     @Test
-    void whenDataNotInsertedThenFindOneReturnNullTest() {
+    void whenDataNotInsertedThenFindOneReturnNull() {
         assertThat(brandRepository.findOne(999L))
                 .isNull();
     }
 
     @Test
-    void whenBrandInsertThenReturnItTest() {
+    void whenBrandInsertThenReturnIt() {
         String testName = "some brand";
         Brand brand = brandRepository.create(testName);
         assertThat(brand)
@@ -81,13 +81,13 @@ class BrandRepositoryImplTest {
     }
 
     @Test
-    void whenDataNotInsertedThenFindOneReturnEmptyOptionalTest() {
+    void whenDataNotInsertedThenFindOneReturnEmptyOptional() {
         assertThat(brandRepository.findOneOptional(999L))
                 .isEmpty();
     }
 
     @Test
-    void whenDataInsertedThenFindOneOptionalReturnItTest() {
+    void whenDataInsertedThenFindOneOptionalReturnIt() {
         Optional<Brand> result = brandRepository.findOneOptional(1L);
         assertThat(result)
                 .isPresent();
@@ -97,7 +97,7 @@ class BrandRepositoryImplTest {
     }
 
     @Test
-    void whenDataInsertedCreateDuplicateEntityThenThrowsExceptionTest() {
+    void whenDataInsertedCreateDuplicateEntityThenThrowsException() {
         String testName = "Samsung";
         assertThatThrownBy(() -> brandRepository.create(testName)).
                 isInstanceOf(DuplicateKeyException.class);

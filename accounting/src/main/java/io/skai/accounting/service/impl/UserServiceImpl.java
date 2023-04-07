@@ -1,26 +1,26 @@
 package io.skai.accounting.service.impl;
 
-import io.skai.accounting.dto.user.UserRequestDto;
 import io.skai.accounting.dto.user.UserDto;
+import io.skai.accounting.dto.user.UserRequestDto;
 import io.skai.accounting.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(final UserRequestDto dto) {
-        return null;
+        throw new UnsupportedOperationException("ip process");
     }
 
     @Override
     public List<UserDto> getAll() {
-        return null;
+        throw new UnsupportedOperationException("ip process");
     }
 }

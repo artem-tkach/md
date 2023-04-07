@@ -15,12 +15,15 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin
 public class ClientsController {
+
     private final ClientService clientService;
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     ClientDto create(final @Valid @RequestBody ClientRequestDto dto){
         return clientService.create(dto);
     }
+
     @GetMapping
     List<ClientDto> getAll(){
         return clientService.getAllDto();

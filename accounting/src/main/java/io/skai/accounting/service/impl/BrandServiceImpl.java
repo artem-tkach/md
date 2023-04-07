@@ -1,22 +1,21 @@
 package io.skai.accounting.service.impl;
 
-import io.skai.accounting.dto.brand.BrandRequestDto;
 import io.skai.accounting.dto.brand.BrandDto;
+import io.skai.accounting.dto.brand.BrandRequestDto;
 import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.mappers.BrandMapper;
 import io.skai.accounting.repository.BrandRepository;
 import io.skai.accounting.service.BrandService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class BrandServiceImpl implements BrandService {
     private final BrandMapper brandMapper;
     private final BrandRepository brandRepository;
@@ -24,7 +23,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     @Cacheable("brand")
     public BrandDto create(BrandRequestDto dto) {
-        log.trace("Call create brand");
+        log.debug("Call create brand");
         return brandMapper.toBrandResponseDto(brandRepository.create(dto.name()));
     }
 
@@ -36,15 +35,8 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     @Cacheable(value = "brand")
-    public Optional<Brand> findOptional(Long id) {
-        log.trace("Call find optional<Brand> by id, id={}", id);
-        return brandRepository.findOneOptional(id);
-    }
-
-    @Override
-    @Cacheable(value = "brand")
     public Brand findOne(Long id) {
-        log.trace("Call find brand by id, id={}", id);
+        log.debug("Call find brand by id, id={}", id);
         return brandRepository.findOne(id);
     }
 }
