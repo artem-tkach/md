@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface ClientRepository {
     Client create(Client client);
+
     List<Client> findAll();
+
+    Client findOne(Long id);
 }

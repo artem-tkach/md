@@ -19,7 +19,7 @@ public class BrandsController {
     private final BrandService brandService;
 
     @PostMapping
-    public BrandDto create(final @Valid @RequestBody BrandRequestDto dto){
+    public BrandDto create(@Valid @RequestBody BrandRequestDto dto){
         return brandService.create(dto);
     }
 

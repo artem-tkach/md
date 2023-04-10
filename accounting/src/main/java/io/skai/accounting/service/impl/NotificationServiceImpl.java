@@ -16,7 +16,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final NotificationClient notificationClient;
     @Override
     @Async
-    public void notifyAboutNewOrder(Order order) {
+    public void asyncNotifyAboutNewOrder(Order order) {
         NewOrderDto dto = NewOrderDto.builder()
                 .orderId(order.getId())
                 .model("Some model")

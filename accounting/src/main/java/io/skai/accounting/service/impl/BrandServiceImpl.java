@@ -23,20 +23,19 @@ public class BrandServiceImpl implements BrandService {
     @Override
     @Cacheable("brand")
     public BrandDto create(BrandRequestDto dto) {
-        log.debug("Call create brand");
         return brandMapper.toBrandResponseDto(brandRepository.create(dto.name()));
     }
 
     @Override
     public List<BrandDto> getAll() {
         List<Brand> brands = brandRepository.findAll();
-        return brandMapper.toBrandResponseDtoList(brands);
+        return brandMapper.toBrandDtoList(brands);
     }
 
     @Override
     @Cacheable(value = "brand")
     public Brand findOne(Long id) {
-        log.debug("Call find brand by id, id={}", id);
+        log.trace("Call find brand by id, id={}", id);
         return brandRepository.findOne(id);
     }
 }

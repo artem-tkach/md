@@ -2,32 +2,28 @@ rootProject.name = 'md'
 include 'accounting',
         'notification'
 
+def springVersion = '3.0.5'
+def mapStructVersion = '1.5.3.Final'
+
 dependencyResolutionManagement {
     versionCatalogs {
         libs {
             library('openapi', 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4')
-            library('spr-configuration-processor','org.springframework.boot:spring-boot-configuration-processor:3.0.5')
+            library('spr-configuration-processor', "org.springframework.boot:spring-boot-configuration-processor:$springVersion")
+            library('springTests', "org.springframework.boot:spring-boot-starter-test:$springVersion")
+            library('redis', "org.springframework.boot:spring-boot-starter-data-redis:$springVersion")
+            library('springMail', "org.springframework.boot:spring-boot-starter-mail:$springVersion")
+            library('jpa', "org.springframework.boot:spring-boot-starter-data-jpa:$springVersion")
+            library('jooq', "org.springframework.boot:spring-boot-starter-jooq:$springVersion")
             library('lombok', 'org.projectlombok:lombok:1.18.26')
             library('mysql', 'com.mysql:mysql-connector-j:8.0.32')
-            library('jpa','org.springframework.boot:spring-boot-starter-data-jpa:3.0.5')
-            library('mapstruct', 'org.mapstruct:mapstruct:1.5.3.Final')
-            library('mapstructAnnotationProcessor', 'org.mapstruct:mapstruct-processor:1.5.3.Final')
+            library('mapstruct', "org.mapstruct:mapstruct:$mapStructVersion")
+            library('mapstructAnnotationProcessor', "org.mapstruct:mapstruct-processor:$mapStructVersion")
             library('kafka', 'org.springframework.kafka:spring-kafka:3.0.5')
-            library('liquibase','org.liquibase:liquibase-core:4.20.0')
-            library('jooq', 'org.springframework.boot:spring-boot-starter-jooq:3.0.5')
-            // https://mvnrepository.com/artifact/org.jooq/jooq-codegen
+            library('liquibase', 'org.liquibase:liquibase-core:4.20.0')
             library('jooqCodegen', 'org.jooq:jooq-codegen:3.17.10')
-            // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
-            library('openfeign','org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2')
-            // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
-            library('springMail','org.springframework.boot:spring-boot-starter-mail:3.0.5')
-            // https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis
-            library('redis','org.springframework.boot:spring-boot-starter-data-redis:3.0.5')
-            // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
-            library('springTests', 'org.springframework.boot:spring-boot-starter-test:3.0.5')
-            // https://mvnrepository.com/artifact/org.assertj/assertj-core
+            library('openfeign', 'org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2')
             library('assertJ', 'org.assertj:assertj-core:3.24.2')
-            // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
             library('hamcrest', 'org.hamcrest:hamcrest:2.2')
         }
     }

@@ -4,11 +4,11 @@ import io.skai.notification.dto.NewOrderRequestDto;
 import io.skai.notification.service.EmailService;
 import io.skai.notification.service.OrderNotificationService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
-@Log4j2
+@Slf4j
 @RequiredArgsConstructor
 public class OrderNotificationServiceImpl implements OrderNotificationService {
     private final EmailService emailService;

@@ -23,9 +23,9 @@ public class OrderServiceImpl implements OrderService {
     private final NotificationService notificationService;
 
     @Override
-    public OrderDto createAndNotify(final OrderRequestDto dto) {
+    public OrderDto createAndNotify(OrderRequestDto dto) {
         Order order = orderRepository.create(orderMapper.toOrder(dto));
-        notificationService.notifyAboutNewOrder(order);
+        notificationService.asyncNotifyAboutNewOrder(order);
         return orderMapper.toResponseDto(order);
     }
 }

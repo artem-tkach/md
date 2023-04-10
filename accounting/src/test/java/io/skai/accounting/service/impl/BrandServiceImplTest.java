@@ -3,115 +3,77 @@ package io.skai.accounting.service.impl;
 import io.skai.accounting.dto.brand.BrandDto;
 import io.skai.accounting.dto.brand.BrandRequestDto;
 import io.skai.accounting.jooq.tables.pojos.Brand;
+import io.skai.accounting.mappers.BrandMapper;
 import io.skai.accounting.repository.BrandRepository;
 import io.skai.accounting.service.BrandService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.cache.CacheManager;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
-import java.util.Optional;
 
-import static java.util.Optional.ofNullable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
 class BrandServiceImplTest {
-    @MockBean
-    private BrandRepository brandRepository;
-    @Autowired
-    private BrandService brandService;
-    @Autowired
-    private CacheManager cacheManager;
+    private final Brand XIAOMI = new Brand(1L, "Xiaomi");
+    private final Brand SAMSUNG = new Brand(2L, "SAMSUNG");
+    private final BrandDto XIAOMI_DTO = BrandDto.builder().id(1L).name("Xiaomi").build();
+    private final BrandDto SAMSUNG_DTO = BrandDto.builder().id(2L).name("SAMSUNG").build();
+    private final BrandRequestDto XIAOMI_REQUEST_DTO = new BrandRequestDto(XIAOMI.getName());
 
-
-    private Optional<Brand> getCachedBrand(Long id) {
-        return ofNullable(cacheManager.getCache("brand"))
-                .map(c -> c.get(id, Brand.class));
-    }
-
-    @Test
-    void whenDataMockedFindAllThenReturnIt() {
-        List<Brand> brands = List.of(new Brand(1L, "iPhone"),
-                new Brand(2L, "Samsung"));
-        when(brandRepository.findAll())
-                .thenReturn(brands);
-        List<BrandDto> result = brandService.getAll();
-        verify(brandRepository, times(1)).findAll();
-
-        assertThat(result)
-                .hasSize(2)
-                .extracting(BrandDto::getName)
-                .contains("Samsung", "iPhone")
-                .doesNotContainNull()
-                .doesNotContain("xiaomi");
-    }
-
-    @Test
-    void whenCalledFindOneThenGetCacheAndReturnIt() {
-        when(brandRepository.findOne(anyLong()))
-                .thenReturn(new Brand(1L, "iPhone"));
-        brandService.findOne(1L);
-        Optional<Brand> cachedBrand = getCachedBrand(1L);
-        assertThat(cachedBrand)
-                .isPresent()
-                .satisfies(value -> assertThat(value.orElseThrow())
-                        .hasFieldOrPropertyWithValue("id", 1L)
-                        .hasFieldOrPropertyWithValue("name", "iPhone"));
-    }
-
-    @Test
-    void whenFindOneNotCalledThenCacheIsEmpty() {
-        Optional<Brand> cachedBrand = getCachedBrand(999L);
-        assertThat(cachedBrand)
-                .isEmpty();
-    }
+    private final BrandRepository brandRepository = mock(BrandRepository.class);
+    private final BrandMapper brandMapper = mock(BrandMapper.class);
+    private final BrandService brandService = new BrandServiceImpl(brandMapper,brandRepository);
 
     @Test
     void whenNoSuchBrandInDBCreateBrandThenReturnDto() {
-        ReflectionTestUtils.setField(brandService, "brandRepository", brandRepository);
-        String testBrandName = "Xiaomi";
-        Brand brand = new Brand(1L, testBrandName);
-        doReturn(brand)
-                .when(brandRepository).create(testBrandName);
-        BrandRequestDto requestDto = new BrandRequestDto(testBrandName);
-        BrandDto resultDto = brandService.create(requestDto);
-        verify(brandRepository, times(1))
-                .create(testBrandName);
+        BrandDto mockResponse = BrandDto.builder().id(XIAOMI.getId()).name(XIAOMI.getName()).build();
+
+        doReturn(XIAOMI)
+                .when(brandRepository).create(XIAOMI.getName());
+        doReturn(mockResponse)
+                .when(brandMapper).toBrandResponseDto(XIAOMI);
+
+        BrandDto resultDto = brandService.create(XIAOMI_REQUEST_DTO);
+
+        verify(brandRepository).create(XIAOMI.getName());
         assertThat(resultDto)
-                .hasFieldOrPropertyWithValue("id", 1L)
-                .hasFieldOrPropertyWithValue("name", testBrandName);
+                .isEqualTo(mockResponse);
     }
 
     @Test
     void whenBrandExistsInDBCreateBrandThenThrowException() {
-        ReflectionTestUtils.setField(brandService, "brandRepository", brandRepository);
         String testBrandName = "Xiaomi999";
         doThrow(DuplicateKeyException.class)
                 .when(brandRepository).create(testBrandName);
         BrandRequestDto requestDto = new BrandRequestDto(testBrandName);
-        verify(brandRepository, times(1)).create(testBrandName);
+
         assertThatThrownBy(() -> brandService.create(requestDto)).
                 isInstanceOf(DuplicateKeyException.class);
+        verify(brandRepository).create(testBrandName);
     }
 
     @Test
     void whenDataInsertedFindThenReturnIt(){
-        ReflectionTestUtils.setField(brandService, "brandRepository", brandRepository);
-        String testBrandName = "Xiaomi";
-        Brand brand = new Brand(333L, testBrandName);
-        doReturn(brand)
-                .when(brandRepository).findOne(333L);
-        Brand resultBrand = brandService.findOne(333L);
-        verify(brandRepository, times(1)).findOne(333L);
+        doReturn(XIAOMI)
+                .when(brandRepository).findOne(XIAOMI.getId());
+        Brand resultBrand = brandService.findOne(XIAOMI.getId());
+
+        verify(brandRepository).findOne(XIAOMI.getId());
         assertThat(resultBrand)
-                .hasFieldOrPropertyWithValue("id",333L)
-                .hasFieldOrPropertyWithValue("name","Xiaomi");
+                .isEqualTo(XIAOMI);
     }
+    @Test
+    void whenBrandsInDbGetWhamAndReturn(){
+        List<Brand> brands = List.of(XIAOMI, SAMSUNG);
+        List<BrandDto> brandDtos = List.of(XIAOMI_DTO, SAMSUNG_DTO);
+        when(brandRepository.findAll()).thenReturn(brands);
+        when(brandMapper.toBrandDtoList(brands))
+                .thenReturn(brandDtos);
+
+        List<BrandDto> result = brandService.getAll();
+        assertThat(result).containsExactlyInAnyOrder(SAMSUNG_DTO, XIAOMI_DTO);
+    }
+
 }

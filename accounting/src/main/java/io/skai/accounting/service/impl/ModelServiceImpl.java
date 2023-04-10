@@ -10,13 +10,11 @@ import io.skai.accounting.service.BrandService;
 import io.skai.accounting.service.ModelService;
 import io.skai.accounting.validators.impl.brand.BrandExistsValidator;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class ModelServiceImpl implements ModelService {
     private final ModelMapper modelMapper;
@@ -26,8 +24,6 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public ModelDto create(ModelRequestDto dto) {
-        log.debug("brand id is {}", dto.brandId());
-
         brandExistsValidator.validate(new Brand(dto.brandId(), null));
         Model model = modelRepository.create(dto.brandId(), dto.name());
         return mapToModelDto(model);
@@ -35,7 +31,6 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public List<ModelDto> findAllDto(Long brandId) {
-        log.trace("Find all models DTO by brand id call");
         List<Model> models = modelRepository.findAll(brandId);
         return mapModelList(models);
     }

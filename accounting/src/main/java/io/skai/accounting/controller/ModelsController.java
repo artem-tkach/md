@@ -17,12 +17,12 @@ public class ModelsController {
     private final ModelService modelService;
 
     @PostMapping
-    public ModelDto create(final @RequestBody ModelRequestDto dto) {
+    public ModelDto create(@RequestBody ModelRequestDto dto) {
         return modelService.create(dto);
     }
 
     @GetMapping
-    public List<ModelDto> findAllById(final @RequestParam Long brandId){
+    public List<ModelDto> findAllById(@RequestParam Long brandId){
         return modelService.findAllDto(brandId);
     }
 }

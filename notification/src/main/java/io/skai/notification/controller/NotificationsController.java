@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/notify")
 @RequiredArgsConstructor
-public class HomeController {
+public class NotificationsController {
     private final EmailService emailService;
     private final OrderNotificationService orderNotificationService;
     @GetMapping

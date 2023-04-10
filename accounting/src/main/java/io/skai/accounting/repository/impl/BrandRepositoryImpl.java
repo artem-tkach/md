@@ -7,7 +7,6 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import static io.skai.accounting.jooq.Tables.BRAND;
 
@@ -30,13 +29,6 @@ public class BrandRepositoryImpl implements BrandRepository {
     public List<Brand> findAll() {
         return dslContext.selectFrom(BRAND)
                 .fetchInto(Brand.class);
-    }
-
-    @Override
-    public Optional<Brand> findOneOptional(Long id) {
-        return dslContext.selectFrom(BRAND)
-                .where(BRAND.ID.eq(id))
-                .fetchOptionalInto(Brand.class);
     }
 
     @Override

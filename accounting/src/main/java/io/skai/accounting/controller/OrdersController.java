@@ -20,7 +20,7 @@ public class OrdersController {
     }
 
     @PostMapping
-    public OrderDto create(final @Valid @RequestBody OrderRequestDto dto) {
+    public OrderDto create(@Valid @RequestBody OrderRequestDto dto) {
         return orderService.createAndNotify(dto);
     }
 

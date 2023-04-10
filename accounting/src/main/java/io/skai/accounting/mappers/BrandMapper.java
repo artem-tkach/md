@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface BrandMapper {
 
-    List<BrandDto> toBrandResponseDtoList(List<Brand> brands);
+    List<BrandDto> toBrandDtoList(List<Brand> brands);
 
     BrandDto toBrandResponseDto(Brand brand);
 

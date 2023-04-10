@@ -21,6 +21,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAll() {
-        throw new UnsupportedOperationException("ip process");
+        throw new UnsupportedOperationException("in process");
     }
 }
