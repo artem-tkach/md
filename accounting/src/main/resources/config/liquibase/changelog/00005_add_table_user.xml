@@ -6,6 +6,12 @@
 
 
     <changeSet id="00005_create_table_user" author="artem-tkach">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="user">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>

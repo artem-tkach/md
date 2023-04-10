@@ -6,6 +6,13 @@
 
 
     <changeSet id="00001_init_table_client" author="artem-tkach">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="client"/>
+            </not>
+        </preConditions>
+        <comment>Table client exists</comment>
+
         <createTable tableName="client">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -21,6 +28,12 @@
 
 
     <changeSet id="00002_init_table_brand" author="artem-tkach">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="brand"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="brand">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -32,6 +45,12 @@
     </changeSet>
 
     <changeSet id="00003_init_table_model" author="artem-tkach">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="model"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="model">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>

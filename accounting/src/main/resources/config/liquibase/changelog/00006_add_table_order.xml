@@ -6,6 +6,12 @@
 
 
     <changeSet id="00006_create_table_order" author="artem-tkach">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="order"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="order">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>

@@ -1,5 +1,5 @@
 dependencies{
-    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation libs.springBootWeb
     compileOnly libs.lombok
     implementation libs.openapi
     annotationProcessor libs.lombok
