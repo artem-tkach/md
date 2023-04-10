@@ -18,15 +18,12 @@ public class BrandExistsValidator implements BrandValidator {
     private final DSLContext dslContext;
 
     @Override
-    public Boolean validate(final Brand brand) {
-        dslContext.selectFrom(BRAND)
-                .where(BRAND.ID.eq(brand.getId()))
-                .fetchOptional()
-                .ifPresentOrElse(t->{},()->throwEntityNotFoundException(brand.getId()));
-        return true;
-    }
-
-    private void throwEntityNotFoundException(Long brandId){
-        throw new EntityNotFoundException(String.format(BRAND_NOT_FOUND_BY_ID, brandId));
+    public void validate(final Brand brand) {
+        boolean exists = dslContext.fetchExists(
+                dslContext.selectFrom(BRAND)
+                        .where(BRAND.ID.eq(brand.getId())));
+        if (exists) {
+            throw new EntityNotFoundException(String.format(BRAND_NOT_FOUND_BY_ID, brand.getId()));
+        }
     }
 }
