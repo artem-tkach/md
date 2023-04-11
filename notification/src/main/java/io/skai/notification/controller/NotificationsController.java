@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/notify")
+@RequestMapping("/notification")
 @RequiredArgsConstructor
 public class NotificationsController {
     private final EmailService emailService;
