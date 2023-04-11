@@ -12,7 +12,6 @@
             </not>
         </preConditions>
         <comment>Table client exists</comment>
-
         <createTable tableName="new_order">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>

@@ -20,5 +20,4 @@ public record NewOrderNotificationRequestDto(@NotNull(message = NULL_ORDER_ID)
                                              @NotBlank(message = BLANK_MODEL_NAME)
                                              String model,
                                              @NotBlank(message = BLANK_DEFECT)
-                                             String defect) {
-}
+                                             String defect) {}
