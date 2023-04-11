@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
         url = "http://localhost:8081/",
         configuration = NotificationClientConfig.class)
 public interface NotificationClient {
-    @RequestLine("POST /notification/newOrder")
+    @RequestLine("POST /notifications/newOrder")
     void notifyAboutNewOrder(NewOrderDto dto);
 }
 
