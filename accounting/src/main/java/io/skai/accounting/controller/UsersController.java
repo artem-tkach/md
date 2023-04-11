@@ -4,6 +4,7 @@ import io.skai.accounting.dto.user.UserRequestDto;
 import io.skai.accounting.dto.user.UserDto;
 import io.skai.accounting.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,8 @@ public class UsersController {
     }
 
     @PostMapping
-    UserDto createUser(@RequestBody UserRequestDto dto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    UserDto create(@RequestBody UserRequestDto dto) {
         return userService.create(dto);
     }
 }

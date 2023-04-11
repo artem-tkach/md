@@ -6,6 +6,7 @@ import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.service.BrandService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class BrandsController {
     private final BrandService brandService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public BrandDto create(@Valid @RequestBody BrandRequestDto dto){
         return brandService.create(dto);
     }

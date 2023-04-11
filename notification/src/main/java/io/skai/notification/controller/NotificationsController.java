@@ -26,6 +26,7 @@ public class NotificationsController {
     }
 
     @PostMapping("/newOrder")
+    @ResponseStatus(HttpStatus.CREATED)
     String notifyAboutNewOrder(final @RequestBody NewOrderRequestDto dto){
         orderNotificationService.notifyAboutNewOrder(dto);
         return "success";

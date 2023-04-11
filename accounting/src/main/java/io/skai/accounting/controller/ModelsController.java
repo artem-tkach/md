@@ -4,6 +4,7 @@ import io.skai.accounting.dto.model.ModelRequestDto;
 import io.skai.accounting.dto.model.ModelDto;
 import io.skai.accounting.service.ModelService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ModelsController {
     private final ModelService modelService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ModelDto create(@RequestBody ModelRequestDto dto) {
         return modelService.create(dto);
     }
