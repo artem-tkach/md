@@ -1,7 +1,11 @@
 dependencies{
     implementation libs.springBootWeb
+    implementation libs.jpa
+    implementation libs.mysql
     compileOnly libs.lombok
     implementation libs.openapi
     annotationProcessor libs.lombok
     implementation libs.springMail
+    implementation libs.springValidation
+    implementation libs.liquibase
 }

@@ -7,6 +7,19 @@ springdoc:
   api-docs:
     path: /api-docs
 spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    username: artem
+    password: 12345
+    url: jdbc:mysql://localhost:3309/mobile_notifications?createDatabaseIfNotExist=TRUE&currentSchema=mobile_notifications
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  liquibase:
+    change-log: classpath:config.liqubase/master.xml
+
+
   mail:
     host: smtp.gmail.com
     port: 587
