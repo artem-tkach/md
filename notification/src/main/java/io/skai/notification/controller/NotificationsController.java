@@ -1,6 +1,6 @@
 package io.skai.notification.controller;
 
-import io.skai.notification.dto.NewOrderRequestDto;
+import io.skai.notification.dto.NewOrderNotificationRequestDto;
 import io.skai.notification.service.EmailService;
 import io.skai.notification.service.OrderNotificationService;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +19,15 @@ public class NotificationsController {
         return "hello from notify";
     }
 
-    @GetMapping("/newOrder")
+    @GetMapping("/new-order")
     String testSending(){
         emailService.sendTest();
         return "ok";
     }
 
-    @PostMapping("/newOrder")
+    @PostMapping("/new-order")
     @ResponseStatus(HttpStatus.CREATED)
-    String notifyAboutNewOrder(final @RequestBody NewOrderRequestDto dto){
+    String notifyAboutNewOrder(final @RequestBody NewOrderNotificationRequestDto dto){
         orderNotificationService.notifyAboutNewOrder(dto);
         return "success";
     }
