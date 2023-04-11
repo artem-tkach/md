@@ -6,8 +6,8 @@ import lombok.*;
 @Entity
 @Table(name = "new_order")
 @Getter
-@AllArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class NewOrderNotification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
