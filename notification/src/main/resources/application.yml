@@ -17,7 +17,7 @@ spring:
     url: jdbc:mysql://localhost:3309/mobile_notifications?createDatabaseIfNotExist=TRUE&currentSchema=mobile_notifications
     driver-class-name: com.mysql.cj.jdbc.Driver
   liquibase:
-    change-log: classpath:config.liqubase/master.xml
+    change-log: classpath:config.liquibase/master.xml
   mail:
     host: smtp.gmail.com
     port: 587

@@ -4,7 +4,6 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
-    <includeAll path="classpath:config/liquibase/changelog/"/>
 
     <changeSet id="00001_init_table_new_order" author="artem-tkach">
         <preConditions onFail="MARK_RAN">
@@ -67,5 +66,4 @@
             </column>
         </createTable>
     </changeSet>
-
 </databaseChangeLog>
