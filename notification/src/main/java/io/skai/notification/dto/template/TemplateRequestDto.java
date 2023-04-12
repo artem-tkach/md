@@ -12,5 +12,5 @@ public record TemplateRequestDto(@NotNull(message = NULL_ORDER_STATUS)
                                  @NotBlank(message = BLANK_TEMPLATE_BODY)
                                  String body,
                                  @NotBlank(message = BLANK_SUBJECT)
-                                 String subjectText) {
+                                 String subject) {
 }
