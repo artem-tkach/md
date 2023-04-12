@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
     <changeSet id="00001_init_table_new_order" author="artem-tkach">
         <preConditions onFail="MARK_RAN">
@@ -11,7 +11,7 @@
                 <tableExists tableName="new_order"/>
             </not>
         </preConditions>
-        <comment>Table client exists</comment>
+        <comment>Table new order exists</comment>
         <createTable tableName="new_order">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -32,6 +32,36 @@
                 <constraints nullable="false"/>
             </column>
             <column name="defect" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="00002_drop_table_new_order" author="artem-tkach">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="new_order"/>
+        </preConditions>
+        <dropTable tableName="new_order"/>
+    </changeSet>
+
+    <changeSet id="00003_create_table_template" author="artem-tkach">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="template"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="template">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="body" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject" type="text">
                 <constraints nullable="false"/>
             </column>
         </createTable>

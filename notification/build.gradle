@@ -8,4 +8,8 @@ dependencies{
     implementation libs.springMail
     implementation libs.springValidation
     implementation libs.liquibase
+    implementation libs.mapstruct
+    annotationProcessor libs.mapstructAnnotationProcessor
+    testImplementation libs.springTests
+    testImplementation libs.assertJ
 }
