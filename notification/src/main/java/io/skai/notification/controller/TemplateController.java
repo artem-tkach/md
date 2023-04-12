@@ -1,7 +1,6 @@
 package io.skai.notification.controller;
 
-import io.skai.notification.dto.template.TemplateRequestDto;
-import io.skai.notification.dto.template.TemplateResponseDto;
+import io.skai.notification.model.Template;
 import io.skai.notification.service.TemplateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +18,12 @@ public class TemplateController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TemplateResponseDto create(@Valid @RequestBody TemplateRequestDto dto) {
-        return templateService.create(dto);
+    public Template create(@Valid @RequestBody Template template) {
+        return templateService.create(template);
     }
 
     @GetMapping
-    public List<TemplateResponseDto> getAll() {
+    public List<Template> getAll() {
         return templateService.getAll();
     }
 }

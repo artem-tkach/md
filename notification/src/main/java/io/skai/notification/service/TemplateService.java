@@ -1,16 +1,15 @@
 package io.skai.notification.service;
 
-import io.skai.notification.dto.template.TemplateRequestDto;
-import io.skai.notification.dto.template.TemplateResponseDto;
 import io.skai.notification.enums.OrderStatus;
+import io.skai.notification.model.Template;
 
 import java.util.List;
 
 public interface TemplateService {
 
-    TemplateResponseDto create(TemplateRequestDto dto);
+    Template create(Template template);
 
-    List<TemplateResponseDto>getAll();
+    List<Template>getAll();
 
-    List<TemplateResponseDto> getAll(OrderStatus orderStatus);
+    List<Template> getAll(OrderStatus orderStatus);
 }
