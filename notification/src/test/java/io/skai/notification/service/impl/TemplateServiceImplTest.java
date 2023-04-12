@@ -79,5 +79,4 @@ class TemplateServiceImplTest {
         assertThat(result)
                 .containsExactlyInAnyOrder(RESPONSE_DTO_NEW);
     }
-
 }

@@ -7,6 +7,7 @@ import io.skai.notification.enums.OrderStatus;
 import java.util.List;
 
 public interface TemplateService {
+
     TemplateResponseDto create(TemplateRequestDto dto);
 
     List<TemplateResponseDto>getAll();
