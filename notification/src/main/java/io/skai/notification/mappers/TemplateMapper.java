@@ -6,6 +6,8 @@ import io.skai.notification.model.Template;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper
 public interface TemplateMapper {
 
@@ -13,4 +15,6 @@ public interface TemplateMapper {
     Template toTemplate(TemplateRequestDto dto);
 
     TemplateResponseDto toResponseDto(Template template);
+
+    List<TemplateResponseDto> toResponseDtoList(List<Template> templates);
 }
