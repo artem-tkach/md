@@ -14,7 +14,6 @@ public class GmailProperties {
     private String debug                 = "false";
     private String socketFactoryClass    = "javax.net.ssl.SSLSocketFactory";
     private String socketFactoryPort     = "465";
-
     private String host;
     private Integer port;
     private String username;
