@@ -9,7 +9,7 @@ dependencyResolutionManagement {
     versionCatalogs {
         libs {
             library('openapi', 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4')
-            library('spr-configuration-processor', "org.springframework.boot:spring-boot-configuration-processor:$springVersion")
+            library('springConfigurationProcessor', "org.springframework.boot:spring-boot-configuration-processor:$springVersion")
             library('springValidation',"org.springframework.boot:spring-boot-starter-validation:$springVersion")
             library('springBootWeb',"org.springframework.boot:spring-boot-starter-web:$springVersion")
             library('springTests', "org.springframework.boot:spring-boot-starter-test:$springVersion")

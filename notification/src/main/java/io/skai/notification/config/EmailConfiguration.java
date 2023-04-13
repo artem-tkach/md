@@ -1,10 +1,8 @@
 package io.skai.notification.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,42 +11,26 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = { "io.skai.notification" })
-@PropertySource(value={"classpath:application.yml"})
+@RequiredArgsConstructor
 public class EmailConfiguration {
-    @Value("${spring.mail.host}")
-    private String mailServerHost;
 
-    @Value("${spring.mail.port}")
-    private Integer mailServerPort;
-
-    @Value("${spring.mail.username}")
-    private String mailServerUsername;
-
-    @Value("${spring.mail.password}")
-    private String mailServerPassword;
-
-    @Value("${spring.mail.properties.mail.smtp.auth}")
-    private String mailServerAuth;
-
-    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
-    private String mailServerStartTls;
+    private final GmailProperties gmailProperties;
 
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
-        mailSender.setHost(mailServerHost);
-        mailSender.setPort(mailServerPort);
+        mailSender.setHost(gmailProperties.getHost());
+        mailSender.setPort(gmailProperties.getPort());
 
-        mailSender.setUsername(mailServerUsername);
-        mailSender.setPassword(mailServerPassword);
+        mailSender.setUsername(gmailProperties.getUsername());
+        mailSender.setPassword(gmailProperties.getPassword());
 
         Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", mailServerAuth);
-        props.put("mail.debug", "true");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", gmailProperties.getSmtpAuth());
+        props.put("mail.debug", gmailProperties.getDebug());
+        props.put("mail.smtp.socketFactory.port", gmailProperties.getSocketFactoryPort());
+        props.put("mail.smtp.socketFactory.class", gmailProperties.getSocketFactoryClass());
 
         return mailSender;
     }

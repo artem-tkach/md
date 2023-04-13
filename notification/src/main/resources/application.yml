@@ -24,7 +24,6 @@ spring:
     username: art.tkach@gmail.com
     password: olfsbvftoktxwecy
     protocol: smtp
-    properties.mail.smtp:
-      auth: true
-      starttls.enable: true
-      ssl.trust: smtp.gmail.com
+    #starttlsEnable: true
+    #sslTrust: smtp.gmail.com
+    smtp-auth: true

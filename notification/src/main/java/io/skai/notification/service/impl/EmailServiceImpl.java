@@ -15,7 +15,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendTest() {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("corasi1329@marikuza.com");
+        msg.setTo("hexit41293@raotus.com");
         msg.setFrom("art.tkach@gmail.com");
         msg.setSubject("Hello");
         msg.setText("Hello world");

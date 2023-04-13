@@ -1,5 +1,6 @@
 dependencies{
     implementation libs.springBootWeb
+    annotationProcessor libs.springConfigurationProcessor
     implementation libs.jpa
     implementation libs.mysql
     compileOnly libs.lombok

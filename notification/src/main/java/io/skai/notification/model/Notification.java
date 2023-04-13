@@ -5,14 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.EqualsAndHashCode;
-import lombok.Value;
 
 import static io.skai.notification.util.ValidationMessages.*;
-import static io.skai.notification.util.ValidationMessages.NEGATIVE_BRAND_ID;
 
-@EqualsAndHashCode(callSuper = false)
-@Value
 public record Notification(Long id,
                            @NotNull(message = NULL_ORDER_ID)
                            @Min(value = 1L, message = NEGATIVE_ORDER_ID)
