@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class BrandServiceImpl implements BrandService {
+
     private final BrandMapper brandMapper;
     private final BrandRepository brandRepository;
 
