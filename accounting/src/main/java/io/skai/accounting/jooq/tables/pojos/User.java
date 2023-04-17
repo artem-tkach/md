@@ -20,6 +20,7 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+    private Integer role;
 
     public User() {}
 
@@ -29,6 +30,7 @@ public class User implements Serializable {
         this.email = value.email;
         this.phone = value.phone;
         this.password = value.password;
+        this.role = value.role;
     }
 
     public User(
@@ -36,13 +38,15 @@ public class User implements Serializable {
         String name,
         String email,
         String phone,
-        String password
+        String password,
+        Integer role
     ) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.role = role;
     }
 
     /**
@@ -115,6 +119,20 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    /**
+     * Getter for <code>mobile_accounting.user.role</code>.
+     */
+    public Integer getRole() {
+        return this.role;
+    }
+
+    /**
+     * Setter for <code>mobile_accounting.user.role</code>.
+     */
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -154,6 +172,12 @@ public class User implements Serializable {
         }
         else if (!this.password.equals(other.password))
             return false;
+        if (this.role == null) {
+            if (other.role != null)
+                return false;
+        }
+        else if (!this.role.equals(other.role))
+            return false;
         return true;
     }
 
@@ -166,6 +190,7 @@ public class User implements Serializable {
         result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
         result = prime * result + ((this.phone == null) ? 0 : this.phone.hashCode());
         result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+        result = prime * result + ((this.role == null) ? 0 : this.role.hashCode());
         return result;
     }
 
@@ -178,6 +203,7 @@ public class User implements Serializable {
         sb.append(", ").append(email);
         sb.append(", ").append(phone);
         sb.append(", ").append(password);
+        sb.append(", ").append(role);
 
         sb.append(")");
         return sb.toString();

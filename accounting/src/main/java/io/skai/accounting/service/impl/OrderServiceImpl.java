@@ -26,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto createAndNotify(OrderRequestDto dto) {
         Order order = orderRepository.create(orderMapper.toOrder(dto));
         notificationService.asyncNotifyAboutNewOrder(order);
+
         return orderMapper.toResponseDto(order);
     }
 }

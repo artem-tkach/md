@@ -6,11 +6,12 @@ package io.skai.accounting.jooq.tables.daos;
 
 import io.skai.accounting.jooq.tables.User;
 import io.skai.accounting.jooq.tables.records.UserRecord;
-import org.jooq.Configuration;
-import org.jooq.impl.DAOImpl;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.jooq.Configuration;
+import org.jooq.impl.DAOImpl;
 
 
 /**
@@ -139,5 +140,20 @@ public class UserDao extends DAOImpl<UserRecord, io.skai.accounting.jooq.tables.
      */
     public List<io.skai.accounting.jooq.tables.pojos.User> fetchByPassword(String... values) {
         return fetch(User.USER.PASSWORD, values);
+    }
+
+    /**
+     * Fetch records that have <code>role BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<io.skai.accounting.jooq.tables.pojos.User> fetchRangeOfRole(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(User.USER.ROLE, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>role IN (values)</code>
+     */
+    public List<io.skai.accounting.jooq.tables.pojos.User> fetchByRole(Integer... values) {
+        return fetch(User.USER.ROLE, values);
     }
 }

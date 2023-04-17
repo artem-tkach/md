@@ -7,15 +7,29 @@ package io.skai.accounting.jooq.tables;
 import io.skai.accounting.jooq.Keys;
 import io.skai.accounting.jooq.MobileAccounting;
 import io.skai.accounting.jooq.tables.records.OrderRecord;
-import org.jooq.Record;
-import org.jooq.*;
-import org.jooq.impl.DSL;
-import org.jooq.impl.SQLDataType;
-import org.jooq.impl.TableImpl;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
+
+import org.jooq.Field;
+import org.jooq.ForeignKey;
+import org.jooq.Function7;
+import org.jooq.Identity;
+import org.jooq.Name;
+import org.jooq.Record;
+import org.jooq.Records;
+import org.jooq.Row7;
+import org.jooq.Schema;
+import org.jooq.SelectField;
+import org.jooq.Table;
+import org.jooq.TableField;
+import org.jooq.TableOptions;
+import org.jooq.UniqueKey;
+import org.jooq.impl.DSL;
+import org.jooq.impl.SQLDataType;
+import org.jooq.impl.TableImpl;
 
 
 /**
@@ -69,6 +83,11 @@ public class Order extends TableImpl<OrderRecord> {
      */
     public final TableField<OrderRecord, Long> MANAGER_ID = createField(DSL.name("manager_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
+    /**
+     * The column <code>mobile_accounting.order.date</code>.
+     */
+    public final TableField<OrderRecord, LocalDateTime> DATE = createField(DSL.name("date"), SQLDataType.LOCALDATETIME(0).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+
     private Order(Name alias, Table<OrderRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -115,11 +134,6 @@ public class Order extends TableImpl<OrderRecord> {
     @Override
     public UniqueKey<OrderRecord> getPrimaryKey() {
         return Keys.KEY_ORDER_PRIMARY;
-    }
-
-    @Override
-    public List<UniqueKey<OrderRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.KEY_ORDER_DEFECT);
     }
 
     @Override
@@ -180,18 +194,18 @@ public class Order extends TableImpl<OrderRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Long, Long, Long, String, String, Long> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row7<Long, Long, Long, String, String, Long, LocalDateTime> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function6<? super Long, ? super Long, ? super Long, ? super String, ? super String, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function7<? super Long, ? super Long, ? super Long, ? super String, ? super String, ? super Long, ? super LocalDateTime, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -199,7 +213,7 @@ public class Order extends TableImpl<OrderRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super Long, ? super Long, ? super Long, ? super String, ? super String, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function7<? super Long, ? super Long, ? super Long, ? super String, ? super String, ? super Long, ? super LocalDateTime, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

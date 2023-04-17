@@ -5,6 +5,7 @@ package io.skai.accounting.jooq.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -21,6 +22,7 @@ public class Order implements Serializable {
     private String serialNumber;
     private String defect;
     private Long managerId;
+    private LocalDateTime date;
 
     public Order() {}
 
@@ -31,6 +33,7 @@ public class Order implements Serializable {
         this.serialNumber = value.serialNumber;
         this.defect = value.defect;
         this.managerId = value.managerId;
+        this.date = value.date;
     }
 
     public Order(
@@ -39,7 +42,8 @@ public class Order implements Serializable {
         Long modelId,
         String serialNumber,
         String defect,
-        Long managerId
+        Long managerId,
+        LocalDateTime date
     ) {
         this.id = id;
         this.clientId = clientId;
@@ -47,6 +51,7 @@ public class Order implements Serializable {
         this.serialNumber = serialNumber;
         this.defect = defect;
         this.managerId = managerId;
+        this.date = date;
     }
 
     /**
@@ -133,6 +138,20 @@ public class Order implements Serializable {
         this.managerId = managerId;
     }
 
+    /**
+     * Getter for <code>mobile_accounting.order.date</code>.
+     */
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+
+    /**
+     * Setter for <code>mobile_accounting.order.date</code>.
+     */
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -178,6 +197,12 @@ public class Order implements Serializable {
         }
         else if (!this.managerId.equals(other.managerId))
             return false;
+        if (this.date == null) {
+            if (other.date != null)
+                return false;
+        }
+        else if (!this.date.equals(other.date))
+            return false;
         return true;
     }
 
@@ -191,6 +216,7 @@ public class Order implements Serializable {
         result = prime * result + ((this.serialNumber == null) ? 0 : this.serialNumber.hashCode());
         result = prime * result + ((this.defect == null) ? 0 : this.defect.hashCode());
         result = prime * result + ((this.managerId == null) ? 0 : this.managerId.hashCode());
+        result = prime * result + ((this.date == null) ? 0 : this.date.hashCode());
         return result;
     }
 
@@ -204,6 +230,7 @@ public class Order implements Serializable {
         sb.append(", ").append(serialNumber);
         sb.append(", ").append(defect);
         sb.append(", ").append(managerId);
+        sb.append(", ").append(date);
 
         sb.append(")");
         return sb.toString();
