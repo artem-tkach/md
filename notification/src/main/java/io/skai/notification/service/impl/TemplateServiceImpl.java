@@ -29,4 +29,9 @@ public class TemplateServiceImpl implements TemplateService {
     public List<Template> getAll(OrderStatus orderStatus) {
         return templateRepository.findAllByStatus(orderStatus);
     }
+
+    @Override
+    public Template findLast(OrderStatus status) {
+        return templateRepository.findFirstByStatusOrderByIdDesc(status);
+    }
 }

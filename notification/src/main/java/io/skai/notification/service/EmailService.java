@@ -1,7 +1,9 @@
 package io.skai.notification.service;
 
-public interface EmailService {
-    void sendTest();
+import org.springframework.mail.SimpleMailMessage;
 
-    void sendMail(final String subject, final String receiver, final String text);
+public interface EmailService {
+    void sendMail(SimpleMailMessage simpleMailMessage);
+
+    SimpleMailMessage buildMailMessage(String from, String receiver, String subject, String body);
 }

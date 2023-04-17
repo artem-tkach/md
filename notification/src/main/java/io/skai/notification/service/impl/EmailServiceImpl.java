@@ -7,32 +7,28 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class EmailServiceImpl implements EmailService {
-    private final JavaMailSender mailSender;
-    @Override
-    public void sendTest() {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("hexit41293@raotus.com");
-        msg.setFrom("art.tkach@gmail.com");
-        msg.setSubject("Hello");
-        msg.setText("Hello world");
 
-        mailSender.send(msg);
+    private final JavaMailSender mailSender;
+
+    @Override
+    public void sendMail(SimpleMailMessage message) {
+        mailSender.send(message);
+        log.info("E-mail send successfully to {}", Arrays.toString(message.getTo()));
     }
 
     @Override
-    public void sendMail(String subject, String receiver, String text) {
-        log.debug("Start sending email to {}", receiver);
+    public SimpleMailMessage buildMailMessage(String from, String receiver, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(receiver);
-        msg.setFrom("art.tkach@gmail.com");
+        msg.setFrom(from);
         msg.setSubject(subject);
-        msg.setText(text);
-
-        mailSender.send(msg);
-        log.debug("E-mail send successfully to {}", receiver);
+        msg.setText(body);
+        return msg;
     }
 }
