@@ -11,8 +11,8 @@ import static org.mockito.Mockito.*;
 
 class EmailServiceImplTest {
 
-    JavaMailSender sender = mock(JavaMailSender.class);
-    EmailService emailService = new EmailServiceImpl(sender);
+    private final JavaMailSender sender = mock(JavaMailSender.class);
+    private final EmailService emailService = new EmailServiceImpl(sender);
 
     @Test
     void shouldReturnSimpleMailMessage() {
@@ -36,7 +36,8 @@ class EmailServiceImplTest {
         SimpleMailMessage msg = prepareMailMessage();
 
         doNothing().when(sender).send(any(SimpleMailMessage.class));
-        emailService.sendMail(from, receiver, subject, body);
+
+        emailService.sendMail(emailService.buildMailMessage(from, receiver, subject, body));
         verify(sender).send(msg);
     }
 
