@@ -31,7 +31,7 @@ public class TemplateServiceImpl implements TemplateService {
     }
 
     @Override
-    public Template findOneLast(OrderStatus status) {
+    public Template findLast(OrderStatus status) {
         return templateRepository.findFirstByStatusOrderByIdDesc(status);
     }
 }

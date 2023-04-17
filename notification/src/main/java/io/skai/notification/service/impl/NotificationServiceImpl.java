@@ -1,5 +1,6 @@
 package io.skai.notification.service.impl;
 
+import io.skai.notification.config.GmailProperties;
 import io.skai.notification.model.Notification;
 import io.skai.notification.model.Template;
 import io.skai.notification.service.EmailService;
@@ -14,21 +15,21 @@ public class NotificationServiceImpl implements NotificationService {
 
     private final TemplateService templateService;
     private final EmailService emailService;
+    private final GmailProperties gmailProperties;
 
     @Override
     public void notify(Notification notification) {
-        Template template = templateService.findOneLast(notification.orderStatus());//findLast
+        Template template = templateService.findLast(notification.orderStatus());
         String subject = formEmailSubject(template.getSubject());
         String body = formEmailBody(template.getBody(), notification);
-        emailService.sendMail("bla bla bla", notification.email(), subject, body);
+        emailService.sendMail(gmailProperties.getUsername(), notification.email(), subject, body);
     }
 
     @Override
     public String formEmailBody(String bodyTemplate, Notification notification) {
-        return bodyTemplate
-                .replace("[brand]", notification.brand())
-                .replace("[model]", notification.model())
-                .replace("[defect]", notification.defect());
+        return String.format(bodyTemplate, notification.brand(),
+                notification.model(), notification.orderId(), notification.orderStatus(), notification.defect(),
+                notification.orderId());
     }
 
     @Override

@@ -13,5 +13,5 @@ public interface TemplateService {
 
     List<Template> getAll(OrderStatus orderStatus);
 
-    Template findOneLast(OrderStatus status);
+    Template findLast(OrderStatus status);
 }
