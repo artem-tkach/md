@@ -35,7 +35,6 @@ public class OrderRepositoryImpl implements OrderRepository {
                     .set(ORDER.SERIAL_NUMBER, order.getSerialNumber())
                     .set(ORDER.MODEL_ID, order.getModelId())
                     .set(ORDER.GUID, order.getGuid())
-                    .set(ORDER.GUID, order.getGuid())
                     .returning()
                     .fetchOptional()
                     .orElseThrow();
