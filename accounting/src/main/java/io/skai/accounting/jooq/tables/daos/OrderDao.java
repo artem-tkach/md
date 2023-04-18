@@ -158,4 +158,33 @@ public class OrderDao extends DAOImpl<OrderRecord, io.skai.accounting.jooq.table
     public List<io.skai.accounting.jooq.tables.pojos.Order> fetchByDate(LocalDateTime... values) {
         return fetch(Order.ORDER.DATE, values);
     }
+
+    /**
+     * Fetch records that have <code>guid BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<io.skai.accounting.jooq.tables.pojos.Order> fetchRangeOfGuid(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Order.ORDER.GUID, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>guid IN (values)</code>
+     */
+    public List<io.skai.accounting.jooq.tables.pojos.Order> fetchByGuid(String... values) {
+        return fetch(Order.ORDER.GUID, values);
+    }
+
+    /**
+     * Fetch a unique record that has <code>guid = value</code>
+     */
+    public io.skai.accounting.jooq.tables.pojos.Order fetchOneByGuid(String value) {
+        return fetchOne(Order.ORDER.GUID, value);
+    }
+
+    /**
+     * Fetch a unique record that has <code>guid = value</code>
+     */
+    public Optional<io.skai.accounting.jooq.tables.pojos.Order> fetchOptionalByGuid(String value) {
+        return fetchOptional(Order.ORDER.GUID, value);
+    }
 }

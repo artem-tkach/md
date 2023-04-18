@@ -13,4 +13,5 @@ public class OrderRequestDto {
     String serialNumber;
     String defect;
     Long managerId;
+    String guid;
 }

@@ -23,6 +23,7 @@ public class Order implements Serializable {
     private String defect;
     private Long managerId;
     private LocalDateTime date;
+    private String guid;
 
     public Order() {}
 
@@ -34,6 +35,7 @@ public class Order implements Serializable {
         this.defect = value.defect;
         this.managerId = value.managerId;
         this.date = value.date;
+        this.guid = value.guid;
     }
 
     public Order(
@@ -43,7 +45,8 @@ public class Order implements Serializable {
         String serialNumber,
         String defect,
         Long managerId,
-        LocalDateTime date
+        LocalDateTime date,
+        String guid
     ) {
         this.id = id;
         this.clientId = clientId;
@@ -52,6 +55,7 @@ public class Order implements Serializable {
         this.defect = defect;
         this.managerId = managerId;
         this.date = date;
+        this.guid = guid;
     }
 
     /**
@@ -152,6 +156,20 @@ public class Order implements Serializable {
         this.date = date;
     }
 
+    /**
+     * Getter for <code>mobile_accounting.order.guid</code>.
+     */
+    public String getGuid() {
+        return this.guid;
+    }
+
+    /**
+     * Setter for <code>mobile_accounting.order.guid</code>.
+     */
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -203,6 +221,12 @@ public class Order implements Serializable {
         }
         else if (!this.date.equals(other.date))
             return false;
+        if (this.guid == null) {
+            if (other.guid != null)
+                return false;
+        }
+        else if (!this.guid.equals(other.guid))
+            return false;
         return true;
     }
 
@@ -217,6 +241,7 @@ public class Order implements Serializable {
         result = prime * result + ((this.defect == null) ? 0 : this.defect.hashCode());
         result = prime * result + ((this.managerId == null) ? 0 : this.managerId.hashCode());
         result = prime * result + ((this.date == null) ? 0 : this.date.hashCode());
+        result = prime * result + ((this.guid == null) ? 0 : this.guid.hashCode());
         return result;
     }
 
@@ -231,6 +256,7 @@ public class Order implements Serializable {
         sb.append(", ").append(defect);
         sb.append(", ").append(managerId);
         sb.append(", ").append(date);
+        sb.append(", ").append(guid);
 
         sb.append(")");
         return sb.toString();

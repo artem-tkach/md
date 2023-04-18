@@ -25,13 +25,13 @@ class ModelRepositoryImplTest extends BaseApplicationContext {
 
     @BeforeEach
     void addTestRecords() {
-        modelRepository.create(GALAXY_13.getBrandId(), GALAXY_13.getName());
-        modelRepository.create(MI9_SE.getBrandId(), MI9_SE.getName());
+        modelRepository.findOrCreate(GALAXY_13.getBrandId(), GALAXY_13.getName());
+        modelRepository.findOrCreate(MI9_SE.getBrandId(), MI9_SE.getName());
     }
 
     @Test
     void whenDataInsertedCreateNewThenReturnIt() {
-        Model model = modelRepository.create(GALAXY_14.getBrandId(), GALAXY_14.getName());
+        Model model = modelRepository.findOrCreate(GALAXY_14.getBrandId(), GALAXY_14.getName());
         assertThat(model)
                 .satisfies(m -> assertThat(m.getId())
                         .isPositive())

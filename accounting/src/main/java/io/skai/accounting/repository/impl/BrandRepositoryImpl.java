@@ -1,6 +1,7 @@
 package io.skai.accounting.repository.impl;
 
 import io.skai.accounting.jooq.tables.pojos.Brand;
+import io.skai.accounting.jooq.tables.records.BrandRecord;
 import io.skai.accounting.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
@@ -13,15 +14,15 @@ import static io.skai.accounting.jooq.Tables.BRAND;
 @Repository
 @RequiredArgsConstructor
 public class BrandRepositoryImpl implements BrandRepository {
+
     private final DSLContext dslContext;
 
     @Override
-    public Brand create(String name) {
-        return dslContext.insertInto(BRAND, BRAND.NAME)
-                .values(name)
-                .returning()
+    public Brand findOrCreate(String name) {
+        return dslContext.selectFrom(BRAND)
+                .where(BRAND.NAME.eq(name))
                 .fetchOptional()
-                .orElseThrow()
+                .orElseGet(() -> createBrandRecord(name))
                 .into(Brand.class);
     }
 
@@ -36,5 +37,12 @@ public class BrandRepositoryImpl implements BrandRepository {
         return dslContext.selectFrom(BRAND)
                 .where(BRAND.ID.eq(id))
                 .fetchOneInto(Brand.class);
+    }
+
+    public BrandRecord createBrandRecord(String name) {
+        return dslContext.insertInto(BRAND, BRAND.NAME)
+                .values(name)
+                .returning()
+                .fetchOne();
     }
 }
