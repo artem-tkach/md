@@ -5,6 +5,7 @@ package io.skai.accounting.jooq.tables.records;
 
 
 import io.skai.accounting.jooq.tables.Client;
+
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record3;

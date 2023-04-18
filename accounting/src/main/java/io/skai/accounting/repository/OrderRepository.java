@@ -3,5 +3,5 @@ package io.skai.accounting.repository;
 import io.skai.accounting.jooq.tables.pojos.Order;
 
 public interface OrderRepository {
-    Order create(Order order);
+    Order findOrCreate(Order order);
 }

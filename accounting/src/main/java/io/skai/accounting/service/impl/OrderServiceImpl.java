@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 @EnableAsync
+
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto createAndNotify(OrderRequestDto dto) {
-        Order order = orderRepository.create(orderMapper.toOrder(dto));
+        Order order = orderRepository.findOrCreate(orderMapper.toOrder(dto));
         notificationService.asyncNotifyAboutNewOrder(order);
         return orderMapper.toResponseDto(order);
     }

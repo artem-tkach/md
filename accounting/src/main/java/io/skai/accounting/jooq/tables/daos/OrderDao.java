@@ -6,11 +6,13 @@ package io.skai.accounting.jooq.tables.daos;
 
 import io.skai.accounting.jooq.tables.Order;
 import io.skai.accounting.jooq.tables.records.OrderRecord;
-import org.jooq.Configuration;
-import org.jooq.impl.DAOImpl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import org.jooq.Configuration;
+import org.jooq.impl.DAOImpl;
 
 
 /**
@@ -128,20 +130,6 @@ public class OrderDao extends DAOImpl<OrderRecord, io.skai.accounting.jooq.table
     }
 
     /**
-     * Fetch a unique record that has <code>defect = value</code>
-     */
-    public io.skai.accounting.jooq.tables.pojos.Order fetchOneByDefect(String value) {
-        return fetchOne(Order.ORDER.DEFECT, value);
-    }
-
-    /**
-     * Fetch a unique record that has <code>defect = value</code>
-     */
-    public Optional<io.skai.accounting.jooq.tables.pojos.Order> fetchOptionalByDefect(String value) {
-        return fetchOptional(Order.ORDER.DEFECT, value);
-    }
-
-    /**
      * Fetch records that have <code>manager_id BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
@@ -154,5 +142,49 @@ public class OrderDao extends DAOImpl<OrderRecord, io.skai.accounting.jooq.table
      */
     public List<io.skai.accounting.jooq.tables.pojos.Order> fetchByManagerId(Long... values) {
         return fetch(Order.ORDER.MANAGER_ID, values);
+    }
+
+    /**
+     * Fetch records that have <code>date BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<io.skai.accounting.jooq.tables.pojos.Order> fetchRangeOfDate(LocalDateTime lowerInclusive, LocalDateTime upperInclusive) {
+        return fetchRange(Order.ORDER.DATE, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>date IN (values)</code>
+     */
+    public List<io.skai.accounting.jooq.tables.pojos.Order> fetchByDate(LocalDateTime... values) {
+        return fetch(Order.ORDER.DATE, values);
+    }
+
+    /**
+     * Fetch records that have <code>guid BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<io.skai.accounting.jooq.tables.pojos.Order> fetchRangeOfGuid(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Order.ORDER.GUID, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>guid IN (values)</code>
+     */
+    public List<io.skai.accounting.jooq.tables.pojos.Order> fetchByGuid(String... values) {
+        return fetch(Order.ORDER.GUID, values);
+    }
+
+    /**
+     * Fetch a unique record that has <code>guid = value</code>
+     */
+    public io.skai.accounting.jooq.tables.pojos.Order fetchOneByGuid(String value) {
+        return fetchOne(Order.ORDER.GUID, value);
+    }
+
+    /**
+     * Fetch a unique record that has <code>guid = value</code>
+     */
+    public Optional<io.skai.accounting.jooq.tables.pojos.Order> fetchOptionalByGuid(String value) {
+        return fetchOptional(Order.ORDER.GUID, value);
     }
 }

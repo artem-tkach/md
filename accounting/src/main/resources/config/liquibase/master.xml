@@ -10,4 +10,5 @@
     <include file="/config/liquibase/changelog/00005_add_table_user.xml"/>
     <include file="/config/liquibase/changelog/00006_add_table_order.xml"/>
     <include file="/config/liquibase/changelog/00007_add_table_order_status.xml"/>
+    <include file="/config/liquibase/changelog/00008_add_column_guid_to_order.xml"/>
 </databaseChangeLog>

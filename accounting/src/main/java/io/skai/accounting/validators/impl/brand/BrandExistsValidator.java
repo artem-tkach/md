@@ -22,7 +22,7 @@ public class BrandExistsValidator implements BrandValidator {
         boolean exists = dslContext.fetchExists(
                 dslContext.selectFrom(BRAND)
                         .where(BRAND.ID.eq(brand.getId())));
-        if (exists) {
+        if (!exists) {
             throw new EntityNotFoundException(String.format(BRAND_NOT_FOUND_BY_ID, brand.getId()));
         }
     }

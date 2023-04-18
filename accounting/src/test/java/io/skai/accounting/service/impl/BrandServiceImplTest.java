@@ -31,13 +31,13 @@ class BrandServiceImplTest {
         BrandDto mockResponse = BrandDto.builder().id(XIAOMI.getId()).name(XIAOMI.getName()).build();
 
         doReturn(XIAOMI)
-                .when(brandRepository).create(XIAOMI.getName());
+                .when(brandRepository).findOrCreate(XIAOMI.getName());
         doReturn(mockResponse)
                 .when(brandMapper).toBrandResponseDto(XIAOMI);
 
         BrandDto resultDto = brandService.create(XIAOMI_REQUEST_DTO);
 
-        verify(brandRepository).create(XIAOMI.getName());
+        verify(brandRepository).findOrCreate(XIAOMI.getName());
         assertThat(resultDto)
                 .isEqualTo(mockResponse);
     }
@@ -46,12 +46,12 @@ class BrandServiceImplTest {
     void whenBrandExistsInDBCreateBrandThenThrowException() {
         String testBrandName = "Xiaomi999";
         doThrow(DuplicateKeyException.class)
-                .when(brandRepository).create(testBrandName);
+                .when(brandRepository).findOrCreate(testBrandName);
         BrandRequestDto requestDto = new BrandRequestDto(testBrandName);
 
         assertThatThrownBy(() -> brandService.create(requestDto)).
                 isInstanceOf(DuplicateKeyException.class);
-        verify(brandRepository).create(testBrandName);
+        verify(brandRepository).findOrCreate(testBrandName);
     }
 
     @Test

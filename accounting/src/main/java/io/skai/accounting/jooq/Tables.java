@@ -4,7 +4,12 @@
 package io.skai.accounting.jooq;
 
 
-import io.skai.accounting.jooq.tables.*;
+import io.skai.accounting.jooq.tables.Brand;
+import io.skai.accounting.jooq.tables.Client;
+import io.skai.accounting.jooq.tables.Model;
+import io.skai.accounting.jooq.tables.Order;
+import io.skai.accounting.jooq.tables.OrderStatus;
+import io.skai.accounting.jooq.tables.User;
 
 
 /**
@@ -32,6 +37,11 @@ public class Tables {
      * The table <code>mobile_accounting.order</code>.
      */
     public static final Order ORDER = Order.ORDER;
+
+    /**
+     * The table <code>mobile_accounting.order_status</code>.
+     */
+    public static final OrderStatus ORDER_STATUS = OrderStatus.ORDER_STATUS;
 
     /**
      * The table <code>mobile_accounting.user</code>.

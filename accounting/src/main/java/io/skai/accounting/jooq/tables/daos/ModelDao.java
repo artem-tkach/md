@@ -6,11 +6,12 @@ package io.skai.accounting.jooq.tables.daos;
 
 import io.skai.accounting.jooq.tables.Model;
 import io.skai.accounting.jooq.tables.records.ModelRecord;
-import org.jooq.Configuration;
-import org.jooq.impl.DAOImpl;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.jooq.Configuration;
+import org.jooq.impl.DAOImpl;
 
 
 /**

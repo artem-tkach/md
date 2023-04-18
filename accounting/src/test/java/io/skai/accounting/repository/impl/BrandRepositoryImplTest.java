@@ -6,12 +6,10 @@ import io.skai.accounting.jooq.tables.pojos.Brand;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.dao.DuplicateKeyException;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class BrandRepositoryImplTest extends BaseApplicationContext {
     private final Brand SAMSUNG = new Brand(1L, "Samsung");
@@ -35,8 +33,8 @@ class BrandRepositoryImplTest extends BaseApplicationContext {
     }
 
     private void addTestRecords() {
-        brandRepository.create(SAMSUNG.getName());
-        brandRepository.create(IPHONE.getName());
+        brandRepository.findOrCreate(SAMSUNG.getName());
+        brandRepository.findOrCreate(IPHONE.getName());
     }
 
     @Test
@@ -65,7 +63,7 @@ class BrandRepositoryImplTest extends BaseApplicationContext {
     @Test
     void whenBrandInsertThenReturnIt() {
         String testName = "some brand";
-        Brand brand = brandRepository.create(testName);
+        Brand brand = brandRepository.findOrCreate(testName);
         assertThat(brand)
                 .hasFieldOrPropertyWithValue("name", testName);
         assertThat(brand.getId())
@@ -73,9 +71,9 @@ class BrandRepositoryImplTest extends BaseApplicationContext {
     }
 
     @Test
-    void whenDataInsertedCreateDuplicateEntityThenThrowsException() {
+    void whenDataInsertedCreateDuplicateEntityThenReturnExisting() {
         String testName = SAMSUNG.getName();
-        assertThatThrownBy(() -> brandRepository.create(testName)).
-                isInstanceOf(DuplicateKeyException.class);
+        Brand result = brandRepository.findOrCreate(testName);
+        assertThat(result).isEqualTo(SAMSUNG);
     }
 }

@@ -25,7 +25,7 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public ModelDto create(ModelRequestDto dto) {
         brandExistsValidator.validate(new Brand(dto.brandId(), null));
-        Model model = modelRepository.create(dto.brandId(), dto.name());
+        Model model = modelRepository.findOrCreate(dto.brandId(), dto.name());
         return mapToModelDto(model);
     }
 

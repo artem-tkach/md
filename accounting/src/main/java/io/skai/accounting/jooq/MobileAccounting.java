@@ -4,13 +4,19 @@
 package io.skai.accounting.jooq;
 
 
-import io.skai.accounting.jooq.tables.*;
-import org.jooq.Catalog;
-import org.jooq.Table;
-import org.jooq.impl.SchemaImpl;
+import io.skai.accounting.jooq.tables.Brand;
+import io.skai.accounting.jooq.tables.Client;
+import io.skai.accounting.jooq.tables.Model;
+import io.skai.accounting.jooq.tables.Order;
+import io.skai.accounting.jooq.tables.OrderStatus;
+import io.skai.accounting.jooq.tables.User;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.jooq.Catalog;
+import org.jooq.Table;
+import org.jooq.impl.SchemaImpl;
 
 
 /**
@@ -47,6 +53,11 @@ public class MobileAccounting extends SchemaImpl {
     public final Order ORDER = Order.ORDER;
 
     /**
+     * The table <code>mobile_accounting.order_status</code>.
+     */
+    public final OrderStatus ORDER_STATUS = OrderStatus.ORDER_STATUS;
+
+    /**
      * The table <code>mobile_accounting.user</code>.
      */
     public final User USER = User.USER;
@@ -71,6 +82,7 @@ public class MobileAccounting extends SchemaImpl {
             Client.CLIENT,
             Model.MODEL,
             Order.ORDER,
+            OrderStatus.ORDER_STATUS,
             User.USER
         );
     }

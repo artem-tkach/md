@@ -24,7 +24,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     @Cacheable("brand")
     public BrandDto create(BrandRequestDto dto) {
-        return brandMapper.toBrandResponseDto(brandRepository.create(dto.name()));
+        return brandMapper.toBrandResponseDto(brandRepository.findOrCreate(dto.name()));
     }
 
     @Override
