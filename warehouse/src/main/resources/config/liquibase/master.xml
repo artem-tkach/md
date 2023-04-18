@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <include file="/config/liquibase/changelog/00001_add_table_brand.xml"/>
+    <include file="/config/liquibase/changelog/00002_add_table_model.xml"/>
+    <include file="/config/liquibase/changelog/00003_add_table_component.xml"/>
+    <include file="/config/liquibase/changelog/00004_add_table_model_component.xml"/>
+    <include file="/config/liquibase/changelog/00005_add_table_component_residues.xml"/>
+</databaseChangeLog>

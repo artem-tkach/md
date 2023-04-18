@@ -32,6 +32,16 @@ services:
       MYSQL_ROOT_PASSWORD: '12345'
     ports:
       - '3309:3306'
+  docker-mysql-warehouse:
+    container_name: my_db_warehouse
+    image: mysql
+    environment:
+      MYSQL_DATABASE: 'mobile_warehouse'
+      MYSQL_USER: artem
+      MYSQL_PASSWORD: '12345'
+      MYSQL_ROOT_PASSWORD: '12345'
+    ports:
+      - '33010:3306'
 
   #  zookeeper-1:
   #    image: confluentinc/cp-zookeeper:latest

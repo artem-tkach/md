@@ -1,0 +1,21 @@
+server:
+
+  port: 8082
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:33010/mobile_warehouse
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: artem
+    password: 12345
+  application:
+    name: md
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:config/liquibase/master.xml
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
