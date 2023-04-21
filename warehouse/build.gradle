@@ -11,4 +11,6 @@ dependencies {
     implementation libs.jpa
     implementation libs.springValidation
     implementation libs.persistanceLayer
+    testImplementation libs.testcontainers
+    testImplementation libs.testContainersJupiter
 }
