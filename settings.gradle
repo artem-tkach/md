@@ -32,6 +32,7 @@ dependencyResolutionManagement {
             library('persistanceLayer','com.kenshoo:persistence-layer:0.1.116-jooq-3.16.3')
             library('testcontainers', "org.testcontainers:testcontainers:$testContainersVersion")
             library('testContainersJupiter',"org.testcontainers:junit-jupiter:$testContainersVersion")
+            library('testContainersMySQL',"org.testcontainers:mysql:$testContainersVersion")
         }
     }
 }
