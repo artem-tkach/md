@@ -10,4 +10,5 @@
     <include file="/config/liquibase/changelog/00003_add_table_component.xml"/>
     <include file="/config/liquibase/changelog/00004_add_table_model_component.xml"/>
     <include file="/config/liquibase/changelog/00005_add_table_component_residues.xml"/>
+    <include file="/config/liquibase/changelog/00006_add_table_brand_info.xml"/>
 </databaseChangeLog>
