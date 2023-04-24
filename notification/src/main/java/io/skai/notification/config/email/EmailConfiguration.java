@@ -1,4 +1,4 @@
-package io.skai.notification.config;
+package io.skai.notification.config.email;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
