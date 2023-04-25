@@ -58,4 +58,14 @@ class ClientServiceImplTest {
         List<ClientDto> results = clientService.getAllDto();
         assertThat(results, containsInAnyOrder(SARA_DTO, ALFRED_DTO));
     }
+
+    @Test
+    void shouldFindClientInDB(){
+        Long entityId = 1L;
+        when(clientRepository.findOne(entityId)).thenReturn(SARA_IN_DB);
+        when(clientMapper.toClientDto(SARA_IN_DB)).thenReturn(SARA_DTO);
+        ClientDto result = clientService.findOne(entityId);
+
+        assertThat(result,equalTo(SARA_DTO));
+    }
 }
