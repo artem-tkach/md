@@ -22,7 +22,6 @@ import static io.skai.notification.config.kafka.KafkaProperties.CONSUMER_GROUP_I
 @RequiredArgsConstructor
 public class KafkaConsumerConfig {
 
-    public static final String NOTIFICATION_CONTAINER_FACTORY = "NOTIFICATION_CONTAINER_FACTORY";
     private final KafkaProperties kafkaProperties;
 
     @Bean
@@ -43,7 +42,7 @@ public class KafkaConsumerConfig {
                 deserializer);
     }
 
-    @Bean(NOTIFICATION_CONTAINER_FACTORY)
+    @Bean
     public ConcurrentKafkaListenerContainerFactory<String, Notification> registerKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Notification> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();

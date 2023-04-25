@@ -2,7 +2,7 @@ package io.skai.notification.service;
 
 import io.skai.notification.model.Notification;
 
-public interface OrderNotificationListener {
+public interface OrderNotificationConsumer {
 
-    void listen(Notification notification);
+    void consume(Notification notification);
 }
