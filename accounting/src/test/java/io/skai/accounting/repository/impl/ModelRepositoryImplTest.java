@@ -1,6 +1,8 @@
 package io.skai.accounting.repository.impl;
 
 import io.skai.accounting.BaseApplicationContext;
+import io.skai.accounting.dto.model.ModelInfoDto;
+import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.jooq.tables.pojos.Model;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,9 +14,10 @@ import static io.skai.accounting.jooq.Tables.MODEL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ModelRepositoryImplTest extends BaseApplicationContext {
-    private final Model GALAXY_13 = new Model(1L, 1L, "Galaxy 13");
+    private static final String SAMSUNG = "Samsung";
+    public static final String XIAOMI = "Xiaomi";
+    private Model galaxy13;
     private final Model GALAXY_14 = new Model(null, 1L, "Galaxy 14");
-    private final Model MI9_SE = new Model(2L, 2L, "MI9 SE");
 
     @AfterEach
     void clearTableModel() {
@@ -25,8 +28,10 @@ class ModelRepositoryImplTest extends BaseApplicationContext {
 
     @BeforeEach
     void addTestRecords() {
-        modelRepository.findOrCreate(GALAXY_13.getBrandId(), GALAXY_13.getName());
-        modelRepository.findOrCreate(MI9_SE.getBrandId(), MI9_SE.getName());
+        Brand samsung = brandRepository.findOrCreate(SAMSUNG);
+        Brand xiaomi = brandRepository.findOrCreate(XIAOMI);
+        galaxy13 = modelRepository.findOrCreate(samsung.getId(), "Galaxy 13");
+        modelRepository.findOrCreate(xiaomi.getId(), "MI9 SE");
     }
 
     @Test
@@ -42,8 +47,18 @@ class ModelRepositoryImplTest extends BaseApplicationContext {
 
     @Test
     void whenDataInsertedGetAllByBrandThenReturnIt() {
-        List<Model> models = modelRepository.findAll(GALAXY_13.getBrandId());
+        List<Model> models = modelRepository.findAll(galaxy13.getBrandId());
         assertThat(models)
-                .containsExactlyInAnyOrder(GALAXY_13);
+                .containsExactlyInAnyOrder(galaxy13);
+    }
+
+    @Test
+    void shouldFindModelInfo() {
+        ModelInfoDto expected = new ModelInfoDto(galaxy13.getId(), galaxy13.getName(), 1L, SAMSUNG);
+        ModelInfoDto result = modelRepository.findModelInfo(galaxy13.getId());
+        assertThat(result)
+                .usingRecursiveComparison()
+                .ignoringFields("brandId")
+                .isEqualTo(expected);
     }
 }
