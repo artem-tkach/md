@@ -13,4 +13,5 @@ dependencies{
     annotationProcessor libs.mapstructAnnotationProcessor
     testImplementation libs.springTests
     testImplementation libs.assertJ
+    implementation libs.kafka
 }

@@ -13,6 +13,7 @@ dependencies{
     implementation libs.jooqCodegen
     implementation libs.openfeign
     implementation libs.redis
+    implementation libs.kafka
     testImplementation libs.springTests
     testImplementation libs.assertJ
     testImplementation libs.hamcrest

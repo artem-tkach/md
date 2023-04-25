@@ -1,6 +1,6 @@
 package io.skai.notification.service.impl;
 
-import io.skai.notification.config.GmailProperties;
+import io.skai.notification.config.email.GmailProperties;
 import io.skai.notification.model.Notification;
 import io.skai.notification.model.Template;
 import io.skai.notification.service.EmailService;

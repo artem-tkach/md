@@ -24,6 +24,8 @@ spring:
     username: art.tkach@gmail.com
     password: olfsbvftoktxwecy
     protocol: smtp
-    #starttlsEnable: true
-    #sslTrust: smtp.gmail.com
     smtp-auth: true
+  kafka:
+    consumer:
+      group-id: notification
+    bootstrap-servers: localhost:29092
