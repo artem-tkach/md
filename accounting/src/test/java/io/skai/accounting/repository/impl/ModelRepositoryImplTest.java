@@ -21,16 +21,14 @@ class ModelRepositoryImplTest extends BaseApplicationContext {
 
     @AfterEach
     void clearTableModel() {
-        dslContext
-                .truncate(MODEL)
-                .execute();
+        dslContext.truncate(MODEL).execute();
     }
 
     @BeforeEach
     void addTestRecords() {
         Brand samsung = brandRepository.findOrCreate(SAMSUNG);
         Brand xiaomi = brandRepository.findOrCreate(XIAOMI);
-        galaxy13 = modelRepository.findOrCreate(samsung.getId(), "Galaxy 13");
+        galaxy13 = modelRepository.findOrCreate(samsung.getId(), "Galaxy 13");//move to constant
         modelRepository.findOrCreate(xiaomi.getId(), "MI9 SE");
     }
 
