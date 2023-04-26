@@ -57,10 +57,10 @@ class BrandServiceImplTest {
     @Test
     void whenDataInsertedFindThenReturnIt(){
         doReturn(XIAOMI)
-                .when(brandRepository).findOne(XIAOMI.getId());
-        Brand resultBrand = brandService.findOne(XIAOMI.getId());
+                .when(brandRepository).find(XIAOMI.getId());
+        Brand resultBrand = brandService.find(XIAOMI.getId());
 
-        verify(brandRepository).findOne(XIAOMI.getId());
+        verify(brandRepository).find(XIAOMI.getId());
         assertThat(resultBrand)
                 .isEqualTo(XIAOMI);
     }

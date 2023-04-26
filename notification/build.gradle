@@ -14,4 +14,7 @@ dependencies{
     testImplementation libs.springTests
     testImplementation libs.assertJ
     implementation libs.kafka
+    testImplementation libs.testContainersKafka
+    testImplementation libs.testcontainers
+    testImplementation libs.testContainersJupiter
 }

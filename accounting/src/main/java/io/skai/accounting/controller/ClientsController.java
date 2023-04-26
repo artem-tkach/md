@@ -26,6 +26,6 @@ public class ClientsController {
 
     @GetMapping
     List<ClientDto> getAll(){
-        return clientService.getAllDto();
+        return clientService.getAll();
     }
 }

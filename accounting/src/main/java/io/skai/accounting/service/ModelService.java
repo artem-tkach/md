@@ -9,7 +9,7 @@ import java.util.List;
 public interface ModelService {
     ModelDto create(ModelRequestDto dto);
 
-    List<ModelDto> findAllDto(Long brandId);
+    List<ModelDto> findAll(Long brandId);
 
-    ModelInfoDto finModelInfoDto(Long id);
+    ModelInfoDto findModelInfo(Long id);
 }

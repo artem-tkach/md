@@ -46,7 +46,7 @@ public class ModelRepositoryImpl implements ModelRepository {
                 .where(MODEL.ID.eq(id))
                 .fetch(this::recordToImmutablePair)
                 .stream()
-                .map(this::mapToModelInfo)
+                .map(this::toModelInfo)
                 .findFirst()
                 .orElseThrow();
     }
@@ -59,7 +59,7 @@ public class ModelRepositoryImpl implements ModelRepository {
                 .fetchOne();
     }
 
-    private ModelInfoDto mapToModelInfo(ImmutablePair<Brand, Model> pair) {
+    private ModelInfoDto toModelInfo(ImmutablePair<Brand, Model> pair) {
         return new ModelInfoDto(pair.right.getId(), pair.right.getName(), pair.left.getId(), pair.left.getName());
     }
 

@@ -55,16 +55,16 @@ class ClientServiceImplTest {
         when(clientMapper.toResponseDtoList(any()))
                 .thenReturn(List.of(SARA_DTO, ALFRED_DTO));
 
-        List<ClientDto> results = clientService.getAllDto();
+        List<ClientDto> results = clientService.getAll();
         assertThat(results, containsInAnyOrder(SARA_DTO, ALFRED_DTO));
     }
 
     @Test
     void shouldFindClientInDB(){
         Long entityId = 1L;
-        when(clientRepository.findOne(entityId)).thenReturn(SARA_IN_DB);
+        when(clientRepository.find(entityId)).thenReturn(SARA_IN_DB);
         when(clientMapper.toClientDto(SARA_IN_DB)).thenReturn(SARA_DTO);
-        ClientDto result = clientService.findOne(entityId);
+        ClientDto result = clientService.find(entityId);
 
         assertThat(result,equalTo(SARA_DTO));
     }

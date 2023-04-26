@@ -35,8 +35,8 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     @Cacheable(value = "brand")
-    public Brand findOne(Long id) {
+    public Brand find(Long id) {
         log.trace("Call find brand by id, id={}", id);
-        return brandRepository.findOne(id);
+        return brandRepository.find(id);
     }
 }

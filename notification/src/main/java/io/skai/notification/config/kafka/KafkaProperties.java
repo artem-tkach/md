@@ -11,8 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 public class KafkaProperties {
 
-    public static final String ORDER_NOTIFICATION_TOPIC_NAME = "orderNotification";
-    public static final String CONSUMER_GROUP_ID = "notification";
-
     private String bootstrapServers;
+    private String topicName;
+    private String groupId;
 }

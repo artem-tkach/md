@@ -23,12 +23,12 @@ public class OrderNotificationService implements NotificationService {
 
     @Override
     public void asyncNotifyAboutNewOrder(Order order) {
-        orderNotificationProducer.produce(buildDto(order));
+        orderNotificationProducer.produce(buildNotification(order));
     }
 
     @Override
-    public OrderNotificationDto buildDto(Order order) {
-        ModelInfoDto modelInfo = modelService.finModelInfoDto(order.getModelId());
+    public OrderNotificationDto buildNotification(Order order) {
+        ModelInfoDto modelInfo = modelService.findModelInfo(order.getModelId());
 
         return OrderNotificationDto.builder()
                 .orderId(order.getId())
@@ -38,7 +38,7 @@ public class OrderNotificationService implements NotificationService {
                 .modelId(order.getModelId())
                 .model(modelInfo.name())
                 .defect(order.getDefect())
-                .email(clientService.findOne(order.getClientId()).getEmail())
+                .email(clientService.find(order.getClientId()).getEmail())
                 .build();
     }
 }

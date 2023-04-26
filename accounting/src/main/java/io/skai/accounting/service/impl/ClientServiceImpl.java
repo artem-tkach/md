@@ -24,13 +24,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<ClientDto> getAllDto() {
+    public List<ClientDto> getAll() {
         List<Client> clients = clientRepository.findAll();
         return clientMapper.toResponseDtoList(clients);
     }
 
     @Override
-    public ClientDto findOne(Long id) {
-        return clientMapper.toClientDto(clientRepository.findOne(id));
+    public ClientDto find(Long id) {
+        return clientMapper.toClientDto(clientRepository.find(id));
     }
 }

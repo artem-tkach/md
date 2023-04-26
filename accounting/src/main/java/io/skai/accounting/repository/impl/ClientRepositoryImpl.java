@@ -33,7 +33,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public Client findOne(Long id) {
+    public Client find(Long id) {
         return dslContext.selectFrom(CLIENT)
                 .where(CLIENT.ID.eq(id))
                 .fetchOneInto(Client.class);

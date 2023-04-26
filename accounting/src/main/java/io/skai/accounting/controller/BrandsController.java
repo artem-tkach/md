@@ -32,6 +32,6 @@ public class BrandsController {
 
     @GetMapping("/{id}")
     public Brand get(@PathVariable Long id){
-        return brandService.findOne(id);
+        return brandService.find(id);
     }
 }

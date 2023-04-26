@@ -6,5 +6,5 @@ import io.skai.accounting.jooq.tables.pojos.Order;
 public interface NotificationService {
     void asyncNotifyAboutNewOrder(Order order);
 
-    OrderNotificationDto buildDto(Order order);
+    OrderNotificationDto buildNotification(Order order);
 }

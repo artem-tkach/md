@@ -9,5 +9,5 @@ public interface BrandRepository {
 
     List<Brand> findAll();
 
-    Brand findOne(Long id);
+    Brand find(Long id);
 }

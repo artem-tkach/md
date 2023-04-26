@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ClientService {
     ClientDto create(ClientRequestDto dto);
-    List<ClientDto> getAllDto();
-    ClientDto findOne(Long id);
+    List<ClientDto> getAll();
+    ClientDto find(Long id);
 }

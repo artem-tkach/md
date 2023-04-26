@@ -33,7 +33,7 @@ public class BrandRepositoryImpl implements BrandRepository {
     }
 
     @Override
-    public Brand findOne(Long id) {
+    public Brand find(Long id) {
         return dslContext.selectFrom(BRAND)
                 .where(BRAND.ID.eq(id))
                 .fetchOneInto(Brand.class);
