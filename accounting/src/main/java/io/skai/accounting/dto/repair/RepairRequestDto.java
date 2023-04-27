@@ -1,18 +1,23 @@
 package io.skai.accounting.dto.repair;
 
 import io.skai.accounting.enums.RepairResult;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.util.Map;
 
+import static io.skai.accounting.util.ValidationMessages.*;
+
 public record RepairRequestDto(
-        @NotNull
+        @Positive(message = WRONG_ORDER_ID)
+        @NotNull(message = NULL_ORDER_ID)
         Long orderId,
-        @NotNull
+        @Positive(message = WRONG_MASTER_ID)
+        @NotNull(message = NULL_MASTER_ID)
         Long masterId,
-        @NotNull
+        @NotBlank(message = BLANK_REPAIR_RESULT)
         RepairResult result,
-        @NotNull
         Double sum,
         Map<Long, Integer> components,
         String comment) {
