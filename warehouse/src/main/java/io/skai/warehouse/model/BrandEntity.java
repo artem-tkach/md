@@ -19,7 +19,7 @@ public class BrandEntity extends AbstractEntityType<BrandEntity> {
 
     @Required
     @Immutable
-    public static final EntityField<BrandEntity, String> NAME = INSTANCE.field(BrandTable.TABLE.name);//
+    public static final EntityField<BrandEntity, String> NAME = INSTANCE.field(BrandTable.TABLE.name);
 
     @Required
     @Immutable
