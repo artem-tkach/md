@@ -10,7 +10,6 @@ import java.util.Map;
 import static io.skai.accounting.util.ValidationMessages.*;
 
 public record RepairRequestDto(
-
         @Positive(message = WRONG_ORDER_ID)
         @NotNull(message = NULL_ORDER_ID)
         Long orderId,
