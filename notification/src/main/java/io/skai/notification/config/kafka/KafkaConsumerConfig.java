@@ -12,10 +12,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import java.util.HashMap;
 import java.util.Map;
-
-import static io.skai.notification.config.kafka.KafkaProperties.CONSUMER_GROUP_ID;
 
 @EnableKafka
 @Configuration
@@ -31,12 +28,12 @@ public class KafkaConsumerConfig {
         deserializer.addTrustedPackages("*");
         deserializer.setUseTypeMapperForKey(true);
 
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, CONSUMER_GROUP_ID);
-        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+        Map<String, Object> props = Map.of(
+                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers(),
+                ConsumerConfig.GROUP_ID_CONFIG, kafkaProperties.getGroupId(),
+                ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true,
+                ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest",
+                ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
 
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(),
                 deserializer);

@@ -4,6 +4,7 @@ server:
 spring:
   kafka:
     bootstrap-servers: localhost:29092
+    topic-name: orderNotification
   cache:
     type: redis
     redis:

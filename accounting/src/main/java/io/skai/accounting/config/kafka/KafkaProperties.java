@@ -1,4 +1,4 @@
-package io.skai.notification.config.kafka;
+package io.skai.accounting.config.kafka;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +13,4 @@ public class KafkaProperties {
 
     private String bootstrapServers;
     private String topicName;
-    private String groupId;
 }

@@ -6,3 +6,10 @@ spring:
     password: 12345
   liquibase:
     change-log: classpath:config/liquibase/master.xml
+  kafka:
+    topic-name: testTopic
+    consumer:
+      auto-offset-reset: latest
+      group-id: notification
+    test:
+      topic: embedded-test-topic

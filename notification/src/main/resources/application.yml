@@ -26,6 +26,8 @@ spring:
     protocol: smtp
     smtp-auth: true
   kafka:
+    topic-name: orderNotification
+    group-id: notification
     consumer:
       group-id: notification
     bootstrap-servers: localhost:29092

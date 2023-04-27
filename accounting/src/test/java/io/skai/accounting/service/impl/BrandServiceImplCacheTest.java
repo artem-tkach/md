@@ -28,14 +28,14 @@ class BrandServiceImplCacheTest {
 
     @Test
     void whenDataInsertedGetEntityTwiceThenReturnItFromCache(){
-        when(brandRepository.findOne(IPHONE.getId()))
+        when(brandRepository.find(IPHONE.getId()))
                 .thenReturn(IPHONE);
 
-        Brand resultBrand1 = brandService.findOne(IPHONE.getId());
-        Brand resultBrand2 = brandService.findOne(IPHONE.getId());
+        Brand resultBrand1 = brandService.find(IPHONE.getId());
+        Brand resultBrand2 = brandService.find(IPHONE.getId());
 
         verify(brandRepository,atMost(1))
-                .findOne(IPHONE.getId());
+                .find(IPHONE.getId());
         assertThat(resultBrand1)
                 .isEqualTo(resultBrand2);
     }

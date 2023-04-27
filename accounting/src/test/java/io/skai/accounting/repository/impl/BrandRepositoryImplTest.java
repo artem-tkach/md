@@ -46,9 +46,9 @@ class BrandRepositoryImplTest extends BaseApplicationContext {
 
     @Test
     void whenDataInsertedThenFindOneReturnIt() {
-        assertThat(brandRepository.findOne(SAMSUNG.getId()))
+        assertThat(brandRepository.find(SAMSUNG.getId()))
                 .isEqualTo(SAMSUNG);
-        assertThat(brandRepository.findOne(IPHONE.getId()))
+        assertThat(brandRepository.find(IPHONE.getId()))
                 .isEqualTo(IPHONE);
     }
 
@@ -56,7 +56,7 @@ class BrandRepositoryImplTest extends BaseApplicationContext {
     void whenDataNotInsertedThenFindOneReturnNull() {
 
         long notPresentIdInDB = 999L;
-        assertThat(brandRepository.findOne(notPresentIdInDB))
+        assertThat(brandRepository.find(notPresentIdInDB))
                 .isNull();
     }
 

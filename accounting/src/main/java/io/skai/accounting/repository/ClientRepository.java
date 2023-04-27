@@ -9,5 +9,5 @@ public interface ClientRepository {
 
     List<Client> findAll();
 
-    Client findOne(Long id);
+    Client find(Long id);
 }

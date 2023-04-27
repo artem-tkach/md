@@ -11,5 +11,5 @@ public interface BrandService {
 
     List<BrandDto> getAll();
 
-    Brand findOne(Long id);
+    Brand find(Long id);
 }

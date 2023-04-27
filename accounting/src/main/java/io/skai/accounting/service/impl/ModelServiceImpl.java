@@ -1,6 +1,7 @@
 package io.skai.accounting.service.impl;
 
 import io.skai.accounting.dto.model.ModelDto;
+import io.skai.accounting.dto.model.ModelInfoDto;
 import io.skai.accounting.dto.model.ModelRequestDto;
 import io.skai.accounting.jooq.tables.pojos.Brand;
 import io.skai.accounting.jooq.tables.pojos.Model;
@@ -30,9 +31,14 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<ModelDto> findAllDto(Long brandId) {
+    public List<ModelDto> findAll(Long brandId) {
         List<Model> models = modelRepository.findAll(brandId);
         return mapModelList(models);
+    }
+
+    @Override
+    public ModelInfoDto findModelInfo(Long id) {
+        return modelRepository.findModelInfo(id);
     }
 
     private List<ModelDto> mapModelList(List<Model> models) {
@@ -41,6 +47,6 @@ public class ModelServiceImpl implements ModelService {
                 .toList();
     }
     private ModelDto mapToModelDto(Model model){
-        return modelMapper.toModelDto(model, brandService.findOne(model.getBrandId()));
+        return modelMapper.toModelDto(model, brandService.find(model.getBrandId()));
     }
 }

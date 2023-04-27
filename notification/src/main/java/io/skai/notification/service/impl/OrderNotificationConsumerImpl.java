@@ -9,8 +9,6 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-import static io.skai.notification.config.kafka.KafkaProperties.ORDER_NOTIFICATION_TOPIC_NAME;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -19,7 +17,8 @@ public class OrderNotificationConsumerImpl implements OrderNotificationConsumer 
     private final NotificationService notificationService;
 
     @Override
-    @KafkaListener(topics = ORDER_NOTIFICATION_TOPIC_NAME, groupId = "notification",
+    @KafkaListener(topics = "#{kafkaProperties.getTopicName()}",
+            groupId = "#{kafkaProperties.getGroupId()}",
             containerFactory = "registerKafkaListenerContainerFactory")
     public void consume(@Payload Notification notification) {
         notificationService.notify(notification);

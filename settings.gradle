@@ -33,6 +33,7 @@ dependencyResolutionManagement {
             library('testcontainers', "org.testcontainers:testcontainers:$testContainersVersion")
             library('testContainersJupiter',"org.testcontainers:junit-jupiter:$testContainersVersion")
             library('testContainersMySQL',"org.testcontainers:mysql:$testContainersVersion")
+            library('testContainersKafka', "org.testcontainers:kafka:$testContainersVersion")
         }
     }
 }
