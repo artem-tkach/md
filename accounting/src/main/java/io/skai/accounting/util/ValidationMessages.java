@@ -17,5 +17,4 @@ public class ValidationMessages {
     public static final String NULL_MASTER_ID = "Master id cant be null";
     public static final String WRONG_MASTER_ID = "Master id must be greater than 0";
     public static final String BLANK_REPAIR_RESULT = "Repair result must be provided";
-
 }
