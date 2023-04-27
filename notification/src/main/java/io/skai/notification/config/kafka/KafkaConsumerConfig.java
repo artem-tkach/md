@@ -32,7 +32,7 @@ public class KafkaConsumerConfig {
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers(),
                 ConsumerConfig.GROUP_ID_CONFIG, kafkaProperties.getGroupId(),
                 ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true,
-                ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest",
+                ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest",
                 ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
 
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(),

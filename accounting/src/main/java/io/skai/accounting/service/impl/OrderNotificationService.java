@@ -22,7 +22,7 @@ public class OrderNotificationService implements NotificationService {
     private final OrderNotificationProducer orderNotificationProducer;
 
     @Override
-    public void asyncNotifyAboutNewOrder(Order order) {
+    public void notify(Order order) {
         orderNotificationProducer.produce(buildNotification(order));
     }
 
