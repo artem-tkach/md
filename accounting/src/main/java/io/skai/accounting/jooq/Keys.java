@@ -9,12 +9,14 @@ import io.skai.accounting.jooq.tables.Client;
 import io.skai.accounting.jooq.tables.Model;
 import io.skai.accounting.jooq.tables.Order;
 import io.skai.accounting.jooq.tables.OrderStatus;
+import io.skai.accounting.jooq.tables.Repair;
 import io.skai.accounting.jooq.tables.User;
 import io.skai.accounting.jooq.tables.records.BrandRecord;
 import io.skai.accounting.jooq.tables.records.ClientRecord;
 import io.skai.accounting.jooq.tables.records.ModelRecord;
 import io.skai.accounting.jooq.tables.records.OrderRecord;
 import io.skai.accounting.jooq.tables.records.OrderStatusRecord;
+import io.skai.accounting.jooq.tables.records.RepairRecord;
 import io.skai.accounting.jooq.tables.records.UserRecord;
 
 import org.jooq.ForeignKey;
@@ -43,6 +45,7 @@ public class Keys {
     public static final UniqueKey<OrderRecord> KEY_ORDER_GUID = Internal.createUniqueKey(Order.ORDER, DSL.name("KEY_order_guid"), new TableField[] { Order.ORDER.GUID }, true);
     public static final UniqueKey<OrderRecord> KEY_ORDER_PRIMARY = Internal.createUniqueKey(Order.ORDER, DSL.name("KEY_order_PRIMARY"), new TableField[] { Order.ORDER.ID }, true);
     public static final UniqueKey<OrderStatusRecord> KEY_ORDER_STATUS_PRIMARY = Internal.createUniqueKey(OrderStatus.ORDER_STATUS, DSL.name("KEY_order_status_PRIMARY"), new TableField[] { OrderStatus.ORDER_STATUS.ID }, true);
+    public static final UniqueKey<RepairRecord> KEY_REPAIR_PRIMARY = Internal.createUniqueKey(Repair.REPAIR, DSL.name("KEY_repair_PRIMARY"), new TableField[] { Repair.REPAIR.ID }, true);
     public static final UniqueKey<UserRecord> KEY_USER_EMAIL = Internal.createUniqueKey(User.USER, DSL.name("KEY_user_email"), new TableField[] { User.USER.EMAIL }, true);
     public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = Internal.createUniqueKey(User.USER, DSL.name("KEY_user_PRIMARY"), new TableField[] { User.USER.ID }, true);
 

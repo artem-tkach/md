@@ -9,6 +9,7 @@ import io.skai.accounting.jooq.tables.Client;
 import io.skai.accounting.jooq.tables.Model;
 import io.skai.accounting.jooq.tables.Order;
 import io.skai.accounting.jooq.tables.OrderStatus;
+import io.skai.accounting.jooq.tables.Repair;
 import io.skai.accounting.jooq.tables.User;
 
 
@@ -42,6 +43,11 @@ public class Tables {
      * The table <code>mobile_accounting.order_status</code>.
      */
     public static final OrderStatus ORDER_STATUS = OrderStatus.ORDER_STATUS;
+
+    /**
+     * The table <code>mobile_accounting.repair</code>.
+     */
+    public static final Repair REPAIR = Repair.REPAIR;
 
     /**
      * The table <code>mobile_accounting.user</code>.
