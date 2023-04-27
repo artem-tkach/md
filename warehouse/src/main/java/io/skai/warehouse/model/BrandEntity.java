@@ -20,15 +20,17 @@ public class BrandEntity extends AbstractEntityType<BrandEntity> {
     @Required
     @Immutable
     public static final EntityField<BrandEntity, String> NAME = INSTANCE.field(BrandTable.TABLE.name);
-    //
-    //INFO
-    //
+
+    @Required
+    @Immutable
     public static final EntityField<BrandEntity, String> COUNTRY = INSTANCE.field(BrandInfoTable.TABLE.country);
 
+    @Required
+    @Immutable
     public static final EntityField<BrandEntity, String> URL = INSTANCE.field(BrandInfoTable.TABLE.url);
 
     protected BrandEntity() {
-        super("brand");
+        super("brandEntity");
     }
 
     @Override
