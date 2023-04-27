@@ -9,6 +9,7 @@ import io.skai.accounting.jooq.tables.Client;
 import io.skai.accounting.jooq.tables.Model;
 import io.skai.accounting.jooq.tables.Order;
 import io.skai.accounting.jooq.tables.OrderStatus;
+import io.skai.accounting.jooq.tables.Repair;
 import io.skai.accounting.jooq.tables.User;
 
 import java.util.Arrays;
@@ -58,6 +59,11 @@ public class MobileAccounting extends SchemaImpl {
     public final OrderStatus ORDER_STATUS = OrderStatus.ORDER_STATUS;
 
     /**
+     * The table <code>mobile_accounting.repair</code>.
+     */
+    public final Repair REPAIR = Repair.REPAIR;
+
+    /**
      * The table <code>mobile_accounting.user</code>.
      */
     public final User USER = User.USER;
@@ -83,6 +89,7 @@ public class MobileAccounting extends SchemaImpl {
             Model.MODEL,
             Order.ORDER,
             OrderStatus.ORDER_STATUS,
+            Repair.REPAIR,
             User.USER
         );
     }
