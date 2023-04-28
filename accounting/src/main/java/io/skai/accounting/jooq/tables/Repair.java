@@ -9,16 +9,18 @@ import io.skai.accounting.jooq.MobileAccounting;
 import io.skai.accounting.jooq.tables.records.RepairRecord;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function7;
+import org.jooq.Function8;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row7;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -86,6 +88,11 @@ public class Repair extends TableImpl<RepairRecord> {
      */
     public final TableField<RepairRecord, String> COMMENT = createField(DSL.name("comment"), SQLDataType.CLOB, this, "");
 
+    /**
+     * The column <code>mobile_accounting.repair.guid</code>.
+     */
+    public final TableField<RepairRecord, String> GUID = createField(DSL.name("guid"), SQLDataType.VARCHAR(68).nullable(false), this, "");
+
     private Repair(Name alias, Table<RepairRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -135,6 +142,11 @@ public class Repair extends TableImpl<RepairRecord> {
     }
 
     @Override
+    public List<UniqueKey<RepairRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.KEY_REPAIR_GUID);
+    }
+
+    @Override
     public Repair as(String alias) {
         return new Repair(DSL.name(alias), this);
     }
@@ -174,18 +186,18 @@ public class Repair extends TableImpl<RepairRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Long, LocalDateTime, Long, Long, String, Double, String> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row8<Long, LocalDateTime, Long, Long, String, Double, String, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function7<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super String, ? super Double, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function8<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super String, ? super Double, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -193,7 +205,7 @@ public class Repair extends TableImpl<RepairRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function7<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super String, ? super Double, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super String, ? super Double, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
