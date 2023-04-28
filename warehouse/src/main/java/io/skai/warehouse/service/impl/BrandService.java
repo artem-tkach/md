@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.jooq.lambda.Seq.seq;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -27,7 +25,7 @@ public class BrandService {
 
         CreateResult<BrandEntity, Identifier<BrandEntity>> result = brandPersistence.create(commands);
 
-        return seq(result.getChangeResults())
+        return result.getChangeResults()
                 .stream()
                 .map(this::mapResults)
                 .toList();

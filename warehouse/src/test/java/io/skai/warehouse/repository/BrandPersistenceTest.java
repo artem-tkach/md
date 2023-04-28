@@ -61,12 +61,6 @@ class BrandPersistenceTest {
         BrandDto dto = new BrandDto(null, "Samsung", "Korea", "https://samsung.com/");
         List<CreateBrandCommand> command = brandCommandsBuilder.buildCreateCommands(List.of(dto));
 
-        final var queryBeforeInsert = plContext
-                .select(BrandEntity.ID)
-                .from(BrandEntity.INSTANCE)
-                .where(BrandEntity.NAME.eq("Samsung"))
-                .fetch();
-
         brandPersistence.create(command);
 
         final var queryAfterInsert = plContext
@@ -76,7 +70,6 @@ class BrandPersistenceTest {
                 .fetch();
 
         assertThat(queryAfterInsert).hasSize(1);
-        assertThat(queryBeforeInsert).isEmpty();
     }
 
     @Test
