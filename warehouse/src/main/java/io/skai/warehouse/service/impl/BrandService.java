@@ -1,4 +1,4 @@
-package io.skai.warehouse.service.brand;
+package io.skai.warehouse.service.impl;
 
 import com.kenshoo.pl.entity.*;
 import io.skai.warehouse.command.CreateBrandCommand;

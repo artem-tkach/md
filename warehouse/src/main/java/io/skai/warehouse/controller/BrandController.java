@@ -1,7 +1,7 @@
 package io.skai.warehouse.controller;
 
 import io.skai.warehouse.dto.BrandDto;
-import io.skai.warehouse.service.brand.BrandService;
+import io.skai.warehouse.service.impl.BrandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

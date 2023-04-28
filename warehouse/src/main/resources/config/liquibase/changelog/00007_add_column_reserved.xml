@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="00007_add_column_reserved_to_residues" author="artem-tkach">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="component_residues" columnName="reserved"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="component_residues">
+            <column name="reserved" type="double"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>
