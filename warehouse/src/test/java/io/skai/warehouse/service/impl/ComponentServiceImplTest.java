@@ -1,7 +1,13 @@
 package io.skai.warehouse.service.impl;
 
+import com.kenshoo.pl.entity.PLContext;
 import io.skai.warehouse.dto.ComponentDto;
 import io.skai.warehouse.service.ComponentService;
+import io.skai.warehouse.table.BrandTable;
+import io.skai.warehouse.table.ComponentResiduesTable;
+import io.skai.warehouse.table.ComponentTable;
+import jakarta.annotation.Resource;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,6 +35,9 @@ class ComponentServiceImplTest {
     @Autowired
     private ComponentService componentService;
 
+    @Resource
+    private PLContext plContext;
+
     @DynamicPropertySource
     public static void overrideProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", container::getJdbcUrl);
@@ -36,12 +45,30 @@ class ComponentServiceImplTest {
         registry.add("spring.datasource.password", container::getPassword);
     }
 
+    @AfterEach
+    protected void clearTables(){
+        plContext.dslContext()
+                .delete(ComponentTable.TABLE)
+                .execute();
+        plContext.dslContext()
+                .delete(ComponentResiduesTable.TABLE)
+                .execute();
+    }
+
     @Test
-    void shouldWriteToDbThenReturnIt() {
+    void shouldWriteToDbThenReturnItCheckIdArePositive() {
         List<ComponentDto> inputData = getInputData();
         List<ComponentDto> result = componentService.create(inputData);
-        assertThat(result).hasSize(3)
-                .allMatch(componentDto -> componentDto.id() > 0)
+        assertThat(result)
+                .isNotEmpty()
+                .allMatch(componentDto -> componentDto.id() > 0);
+    }
+
+    @Test
+    void shouldWriteToDbThenReturnItCheckContainNames() {
+        List<ComponentDto> inputData = getInputData();
+        List<ComponentDto> result = componentService.create(inputData);
+        assertThat(result)
                 .extracting("name")
                 .containsExactlyInAnyOrder(TOUCHPAD, KEYBOARD, SCREEN);
     }

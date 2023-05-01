@@ -3,7 +3,7 @@ package io.skai.warehouse.mapper;
 import com.kenshoo.pl.entity.*;
 import io.skai.warehouse.dto.ComponentDto;
 import io.skai.warehouse.model.ComponentEntity;
-import io.skai.warehouse.util.ChangeResultFieldGetter;
+import io.skai.warehouse.util.ChangeResultUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +11,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ComponentMapper {
 
-    private final ChangeResultFieldGetter fieldGetter;
+    private final ChangeResultUtils fieldGetter;
 
-    public ComponentDto toComponentDto(EntityChangeResult<ComponentEntity, Identifier<ComponentEntity>, CreateEntityCommand<ComponentEntity>> result) {
+    public ComponentDto toComponentDto(EntityChangeResult<ComponentEntity, Identifier<ComponentEntity>,
+            CreateEntityCommand<ComponentEntity>> result) {
         Long id = fieldGetter.get(result, ComponentEntity.ID);
         String name = fieldGetter.get(result, ComponentEntity.NAME);
         Double count = fieldGetter.get(result, ComponentEntity.COUNT);
