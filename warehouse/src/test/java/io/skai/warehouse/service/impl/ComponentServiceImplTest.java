@@ -3,7 +3,6 @@ package io.skai.warehouse.service.impl;
 import com.kenshoo.pl.entity.PLContext;
 import io.skai.warehouse.dto.ComponentDto;
 import io.skai.warehouse.service.ComponentService;
-import io.skai.warehouse.table.BrandTable;
 import io.skai.warehouse.table.ComponentResiduesTable;
 import io.skai.warehouse.table.ComponentTable;
 import jakarta.annotation.Resource;
@@ -66,10 +65,11 @@ class ComponentServiceImplTest {
 
     @Test
     void shouldWriteToDbThenReturnItCheckContainNames() {
+        String fieldName = "name";
         List<ComponentDto> inputData = getInputData();
         List<ComponentDto> result = componentService.create(inputData);
         assertThat(result)
-                .extracting("name")
+                .extracting(fieldName)
                 .containsExactlyInAnyOrder(TOUCHPAD, KEYBOARD, SCREEN);
     }
 
