@@ -11,4 +11,7 @@
     <include file="/config/liquibase/changelog/00004_add_table_model_component.xml"/>
     <include file="/config/liquibase/changelog/00005_add_table_component_residues.xml"/>
     <include file="/config/liquibase/changelog/00006_add_table_brand_info.xml"/>
+    <include file="/config/liquibase/changelog/00007_add_column_reserved.xml"/>
+    <include file="/config/liquibase/changelog/00008_add_fk_toComponent_residues.xml"/>
+    <include file="/config/liquibase/changelog/00009_add_autoincrement_residues.xml"/>
 </databaseChangeLog>
