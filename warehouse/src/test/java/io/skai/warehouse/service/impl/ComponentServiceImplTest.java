@@ -14,6 +14,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 @Testcontainers
 @SpringBootTest
 class ComponentServiceImplTest {
@@ -21,8 +22,10 @@ class ComponentServiceImplTest {
     private static final String SCREEN = "screen";
     private static final String KEYBOARD = "keyboard";
     private static final String TOUCHPAD = "touchpad";
+
     @Container
     private static final MySQLContainer container = new MySQLContainer<>("mysql:latest");
+
     @Autowired
     private ComponentService componentService;
 
@@ -38,7 +41,7 @@ class ComponentServiceImplTest {
         List<ComponentDto> inputData = getInputData();
         List<ComponentDto> result = componentService.create(inputData);
         assertThat(result).hasSize(3)
-                .allMatch(n -> n.id() > 0)
+                .allMatch(componentDto -> componentDto.id() > 0)
                 .extracting("name")
                 .containsExactlyInAnyOrder(TOUCHPAD, KEYBOARD, SCREEN);
     }

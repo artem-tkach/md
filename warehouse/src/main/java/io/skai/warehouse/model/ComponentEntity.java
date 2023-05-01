@@ -20,9 +20,7 @@ public class ComponentEntity extends AbstractEntityType<ComponentEntity> {
     @Required
     @Immutable
     public static final EntityField<ComponentEntity, String> NAME = INSTANCE.field(ComponentTable.TABLE.name);
-    //
-    //RESIDUES
-    //
+
     public static final EntityField<ComponentEntity, Double> COUNT = INSTANCE.field(ComponentResiduesTable.TABLE.count);
 
     public static final EntityField<ComponentEntity, Double> RESERVED = INSTANCE.field(ComponentResiduesTable.TABLE.reserved);

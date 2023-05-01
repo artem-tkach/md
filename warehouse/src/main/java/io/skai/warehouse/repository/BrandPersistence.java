@@ -14,6 +14,7 @@ import java.util.Collection;
 public class BrandPersistence {
 
     private final PersistenceLayer<BrandEntity> persistenceLayer;
+
     @Resource
     private PLContext settings;
 
