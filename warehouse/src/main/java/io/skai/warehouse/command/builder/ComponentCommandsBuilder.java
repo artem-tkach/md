@@ -9,6 +9,7 @@ import java.util.List;
 
 @Component
 public class ComponentCommandsBuilder {
+
     public List<CreateComponentCommand> buildCreateCommands(List<ComponentDto> dtos) {
         return dtos.stream()
                 .map(this::buildCreateCommand)

@@ -8,6 +8,7 @@ import jakarta.annotation.Resource;
 import java.util.Collection;
 
 public class ComponentPersistence {
+
     private final PersistenceLayer<ComponentEntity> persistenceLayer;
     @Resource
     private PLContext settings;

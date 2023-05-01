@@ -1,7 +1,12 @@
 package io.skai.warehouse.service.impl;
 
+import com.kenshoo.pl.entity.PLContext;
 import io.skai.warehouse.dto.ComponentDto;
 import io.skai.warehouse.service.ComponentService;
+import io.skai.warehouse.table.ComponentResiduesTable;
+import io.skai.warehouse.table.ComponentTable;
+import jakarta.annotation.Resource;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +19,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 @Testcontainers
 @SpringBootTest
 class ComponentServiceImplTest {
@@ -21,10 +27,15 @@ class ComponentServiceImplTest {
     private static final String SCREEN = "screen";
     private static final String KEYBOARD = "keyboard";
     private static final String TOUCHPAD = "touchpad";
+
     @Container
     private static final MySQLContainer container = new MySQLContainer<>("mysql:latest");
+
     @Autowired
     private ComponentService componentService;
+
+    @Resource
+    private PLContext plContext;
 
     @DynamicPropertySource
     public static void overrideProperties(DynamicPropertyRegistry registry) {
@@ -33,13 +44,32 @@ class ComponentServiceImplTest {
         registry.add("spring.datasource.password", container::getPassword);
     }
 
+    @AfterEach
+    protected void clearTables(){
+        plContext.dslContext()
+                .delete(ComponentTable.TABLE)
+                .execute();
+        plContext.dslContext()
+                .delete(ComponentResiduesTable.TABLE)
+                .execute();
+    }
+
     @Test
-    void shouldWriteToDbThenReturnIt() {
+    void shouldWriteToDbThenReturnItCheckIdArePositive() {
         List<ComponentDto> inputData = getInputData();
         List<ComponentDto> result = componentService.create(inputData);
-        assertThat(result).hasSize(3)
-                .allMatch(n -> n.id() > 0)
-                .extracting("name")
+        assertThat(result)
+                .isNotEmpty()
+                .allMatch(componentDto -> componentDto.id() > 0);
+    }
+
+    @Test
+    void shouldWriteToDbThenReturnItCheckContainNames() {
+        String fieldName = "name";
+        List<ComponentDto> inputData = getInputData();
+        List<ComponentDto> result = componentService.create(inputData);
+        assertThat(result)
+                .extracting(fieldName)
                 .containsExactlyInAnyOrder(TOUCHPAD, KEYBOARD, SCREEN);
     }
 
