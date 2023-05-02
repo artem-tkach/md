@@ -9,7 +9,7 @@ dependencies{
     implementation libs.mapstruct
     annotationProcessor libs.mapstructAnnotationProcessor
     implementation libs.liquibase
-    compileOnly libs.jooq
+    compileOnly libs.springJooq
     implementation libs.jooqCodegen
     implementation libs.openfeign
     implementation libs.redis

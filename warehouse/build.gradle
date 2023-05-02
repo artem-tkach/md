@@ -1,5 +1,6 @@
 dependencies {
     implementation libs.springBootWeb
+    implementation libs.jooq
     annotationProcessor libs.springConfigurationProcessor
     implementation libs.liquibase
     compileOnly libs.lombok
