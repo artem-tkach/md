@@ -13,6 +13,7 @@ import io.skai.warehouse.repository.ComponentPersistence;
 import io.skai.warehouse.service.ComponentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,17 +41,25 @@ public class ComponentServiceImpl implements ComponentService {
 
     @Override
     public Boolean updateResidues(List<ComponentDto> components) {
-        List<ComponentDto> dtosToWrite = calculateResidues(components);
-        Long wrongDtoCount = getCountOfNegative(dtosToWrite);
+        List<ComponentDto> decrementedResidues = calculateResidues(components);
+        Long countWithNegativeResidues = getCountOfNegative(decrementedResidues);
 
-        if (wrongDtoCount == 0) {
-            List<InsertOnDuplicateUpdateComponentCommand> commands =
-                    componentCommandsBuilder.buildUpsertCommands(dtosToWrite);
+        if (countWithNegativeResidues == 0) {
+            List<InsertOnDuplicateUpdateComponentCommand> commands = componentCommandsBuilder.buildUpsertCommands(decrementedResidues);
 
             componentPersistence.insertOnDuplicateUpdate(commands);
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    @Override
+    public ResponseEntity<Boolean> updateResiduesAndWrapToResponseStatus(List<ComponentDto> components) {
+        Boolean updateResult = updateResidues(components);
+        if (updateResult==Boolean.TRUE){
+            return ResponseEntity.ok(Boolean.TRUE);
+        }
+        return ResponseEntity.badRequest().body(Boolean.FALSE);
     }
 
     private List<ComponentDto> calculateResidues(List<ComponentDto> components) {

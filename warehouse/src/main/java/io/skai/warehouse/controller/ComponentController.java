@@ -24,9 +24,6 @@ public class ComponentController {
 
     @PutMapping
     public ResponseEntity<Boolean> update(@RequestBody List<ComponentDto> components){
-        if (componentService.updateResidues(components)){
-            return ResponseEntity.ok(Boolean.TRUE);
-        }
-        return ResponseEntity.badRequest().body(Boolean.FALSE);
+        return componentService.updateResiduesAndWrapToResponseStatus(components);
     }
 }
