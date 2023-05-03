@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +41,7 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
-    public Boolean updateResidues(List<ComponentDto> components) {
+    public Boolean updateResidues(Map<Long, Double> components) {
         List<ComponentDto> decrementedResidues = calculateResidues(components);
         Long countWithNegativeResidues = getCountOfNegative(decrementedResidues);
 
@@ -54,24 +55,25 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
-    public ResponseEntity<Boolean> updateResiduesAndWrapToResponseStatus(List<ComponentDto> components) {
+    public ResponseEntity<Boolean> updateResiduesAndWrapToResponseStatus(Map<Long, Double> components) {
         Boolean updateResult = updateResidues(components);
-        if (updateResult==Boolean.TRUE){
+        if (updateResult == Boolean.TRUE) {
             return ResponseEntity.ok(Boolean.TRUE);
         }
         return ResponseEntity.badRequest().body(Boolean.FALSE);
     }
 
-    private List<ComponentDto> calculateResidues(List<ComponentDto> components) {
-        return components.stream()
+    private List<ComponentDto> calculateResidues(Map<Long, Double> components) {
+        return components.entrySet()
+                .stream()
                 .map(this::calculateResidue)
                 .toList();
     }
 
-    public ComponentDto calculateResidue(ComponentDto dto) {
-        Component component = componentPersistence.find(dto.id());
+    public ComponentDto calculateResidue(Map.Entry<Long, Double> dto) {
+        Component component = componentPersistence.find(dto.getKey());
         return new ComponentDto(component.id(), component.name(),
-                component.count() - dto.count(), component.reserved());
+                component.count() - dto.getValue(), component.reserved());
     }
 
     private Long getCountOfNegative(List<ComponentDto> components) {

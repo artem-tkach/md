@@ -17,6 +17,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,7 +47,7 @@ class ComponentServiceImplTest {
     }
 
     @AfterEach
-    protected void clearTables(){
+    protected void clearTables() {
         plContext.dslContext()
                 .delete(ComponentTable.TABLE)
                 .execute();
@@ -74,32 +76,28 @@ class ComponentServiceImplTest {
     }
 
     @Test
-    void shouldUpdateDataAndReturnTrue(){
+    void shouldUpdateDataAndReturnTrue() {
         List<ComponentDto> components = componentService.create(getInputData());
-        List<ComponentDto> toUpdate = components.stream()
-                .map(component->buildNew(component,1d))
-                .toList();
+        Map<Long, Double> toUpdate = components.stream()
+                .collect(Collectors.toMap(ComponentDto::id, component -> 1d));
+
         Boolean result = componentService.updateResidues(toUpdate);
         assertThat(result).isTrue();
     }
 
     @Test
-    void shouldDenyUpdatingAndReturnFalse(){
+    void shouldDenyUpdatingAndReturnFalse() {
         List<ComponentDto> components = componentService.create(getInputData());
-        List<ComponentDto> moreThanPresent = components.stream()
-                .map(component->buildNew(component, 999d))
-                .toList();
+        Map<Long, Double> moreThanPresent = components.stream()
+                .collect(Collectors.toMap(ComponentDto::id, component -> 999d));
+
         Boolean result = componentService.updateResidues(moreThanPresent);
         assertThat(result).isFalse();
     }
 
     private List<ComponentDto> getInputData() {
-        return List.of(new ComponentDto(null, SCREEN,15d,10d),
-                new ComponentDto(null, KEYBOARD,20d,10d),
-                new ComponentDto(null, TOUCHPAD,25d, 10d));
-    }
-
-    private ComponentDto buildNew(ComponentDto component, Double count){
-        return new ComponentDto(component.id(),component.name(),count,0d);
+        return List.of(new ComponentDto(null, SCREEN, 15d, 10d),
+                new ComponentDto(null, KEYBOARD, 20d, 10d),
+                new ComponentDto(null, TOUCHPAD, 25d, 10d));
     }
 }
