@@ -9,6 +9,6 @@ import java.util.Map;
         url = "http://localhost:8082/",
         configuration = FeignConfig.class)
 public interface WarehouseClient {
-    @RequestLine("POST /notifications/new-order")
-    String writeComponents(Map<Long, Integer> components);
+    @RequestLine("PUT /component")
+    Boolean writeComponents(Map<Long, Integer> components);
 }

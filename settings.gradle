@@ -36,6 +36,7 @@ dependencyResolutionManagement {
             library('testContainersJupiter',"org.testcontainers:junit-jupiter:$testContainersVersion")
             library('testContainersMySQL',"org.testcontainers:mysql:$testContainersVersion")
             library('testContainersKafka', "org.testcontainers:kafka:$testContainersVersion")
+            library('wireMock','com.github.tomakehurst:wiremock:2.27.2')
         }
     }
 }
