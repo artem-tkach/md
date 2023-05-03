@@ -73,9 +73,33 @@ class ComponentServiceImplTest {
                 .containsExactlyInAnyOrder(TOUCHPAD, KEYBOARD, SCREEN);
     }
 
+    @Test
+    void shouldUpdateDataAndReturnTrue(){
+        List<ComponentDto> components = componentService.create(getInputData());
+        List<ComponentDto> toUpdate = components.stream()
+                .map(component->buildNew(component,1d))
+                .toList();
+        Boolean result = componentService.updateResidues(toUpdate);
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void shouldDenyUpdatingAndReturnFalse(){
+        List<ComponentDto> components = componentService.create(getInputData());
+        List<ComponentDto> moreThanPresent = components.stream()
+                .map(component->buildNew(component, 999d))
+                .toList();
+        Boolean result = componentService.updateResidues(moreThanPresent);
+        assertThat(result).isFalse();
+    }
+
     private List<ComponentDto> getInputData() {
-        return List.of(new ComponentDto(null, SCREEN,0d,0d),
-                new ComponentDto(null, KEYBOARD,0d,0d),
-                new ComponentDto(null, TOUCHPAD,0d, 0d));
+        return List.of(new ComponentDto(null, SCREEN,15d,10d),
+                new ComponentDto(null, KEYBOARD,20d,10d),
+                new ComponentDto(null, TOUCHPAD,25d, 10d));
+    }
+
+    private ComponentDto buildNew(ComponentDto component, Double count){
+        return new ComponentDto(component.id(),component.name(),count,0d);
     }
 }
