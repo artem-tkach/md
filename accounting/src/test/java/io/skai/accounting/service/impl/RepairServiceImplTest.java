@@ -1,49 +1,73 @@
 package io.skai.accounting.service.impl;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
-import io.skai.accounting.AccountingApplication;
-import io.skai.accounting.BaseApplicationContext;
+import io.skai.accounting.dto.repair.RepairRequestDto;
+import io.skai.accounting.enums.RepairResult;
 import io.skai.accounting.feign.WarehouseClient;
+import io.skai.accounting.repository.RepairRepository;
+import io.skai.accounting.service.RepairService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Map;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @WireMockTest(httpPort = 8082)
+@ActiveProfiles("test")
 class RepairServiceImplTest {
+
+    @Autowired
+    private RepairService repairService;
 
     @Autowired
     private WarehouseClient warehouseClient;
 
-    //private WireMockServer wireMockServer = new WireMockServer();
+    @SpyBean
+    private RepairRepository repairRepository;
 
     @Test
-    void shouldCreateNewRepair(WireMockRuntimeInfo wmRuntimeInfo) {
-        //wireMockServer.start();
-
-        //configureFor("localhost", 8082);
-        Map<Long, Integer> components = Map.of(1L, 1, 2L, 1);
+    void shouldCreateNewRepair() {
+        RepairRequestDto inputData = getInputData();
         stubFor(WireMock
                 .put("/component")
-                //.withRequestBody(equalTo(components.toString()))
                 .withHost(equalTo("localhost"))
                 .willReturn(aResponse()
-                        .withBody("TRUE")
+                        .withHeader("Content-Type","application/json;charset=UTF-8")
+                        .withBody("true")
                         .withStatus(200)));
 
-        var result = warehouseClient.writeComponents(components);
-
+        Boolean result = warehouseClient.writeComponents(inputData.components());
         assertThat(result).isTrue();
-        //wireMockServer.stop();
+        repairService.findOrCreate(inputData);
+        verify(repairRepository).findOrCreate(inputData);
+    }
+
+    @Test
+    void shouldNotCreateNewRepair() {
+        RepairRequestDto inputData = getInputData();
+        stubFor(WireMock
+                .put("/component")
+                .withHost(equalTo("localhost"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type","application/json;charset=UTF-8")
+                        .withBody("false")
+                        .withStatus(200)));
+
+        repairService.findOrCreate(inputData);
+        verify(repairRepository,times(0)).findOrCreate(inputData);
+    }
+
+    private RepairRequestDto getInputData(){
+        return new RepairRequestDto(1L,1L, RepairResult.REPAIRED,300d,Map.of(1L, 1),
+                "some comment", "some guid");
     }
 }
