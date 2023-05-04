@@ -25,6 +25,6 @@ public class ComponentController {
 
     @PutMapping
     public ResponseEntity<Boolean> update(@RequestBody Map<Long, Double> components){
-        return componentService.updateResiduesAndWrapToResponseStatus(components);
+        return componentService.updateResidues(components);
     }
 }

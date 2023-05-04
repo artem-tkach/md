@@ -10,7 +10,5 @@ public interface ComponentService {
 
     List<ComponentDto> create(List<ComponentDto> components);
 
-    Boolean updateResidues(Map<Long, Double> components);
-
-    ResponseEntity<Boolean> updateResiduesAndWrapToResponseStatus(Map<Long, Double> components);
+    ResponseEntity<Boolean> updateResidues(Map<Long, Double> components);
 }

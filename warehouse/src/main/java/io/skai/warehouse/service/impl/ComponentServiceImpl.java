@@ -40,8 +40,7 @@ public class ComponentServiceImpl implements ComponentService {
                 .toList();
     }
 
-    @Override
-    public Boolean updateResidues(Map<Long, Double> components) {
+    private Boolean processResidues(Map<Long, Double> components) {
         List<ComponentDto> decrementedResidues = calculateResidues(components);
         Long countWithNegativeResidues = getCountOfNegative(decrementedResidues);
 
@@ -55,8 +54,8 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
-    public ResponseEntity<Boolean> updateResiduesAndWrapToResponseStatus(Map<Long, Double> components) {
-        Boolean updateResult = updateResidues(components);
+    public ResponseEntity<Boolean> updateResidues(Map<Long, Double> components) {
+        Boolean updateResult = processResidues(components);
         if (updateResult == Boolean.TRUE) {
             return ResponseEntity.ok(Boolean.TRUE);
         }
