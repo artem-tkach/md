@@ -13,9 +13,11 @@ import io.skai.warehouse.repository.ComponentPersistence;
 import io.skai.warehouse.service.ComponentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -38,14 +40,12 @@ public class ComponentServiceImpl implements ComponentService {
                 .toList();
     }
 
-    @Override
-    public Boolean updateResidues(List<ComponentDto> components) {
-        List<ComponentDto> dtosToWrite = calculateResidues(components);
-        Long wrongDtoCount = getCountOfNegative(dtosToWrite);
+    private Boolean processResidues(Map<Long, Double> components) {
+        List<ComponentDto> decrementedResidues = calculateResidues(components);
+        Long countWithNegativeResidues = getCountOfNegative(decrementedResidues);
 
-        if (wrongDtoCount == 0) {
-            List<InsertOnDuplicateUpdateComponentCommand> commands =
-                    componentCommandsBuilder.buildUpsertCommands(dtosToWrite);
+        if (countWithNegativeResidues == 0) {
+            List<InsertOnDuplicateUpdateComponentCommand> commands = componentCommandsBuilder.buildUpsertCommands(decrementedResidues);
 
             componentPersistence.insertOnDuplicateUpdate(commands);
             return Boolean.TRUE;
@@ -53,16 +53,26 @@ public class ComponentServiceImpl implements ComponentService {
         return Boolean.FALSE;
     }
 
-    private List<ComponentDto> calculateResidues(List<ComponentDto> components) {
-        return components.stream()
+    @Override
+    public ResponseEntity<Boolean> updateResidues(Map<Long, Double> components) {
+        Boolean updateResult = processResidues(components);
+        if (updateResult == Boolean.TRUE) {
+            return ResponseEntity.ok(Boolean.TRUE);
+        }
+        return ResponseEntity.badRequest().body(Boolean.FALSE);
+    }
+
+    private List<ComponentDto> calculateResidues(Map<Long, Double> components) {
+        return components.entrySet()
+                .stream()
                 .map(this::calculateResidue)
                 .toList();
     }
 
-    public ComponentDto calculateResidue(ComponentDto dto) {
-        Component component = componentPersistence.find(dto.id());
+    public ComponentDto calculateResidue(Map.Entry<Long, Double> dto) {
+        Component component = componentPersistence.find(dto.getKey());
         return new ComponentDto(component.id(), component.name(),
-                component.count() - dto.count(), component.reserved());
+                component.count() - dto.getValue(), component.reserved());
     }
 
     private Long getCountOfNegative(List<ComponentDto> components) {

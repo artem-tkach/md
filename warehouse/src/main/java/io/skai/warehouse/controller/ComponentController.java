@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/component")
@@ -23,10 +24,7 @@ public class ComponentController {
     }
 
     @PutMapping
-    public ResponseEntity<Boolean> update(@RequestBody List<ComponentDto> components){
-        if (componentService.updateResidues(components)){
-            return ResponseEntity.ok(Boolean.TRUE);
-        }
-        return ResponseEntity.badRequest().body(Boolean.FALSE);
+    public ResponseEntity<Boolean> update(@RequestBody Map<Long, Double> components){
+        return componentService.updateResidues(components);
     }
 }

@@ -10,6 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
@@ -17,6 +19,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,7 +49,7 @@ class ComponentServiceImplTest {
     }
 
     @AfterEach
-    protected void clearTables(){
+    protected void clearTables() {
         plContext.dslContext()
                 .delete(ComponentTable.TABLE)
                 .execute();
@@ -74,32 +78,48 @@ class ComponentServiceImplTest {
     }
 
     @Test
-    void shouldUpdateDataAndReturnTrue(){
+    void shouldUpdateDataAndReturnTrue() {
         List<ComponentDto> components = componentService.create(getInputData());
-        List<ComponentDto> toUpdate = components.stream()
-                .map(component->buildNew(component,1d))
-                .toList();
-        Boolean result = componentService.updateResidues(toUpdate);
-        assertThat(result).isTrue();
+        Map<Long, Double> toUpdate = components.stream()
+                .collect(Collectors.toMap(ComponentDto::id, component -> 1d));
+
+        ResponseEntity<Boolean> result = componentService.updateResidues(toUpdate);
+        assertThat(result.getBody()).isTrue();
     }
 
     @Test
-    void shouldDenyUpdatingAndReturnFalse(){
+    void shouldUpdateDataAndReturnStatus200() {
         List<ComponentDto> components = componentService.create(getInputData());
-        List<ComponentDto> moreThanPresent = components.stream()
-                .map(component->buildNew(component, 999d))
-                .toList();
-        Boolean result = componentService.updateResidues(moreThanPresent);
-        assertThat(result).isFalse();
+        Map<Long, Double> toUpdate = components.stream()
+                .collect(Collectors.toMap(ComponentDto::id, component -> 1d));
+
+        ResponseEntity<Boolean> result = componentService.updateResidues(toUpdate);
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    void shouldDenyUpdatingAndReturnFalse() {
+        List<ComponentDto> components = componentService.create(getInputData());
+        Map<Long, Double> moreThanPresent = components.stream()
+                .collect(Collectors.toMap(ComponentDto::id, component -> 999d));
+
+        ResponseEntity<Boolean> result = componentService.updateResidues(moreThanPresent);
+        assertThat(result.getBody()).isFalse();
+    }
+
+    @Test
+    void shouldDenyUpdatingAndReturnStatus400() {
+        List<ComponentDto> components = componentService.create(getInputData());
+        Map<Long, Double> moreThanPresent = components.stream()
+                .collect(Collectors.toMap(ComponentDto::id, component -> 999d));
+
+        ResponseEntity<Boolean> result = componentService.updateResidues(moreThanPresent);
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     private List<ComponentDto> getInputData() {
-        return List.of(new ComponentDto(null, SCREEN,15d,10d),
-                new ComponentDto(null, KEYBOARD,20d,10d),
-                new ComponentDto(null, TOUCHPAD,25d, 10d));
-    }
-
-    private ComponentDto buildNew(ComponentDto component, Double count){
-        return new ComponentDto(component.id(),component.name(),count,0d);
+        return List.of(new ComponentDto(null, SCREEN, 15d, 10d),
+                new ComponentDto(null, KEYBOARD, 20d, 10d),
+                new ComponentDto(null, TOUCHPAD, 25d, 10d));
     }
 }
