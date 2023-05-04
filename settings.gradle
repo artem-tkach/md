@@ -6,6 +6,7 @@ include 'accounting',
 def springVersion = '3.0.5'
 def mapStructVersion = '1.5.3.Final'
 def testContainersVersion = '1.18.0'
+def jooqVersion = '3.16.3'
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -18,18 +19,19 @@ dependencyResolutionManagement {
             library('redis', "org.springframework.boot:spring-boot-starter-data-redis:$springVersion")
             library('springMail', "org.springframework.boot:spring-boot-starter-mail:$springVersion")
             library('jpa', "org.springframework.boot:spring-boot-starter-data-jpa:$springVersion")
-            library('jooq', "org.springframework.boot:spring-boot-starter-jooq:$springVersion")
+            library('springJooq', "org.springframework.boot:spring-boot-starter-jooq:$springVersion")
+            library('jooq', "org.jooq:jooq:$jooqVersion")
+            library('jooqCodegen', "org.jooq:jooq-codegen:$jooqVersion")
             library('lombok', 'org.projectlombok:lombok:1.18.26')
             library('mysql', 'com.mysql:mysql-connector-j:8.0.32')
             library('mapstruct', "org.mapstruct:mapstruct:$mapStructVersion")
             library('mapstructAnnotationProcessor', "org.mapstruct:mapstruct-processor:$mapStructVersion")
             library('kafka', "org.springframework.kafka:spring-kafka:$springVersion")
             library('liquibase', 'org.liquibase:liquibase-core:4.20.0')
-            library('jooqCodegen', 'org.jooq:jooq-codegen:3.17.10')
             library('openfeign', 'org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2')
             library('assertJ', 'org.assertj:assertj-core:3.24.2')
             library('hamcrest', 'org.hamcrest:hamcrest:2.2')
-            library('persistanceLayer','com.kenshoo:persistence-layer:0.1.116-jooq-3.16.3')
+            library('persistanceLayer','com.kenshoo:persistence-layer:0.1.111-jooq-3.16.3')
             library('testcontainers', "org.testcontainers:testcontainers:$testContainersVersion")
             library('testContainersJupiter',"org.testcontainers:junit-jupiter:$testContainersVersion")
             library('testContainersMySQL',"org.testcontainers:mysql:$testContainersVersion")

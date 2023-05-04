@@ -1,8 +1,10 @@
-package io.skai.warehouse.model;
+package io.skai.warehouse.model.component;
 
 import com.kenshoo.jooq.DataTable;
 import com.kenshoo.pl.entity.AbstractEntityType;
 import com.kenshoo.pl.entity.EntityField;
+import com.kenshoo.pl.entity.SingleUniqueKey;
+import com.kenshoo.pl.entity.SingleUniqueKeyValue;
 import com.kenshoo.pl.entity.annotation.Id;
 import com.kenshoo.pl.entity.annotation.Immutable;
 import com.kenshoo.pl.entity.annotation.Required;
@@ -32,5 +34,19 @@ public class ComponentEntity extends AbstractEntityType<ComponentEntity> {
     @Override
     public DataTable getPrimaryTable() {
         return ComponentTable.TABLE;
+    }
+
+    public static class Key extends SingleUniqueKeyValue<ComponentEntity, Long> {
+        public static final SingleUniqueKey<ComponentEntity, Long> DEFINITION =
+                new SingleUniqueKey<>(ID) {
+                    @Override
+                    protected ComponentEntity.Key createValue(Long id) {
+                        return new ComponentEntity.Key(id);
+                    }
+                };
+
+        public Key(long id) {
+            super(DEFINITION, id);
+        }
     }
 }

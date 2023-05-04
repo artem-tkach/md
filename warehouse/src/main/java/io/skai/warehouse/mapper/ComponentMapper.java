@@ -2,7 +2,7 @@ package io.skai.warehouse.mapper;
 
 import com.kenshoo.pl.entity.*;
 import io.skai.warehouse.dto.ComponentDto;
-import io.skai.warehouse.model.ComponentEntity;
+import io.skai.warehouse.model.component.ComponentEntity;
 import io.skai.warehouse.util.ChangeResultUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

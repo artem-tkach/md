@@ -1,7 +1,7 @@
-package io.skai.warehouse.command;
+package io.skai.warehouse.command.entity.component;
 
 import com.kenshoo.pl.entity.CreateEntityCommand;
-import io.skai.warehouse.model.ComponentEntity;
+import io.skai.warehouse.model.component.ComponentEntity;
 
 public class CreateComponentCommand extends CreateEntityCommand<ComponentEntity> {
 

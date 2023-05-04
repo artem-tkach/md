@@ -20,5 +20,6 @@ public record RepairRequestDto(
         RepairResult result,
         Double sum,
         Map<Long, Integer> components,
-        String comment) {
+        String comment,
+        String guid) {
 }

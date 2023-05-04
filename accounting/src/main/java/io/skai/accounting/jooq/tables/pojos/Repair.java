@@ -23,6 +23,7 @@ public class Repair implements Serializable {
     private String result;
     private Double sum;
     private String comment;
+    private String guid;
 
     public Repair() {}
 
@@ -34,6 +35,7 @@ public class Repair implements Serializable {
         this.result = value.result;
         this.sum = value.sum;
         this.comment = value.comment;
+        this.guid = value.guid;
     }
 
     public Repair(
@@ -43,7 +45,8 @@ public class Repair implements Serializable {
         Long masterId,
         String result,
         Double sum,
-        String comment
+        String comment,
+        String guid
     ) {
         this.id = id;
         this.date = date;
@@ -52,6 +55,7 @@ public class Repair implements Serializable {
         this.result = result;
         this.sum = sum;
         this.comment = comment;
+        this.guid = guid;
     }
 
     /**
@@ -152,6 +156,20 @@ public class Repair implements Serializable {
         this.comment = comment;
     }
 
+    /**
+     * Getter for <code>mobile_accounting.repair.guid</code>.
+     */
+    public String getGuid() {
+        return this.guid;
+    }
+
+    /**
+     * Setter for <code>mobile_accounting.repair.guid</code>.
+     */
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -203,6 +221,12 @@ public class Repair implements Serializable {
         }
         else if (!this.comment.equals(other.comment))
             return false;
+        if (this.guid == null) {
+            if (other.guid != null)
+                return false;
+        }
+        else if (!this.guid.equals(other.guid))
+            return false;
         return true;
     }
 
@@ -217,6 +241,7 @@ public class Repair implements Serializable {
         result = prime * result + ((this.result == null) ? 0 : this.result.hashCode());
         result = prime * result + ((this.sum == null) ? 0 : this.sum.hashCode());
         result = prime * result + ((this.comment == null) ? 0 : this.comment.hashCode());
+        result = prime * result + ((this.guid == null) ? 0 : this.guid.hashCode());
         return result;
     }
 
@@ -231,6 +256,7 @@ public class Repair implements Serializable {
         sb.append(", ").append(result);
         sb.append(", ").append(sum);
         sb.append(", ").append(comment);
+        sb.append(", ").append(guid);
 
         sb.append(")");
         return sb.toString();
