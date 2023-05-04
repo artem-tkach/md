@@ -21,4 +21,5 @@ dependencies{
     testImplementation libs.testContainersKafka
     testImplementation libs.testContainersJupiter
     testImplementation libs.wireMock
+    implementation libs.contractStubRunner
 }
