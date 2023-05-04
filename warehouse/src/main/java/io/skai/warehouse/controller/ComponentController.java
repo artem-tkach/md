@@ -4,7 +4,6 @@ import io.skai.warehouse.dto.ComponentDto;
 import io.skai.warehouse.service.ComponentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,12 +18,12 @@ public class ComponentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public List<ComponentDto> create(@RequestBody List<ComponentDto> components){
+    public List<ComponentDto> create(@RequestBody List<ComponentDto> components) {
         return componentService.create(components);
     }
 
     @PutMapping
-    public ResponseEntity<Boolean> update(@RequestBody Map<Long, Double> components){
+    public Boolean update(@RequestBody Map<Long, Double> components) {
         return componentService.updateResidues(components);
     }
 }
