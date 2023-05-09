@@ -16,4 +16,5 @@ dependencies {
     testImplementation libs.testContainersJupiter
     testImplementation libs.assertJ;
     testImplementation libs.testContainersMySQL
+    implementation libs.guava
 }

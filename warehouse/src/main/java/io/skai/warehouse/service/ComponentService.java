@@ -10,4 +10,6 @@ public interface ComponentService {
     List<ComponentDto> create(List<ComponentDto> components);
 
     Boolean updateResidues(Map<Long, Double> components);
+
+    List<ComponentDto> findAll();
 }

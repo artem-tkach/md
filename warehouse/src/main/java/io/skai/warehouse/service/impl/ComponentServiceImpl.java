@@ -53,6 +53,11 @@ public class ComponentServiceImpl implements ComponentService {
         return Boolean.FALSE;
     }
 
+    @Override
+    public List<ComponentDto> findAll() {
+        throw new UnsupportedOperationException("In progress");
+    }
+
     private List<ComponentDto> calculateResidues(Map<Long, Double> components) {
         return components.entrySet()
                 .stream()

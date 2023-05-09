@@ -26,4 +26,9 @@ public class ComponentController {
     public Boolean update(@RequestBody Map<Long, Double> components) {
         return componentService.updateResidues(components);
     }
+
+    @GetMapping
+    public List<ComponentDto> findAll(){
+        return componentService.findAll();
+    }
 }
