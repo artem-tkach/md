@@ -6,10 +6,8 @@ import io.skai.accounting.jooq.tables.pojos.Repair;
 import io.skai.accounting.repository.RepairRepository;
 import io.skai.accounting.service.RepairService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class RepairServiceImpl implements RepairService {
