@@ -2,6 +2,7 @@ package io.skai.warehouse.service.impl;
 
 import com.kenshoo.pl.entity.CreateResult;
 import com.kenshoo.pl.entity.Identifier;
+import io.skai.warehouse.cache.CacheStore;
 import io.skai.warehouse.command.builder.ComponentCommandsBuilder;
 import io.skai.warehouse.command.entity.component.CreateComponentCommand;
 import io.skai.warehouse.command.entity.component.InsertOnDuplicateUpdateComponentCommand;
@@ -26,6 +27,7 @@ public class ComponentServiceImpl implements ComponentService {
     private final ComponentPersistence componentPersistence;
     private final ComponentCommandsBuilder componentCommandsBuilder;
     private final ComponentMapper componentMapper;
+    private final CacheStore<Component> cache;
 
     @Override
     public List<ComponentDto> create(List<ComponentDto> components) {
@@ -54,8 +56,20 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
-    public List<ComponentDto> findAll() {
-        throw new UnsupportedOperationException("In progress");
+    public List<Component> findAll() {
+        return componentPersistence.findAll();
+    }
+
+    @Override
+    public Component findById(Long id) {
+        return cache.get(id)
+                .orElseGet(() -> findAndCache(id));
+    }
+
+    private Component findAndCache(Long id) {
+        Component component = componentPersistence.find(id);
+        cache.add(id, component);
+        return component;
     }
 
     private List<ComponentDto> calculateResidues(Map<Long, Double> components) {
