@@ -14,9 +14,9 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class ComponentServiceCacheTest {
 
-    private static final Long id = 1L;
+    private static final Long ID = 1L;
 
-    private static final Component EXPECTED = new Component(id, "screen", 15d, 10d);
+    private static final Component EXPECTED = new Component(ID, "screen", 15d, 10d);
 
     @Autowired
     private ComponentService componentService;
@@ -26,21 +26,21 @@ class ComponentServiceCacheTest {
 
     @Test
     void shouldReadDBOnlyOnce() {
-        when(componentPersistence.find(id)).thenReturn(EXPECTED);
+        when(componentPersistence.find(ID)).thenReturn(EXPECTED);
 
-        componentService.findById(id);
-        Component fromCache = componentService.findById(id);
+        componentService.findById(ID);
+        Component fromCache = componentService.findById(ID);
 
         assertThat(fromCache).isEqualTo(EXPECTED);
     }
 
     @Test
     void shouldGetComponentFromCache() {
-        when(componentPersistence.find(id)).thenReturn(EXPECTED);
+        when(componentPersistence.find(ID)).thenReturn(EXPECTED);
 
-        componentService.findById(id);
-        componentService.findById(id);
+        componentService.findById(ID);
+        componentService.findById(ID);
 
-        verify(componentPersistence, atMost(1)).find(id);
+        verify(componentPersistence, atMost(1)).find(ID);
     }
 }

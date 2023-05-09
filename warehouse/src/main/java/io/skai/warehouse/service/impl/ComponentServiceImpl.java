@@ -62,8 +62,7 @@ public class ComponentServiceImpl implements ComponentService {
 
     @Override
     public Component findById(Long id) {
-        return cache.get(id)
-                .orElseGet(() -> findAndCache(id));
+        return cache.get(id).orElseGet(() -> findAndCache(id));
     }
 
     private Component findAndCache(Long id) {

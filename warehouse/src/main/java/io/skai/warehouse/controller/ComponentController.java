@@ -4,14 +4,12 @@ import io.skai.warehouse.dto.ComponentDto;
 import io.skai.warehouse.model.component.Component;
 import io.skai.warehouse.service.ComponentService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 @RestController
 @RequestMapping("/component")
 @RequiredArgsConstructor
