@@ -1,14 +1,14 @@
 package io.skai.accounting.feign;
 
-import feign.RequestLine;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.Map;
 
 @FeignClient(name = "warehouse",
-        url = "http://localhost:8082/",
-        configuration = FeignConfig.class)
+        url = "http://localhost:8082/")
 public interface WarehouseClient {
-    @RequestLine("PUT /component")
+
+    @PutMapping(value = "/component")
     Boolean writeComponents(Map<Long, Integer> components);
 }

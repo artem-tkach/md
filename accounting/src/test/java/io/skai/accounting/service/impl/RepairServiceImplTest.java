@@ -37,14 +37,7 @@ class RepairServiceImplTest {
     @Test
     void shouldCreateNewRepair() {
         RepairRequestDto inputData = getInputData();
-        stubFor(WireMock
-                .put("/component")
-                .withHost(equalTo("localhost"))
-                .willReturn(aResponse()
-                        .withHeader("Content-Type","application/json;charset=UTF-8")
-                        .withBody("true")
-                        .withStatus(200)));
-
+        stub(Boolean.TRUE);
         Boolean result = warehouseClient.writeComponents(inputData.components());
         assertThat(result).isTrue();
         repairService.findOrCreate(inputData);
@@ -54,13 +47,7 @@ class RepairServiceImplTest {
     @Test
     void shouldNotCreateNewRepair() {
         RepairRequestDto inputData = getInputData();
-        stubFor(WireMock
-                .put("/component")
-                .withHost(equalTo("localhost"))
-                .willReturn(aResponse()
-                        .withHeader("Content-Type","application/json;charset=UTF-8")
-                        .withBody("false")
-                        .withStatus(200)));
+        stub(Boolean.FALSE);
 
         repairService.findOrCreate(inputData);
         verify(repairRepository,times(0)).findOrCreate(inputData);
@@ -69,5 +56,15 @@ class RepairServiceImplTest {
     private RepairRequestDto getInputData(){
         return new RepairRequestDto(1L,1L, RepairResult.REPAIRED,300d,Map.of(1L, 1),
                 "some comment", "some guid");
+    }
+
+    private void stub(Boolean response){
+        stubFor(WireMock
+                .put("/component")
+                .withHost(equalTo("localhost"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type","application/json;charset=UTF-8")
+                        .withBody(response.toString())
+                        .withStatus(200)));
     }
 }
