@@ -37,7 +37,7 @@ class RepairServiceImplTest {
     @Test
     void shouldCreateNewRepair() {
         RepairRequestDto inputData = getInputData();
-        stub(Boolean.TRUE);
+        configureWireMock(Boolean.TRUE);
         Boolean result = warehouseClient.writeComponents(inputData.components());
         assertThat(result).isTrue();
         repairService.findOrCreate(inputData);
@@ -47,7 +47,7 @@ class RepairServiceImplTest {
     @Test
     void shouldNotCreateNewRepair() {
         RepairRequestDto inputData = getInputData();
-        stub(Boolean.FALSE);
+        configureWireMock(Boolean.FALSE);
 
         repairService.findOrCreate(inputData);
         verify(repairRepository,times(0)).findOrCreate(inputData);
@@ -58,7 +58,7 @@ class RepairServiceImplTest {
                 "some comment", "some guid");
     }
 
-    private void stub(Boolean response){
+    private void configureWireMock(Boolean response){
         stubFor(WireMock
                 .put("/component")
                 .withHost(equalTo("localhost"))
