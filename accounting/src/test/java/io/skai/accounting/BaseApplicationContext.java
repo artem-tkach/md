@@ -3,6 +3,7 @@ package io.skai.accounting;
 import io.skai.accounting.repository.BrandRepository;
 import io.skai.accounting.repository.ClientRepository;
 import io.skai.accounting.repository.ModelRepository;
+import io.skai.accounting.service.RepairService;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,5 +20,7 @@ public class BaseApplicationContext {
     protected ClientRepository clientRepository;
     @Autowired
     protected ModelRepository modelRepository;
+    @Autowired
+    protected RepairService repairService;
 
 }

@@ -13,7 +13,6 @@ import io.skai.warehouse.repository.ComponentPersistence;
 import io.skai.warehouse.service.ComponentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,7 +39,8 @@ public class ComponentServiceImpl implements ComponentService {
                 .toList();
     }
 
-    private Boolean processResidues(Map<Long, Double> components) {
+    @Override
+    public Boolean updateResidues(Map<Long, Double> components) {
         List<ComponentDto> decrementedResidues = calculateResidues(components);
         Long countWithNegativeResidues = getCountOfNegative(decrementedResidues);
 
@@ -51,15 +51,6 @@ public class ComponentServiceImpl implements ComponentService {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
-    }
-
-    @Override
-    public ResponseEntity<Boolean> updateResidues(Map<Long, Double> components) {
-        Boolean updateResult = processResidues(components);
-        if (updateResult == Boolean.TRUE) {
-            return ResponseEntity.ok(Boolean.TRUE);
-        }
-        return ResponseEntity.badRequest().body(Boolean.FALSE);
     }
 
     private List<ComponentDto> calculateResidues(Map<Long, Double> components) {

@@ -36,6 +36,8 @@ dependencyResolutionManagement {
             library('testContainersJupiter',"org.testcontainers:junit-jupiter:$testContainersVersion")
             library('testContainersMySQL',"org.testcontainers:mysql:$testContainersVersion")
             library('testContainersKafka', "org.testcontainers:kafka:$testContainersVersion")
+            library('wireMock','com.github.tomakehurst:wiremock:3.0.0-beta-8')
+            library('contractStubRunner','org.springframework.cloud:spring-cloud-starter-contract-stub-runner:4.0.2')
         }
     }
 }
