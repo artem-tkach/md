@@ -20,7 +20,6 @@ public class RepairController {
 
     @PostMapping
     public Repair create(@RequestBody RepairRequestDto repair) {
-        log.info("New repair:::{}", repair);
         return repairService.findOrCreate(repair);
     }
 }

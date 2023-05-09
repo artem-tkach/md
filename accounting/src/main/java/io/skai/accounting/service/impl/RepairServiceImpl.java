@@ -20,7 +20,6 @@ public class RepairServiceImpl implements RepairService {
     @Override
     public Repair findOrCreate(RepairRequestDto repair) {
         Boolean result = warehouseClient.writeComponents(repair.components());
-        log.info("from components:{}", result);
         if (result == Boolean.TRUE) {
             return repairRepository.findOrCreate(repair);
         }
