@@ -2,15 +2,13 @@ package io.skai.warehouse.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-@Slf4j
 public class CacheStore<T> {
 
-    private Cache<Long, T> cache;
+    private final Cache<Long, T> cache;
 
     public CacheStore(int expiryDuration, TimeUnit timeUnit) {
         cache = CacheBuilder.newBuilder()
