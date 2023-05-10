@@ -19,3 +19,6 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+guava-cache:
+  expiryDuration: 120
+  timeUnit: MINUTES
