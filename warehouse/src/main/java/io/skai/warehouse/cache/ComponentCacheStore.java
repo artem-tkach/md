@@ -28,12 +28,6 @@ public class ComponentCacheStore {
         return Optional.ofNullable(cache.getUnchecked(key));
     }
 
-    public void add(Long key, Component value) {
-        if (key != null && value != null) {
-            cache.put(key, value);
-        }
-    }
-
     private CacheLoader<Long, Component> getCacheLoader() {
         return new CacheLoader<>() {
             @Override
