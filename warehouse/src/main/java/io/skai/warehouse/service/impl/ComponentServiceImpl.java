@@ -2,6 +2,7 @@ package io.skai.warehouse.service.impl;
 
 import com.kenshoo.pl.entity.CreateResult;
 import com.kenshoo.pl.entity.Identifier;
+import io.skai.warehouse.cache.ComponentCacheStore;
 import io.skai.warehouse.command.builder.ComponentCommandsBuilder;
 import io.skai.warehouse.command.entity.component.CreateComponentCommand;
 import io.skai.warehouse.command.entity.component.InsertOnDuplicateUpdateComponentCommand;
@@ -26,6 +27,7 @@ public class ComponentServiceImpl implements ComponentService {
     private final ComponentPersistence componentPersistence;
     private final ComponentCommandsBuilder componentCommandsBuilder;
     private final ComponentMapper componentMapper;
+    private final ComponentCacheStore cache;
 
     @Override
     public List<ComponentDto> create(List<ComponentDto> components) {
@@ -48,9 +50,20 @@ public class ComponentServiceImpl implements ComponentService {
             List<InsertOnDuplicateUpdateComponentCommand> commands = componentCommandsBuilder.buildUpsertCommands(decrementedResidues);
 
             componentPersistence.insertOnDuplicateUpdate(commands);
+            cache.invalidate(components.keySet());
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    @Override
+    public List<Component> findAll() {
+        return componentPersistence.findAll();
+    }
+
+    @Override
+    public Component findById(Long id) {
+        return cache.get(id).orElseThrow();
     }
 
     private List<ComponentDto> calculateResidues(Map<Long, Double> components) {

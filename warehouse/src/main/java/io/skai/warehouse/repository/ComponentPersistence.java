@@ -42,6 +42,16 @@ public class ComponentPersistence {
                 .orElseThrow();
     }
 
+    public List<Component> findAll(){
+        return plContext.select(ComponentEntity.ID, ComponentEntity.NAME, ComponentEntity.RESERVED, ComponentEntity.COUNT)
+                .from(ComponentEntity.INSTANCE)
+                .where(PLCondition.trueCondition())
+                .fetch()
+                .stream()
+                .map(this::buildComponent)
+                .toList();
+    }
+
     private ChangeFlowConfig.Builder<ComponentEntity> flowBuilder() {
         return ChangeFlowConfigBuilderFactory
                 .newInstance(plContext, ComponentEntity.INSTANCE);

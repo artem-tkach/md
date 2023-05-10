@@ -1,6 +1,7 @@
 package io.skai.warehouse.controller;
 
 import io.skai.warehouse.dto.ComponentDto;
+import io.skai.warehouse.model.component.Component;
 import io.skai.warehouse.service.ComponentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,5 +26,16 @@ public class ComponentController {
     @PutMapping
     public Boolean update(@RequestBody Map<Long, Double> components) {
         return componentService.updateResidues(components);
+    }
+
+    @GetMapping
+    public List<Component> findAll() {
+        return componentService.findAll();
+    }
+
+    @GetMapping
+    @RequestMapping("/{id}")
+    public Component getById(@PathVariable("id") Long id) {
+        return componentService.findById(id);
     }
 }
