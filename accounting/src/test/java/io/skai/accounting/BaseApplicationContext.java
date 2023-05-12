@@ -2,6 +2,7 @@ package io.skai.accounting;
 
 import io.skai.accounting.repository.BrandRepository;
 import io.skai.accounting.repository.ClientRepository;
+import io.skai.accounting.repository.DeliveryRepository;
 import io.skai.accounting.repository.ModelRepository;
 import io.skai.accounting.service.RepairService;
 import org.jooq.DSLContext;
@@ -22,5 +23,6 @@ public class BaseApplicationContext {
     protected ModelRepository modelRepository;
     @Autowired
     protected RepairService repairService;
-
+    @Autowired
+    protected DeliveryRepository deliveryRepository;
 }
