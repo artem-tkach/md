@@ -3,9 +3,9 @@ package io.skai.accounting.cucumber.steps;
 import groovy.util.logging.Slf4j;
 import io.cucumber.java.After;
 import io.cucumber.java.DataTableType;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.spring.CucumberContextConfiguration;
 import io.skai.accounting.cucumber.CucumberBootstrap;
 import io.skai.accounting.dto.client.ClientDto;
 import io.skai.accounting.dto.client.ClientRequestDto;
@@ -23,6 +23,7 @@ import static io.skai.accounting.jooq.Tables.CLIENT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
+@CucumberContextConfiguration
 public class ClientCreationSteps extends CucumberBootstrap {
 
     @Autowired
@@ -30,13 +31,6 @@ public class ClientCreationSteps extends CucumberBootstrap {
 
     @Autowired
     private ClientService clientService;
-
-    @Given("^Client absent in db")
-    public void clientIsAbsent() {
-        dslContext
-                .truncate(CLIENT)
-                .execute();
-    }
 
     @When("^Call to create new client$")
     public void createNewBrand(ClientRequestDto client) throws URISyntaxException {
@@ -46,15 +40,14 @@ public class ClientCreationSteps extends CucumberBootstrap {
     }
 
     @Then("Client is stored in database$")
-    public void getCreatedClient(ClientDto expected) {
+    public void getCreatedClient(List<ClientDto> expected) {
         List<ClientDto> results = clientService.getAll();
         assertThat(results).hasSize(1);
-        assertThat(results.get(0)).isEqualTo(expected);
+        assertThat(results).isEqualTo(expected);
     }
 
     @DataTableType
     public ClientRequestDto ClientRequestDtoTransformer(Map<String, String> row) {
-
         return new ClientRequestDto(
                 row.get("name"),
                 row.get("email"));
@@ -62,7 +55,6 @@ public class ClientCreationSteps extends CucumberBootstrap {
 
     @DataTableType
     public ClientDto ClientDtoTransformer(Map<String, String> row) {
-
         return new ClientDto(
                 Long.parseLong(row.get("id")),
                 row.get("name"),
@@ -70,7 +62,7 @@ public class ClientCreationSteps extends CucumberBootstrap {
     }
 
     @After
-    public void clearTable() {
+    public void truncateTableClient() {
         dslContext
                 .truncate(CLIENT)
                 .execute();

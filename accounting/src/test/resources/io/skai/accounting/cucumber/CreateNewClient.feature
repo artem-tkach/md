@@ -3,8 +3,6 @@ Feature: addNewClient
 
   Scenario: add new client
 
-    Given Client absent in db
-
     When Call to create new client
       | name      | email                |
       | Brad Pit  |brad.pit@gmail.com    |
