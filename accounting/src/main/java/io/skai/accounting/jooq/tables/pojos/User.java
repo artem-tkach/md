@@ -15,11 +15,11 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-    private String name;
-    private String email;
-    private String phone;
-    private String password;
+    private Long    id;
+    private String  name;
+    private String  email;
+    private String  phone;
+    private String  password;
     private Integer role;
 
     public User() {}
@@ -34,11 +34,11 @@ public class User implements Serializable {
     }
 
     public User(
-        Long id,
-        String name,
-        String email,
-        String phone,
-        String password,
+        Long    id,
+        String  name,
+        String  email,
+        String  phone,
+        String  password,
         Integer role
     ) {
         this.id = id;
@@ -131,67 +131,6 @@ public class User implements Serializable {
      */
     public void setRole(Integer role) {
         this.role = role;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        final User other = (User) obj;
-        if (this.id == null) {
-            if (other.id != null)
-                return false;
-        }
-        else if (!this.id.equals(other.id))
-            return false;
-        if (this.name == null) {
-            if (other.name != null)
-                return false;
-        }
-        else if (!this.name.equals(other.name))
-            return false;
-        if (this.email == null) {
-            if (other.email != null)
-                return false;
-        }
-        else if (!this.email.equals(other.email))
-            return false;
-        if (this.phone == null) {
-            if (other.phone != null)
-                return false;
-        }
-        else if (!this.phone.equals(other.phone))
-            return false;
-        if (this.password == null) {
-            if (other.password != null)
-                return false;
-        }
-        else if (!this.password.equals(other.password))
-            return false;
-        if (this.role == null) {
-            if (other.role != null)
-                return false;
-        }
-        else if (!this.role.equals(other.role))
-            return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
-        result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
-        result = prime * result + ((this.phone == null) ? 0 : this.phone.hashCode());
-        result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
-        result = prime * result + ((this.role == null) ? 0 : this.role.hashCode());
-        return result;
     }
 
     @Override

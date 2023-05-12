@@ -6,6 +6,7 @@ package io.skai.accounting.jooq;
 
 import io.skai.accounting.jooq.tables.Brand;
 import io.skai.accounting.jooq.tables.Client;
+import io.skai.accounting.jooq.tables.Delivery;
 import io.skai.accounting.jooq.tables.Model;
 import io.skai.accounting.jooq.tables.Order;
 import io.skai.accounting.jooq.tables.OrderStatus;
@@ -42,6 +43,11 @@ public class MobileAccounting extends SchemaImpl {
      * The table <code>mobile_accounting.client</code>.
      */
     public final Client CLIENT = Client.CLIENT;
+
+    /**
+     * The table <code>mobile_accounting.delivery</code>.
+     */
+    public final Delivery DELIVERY = Delivery.DELIVERY;
 
     /**
      * The table <code>mobile_accounting.model</code>.
@@ -86,6 +92,7 @@ public class MobileAccounting extends SchemaImpl {
         return Arrays.asList(
             Brand.BRAND,
             Client.CLIENT,
+            Delivery.DELIVERY,
             Model.MODEL,
             Order.ORDER,
             OrderStatus.ORDER_STATUS,

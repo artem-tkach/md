@@ -9,18 +9,14 @@ import io.skai.accounting.jooq.MobileAccounting;
 import io.skai.accounting.jooq.tables.records.OrderStatusRecord;
 
 import java.time.LocalDateTime;
-import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function4;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Records;
 import org.jooq.Row4;
 import org.jooq.Schema;
-import org.jooq.SelectField;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
@@ -69,7 +65,7 @@ public class OrderStatus extends TableImpl<OrderStatusRecord> {
     /**
      * The column <code>mobile_accounting.order_status.date</code>.
      */
-    public final TableField<OrderStatusRecord, LocalDateTime> DATE = createField(DSL.name("date"), SQLDataType.LOCALDATETIME(0).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<OrderStatusRecord, LocalDateTime> DATE = createField(DSL.name("date"), SQLDataType.LOCALDATETIME(0), this, "");
 
     private OrderStatus(Name alias, Table<OrderStatusRecord> aliased) {
         this(alias, aliased, null);
@@ -131,11 +127,6 @@ public class OrderStatus extends TableImpl<OrderStatusRecord> {
         return new OrderStatus(alias, this);
     }
 
-    @Override
-    public OrderStatus as(Table<?> alias) {
-        return new OrderStatus(alias.getQualifiedName(), this);
-    }
-
     /**
      * Rename this table
      */
@@ -152,14 +143,6 @@ public class OrderStatus extends TableImpl<OrderStatusRecord> {
         return new OrderStatus(name, null);
     }
 
-    /**
-     * Rename this table
-     */
-    @Override
-    public OrderStatus rename(Table<?> name) {
-        return new OrderStatus(name.getQualifiedName(), null);
-    }
-
     // -------------------------------------------------------------------------
     // Row4 type methods
     // -------------------------------------------------------------------------
@@ -167,20 +150,5 @@ public class OrderStatus extends TableImpl<OrderStatusRecord> {
     @Override
     public Row4<Long, Long, String, LocalDateTime> fieldsRow() {
         return (Row4) super.fieldsRow();
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
-     */
-    public <U> SelectField<U> mapping(Function4<? super Long, ? super Long, ? super String, ? super LocalDateTime, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
-     */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Long, ? super Long, ? super String, ? super LocalDateTime, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
     }
 }

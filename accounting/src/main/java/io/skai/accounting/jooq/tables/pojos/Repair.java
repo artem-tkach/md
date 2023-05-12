@@ -16,14 +16,14 @@ public class Repair implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Long          id;
     private LocalDateTime date;
-    private Long orderId;
-    private Long masterId;
-    private String result;
-    private Double sum;
-    private String comment;
-    private String guid;
+    private Long          orderId;
+    private Long          masterId;
+    private String        result;
+    private Double        sum;
+    private String        comment;
+    private String        guid;
 
     public Repair() {}
 
@@ -39,14 +39,14 @@ public class Repair implements Serializable {
     }
 
     public Repair(
-        Long id,
+        Long          id,
         LocalDateTime date,
-        Long orderId,
-        Long masterId,
-        String result,
-        Double sum,
-        String comment,
-        String guid
+        Long          orderId,
+        Long          masterId,
+        String        result,
+        Double        sum,
+        String        comment,
+        String        guid
     ) {
         this.id = id;
         this.date = date;
@@ -168,81 +168,6 @@ public class Repair implements Serializable {
      */
     public void setGuid(String guid) {
         this.guid = guid;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        final Repair other = (Repair) obj;
-        if (this.id == null) {
-            if (other.id != null)
-                return false;
-        }
-        else if (!this.id.equals(other.id))
-            return false;
-        if (this.date == null) {
-            if (other.date != null)
-                return false;
-        }
-        else if (!this.date.equals(other.date))
-            return false;
-        if (this.orderId == null) {
-            if (other.orderId != null)
-                return false;
-        }
-        else if (!this.orderId.equals(other.orderId))
-            return false;
-        if (this.masterId == null) {
-            if (other.masterId != null)
-                return false;
-        }
-        else if (!this.masterId.equals(other.masterId))
-            return false;
-        if (this.result == null) {
-            if (other.result != null)
-                return false;
-        }
-        else if (!this.result.equals(other.result))
-            return false;
-        if (this.sum == null) {
-            if (other.sum != null)
-                return false;
-        }
-        else if (!this.sum.equals(other.sum))
-            return false;
-        if (this.comment == null) {
-            if (other.comment != null)
-                return false;
-        }
-        else if (!this.comment.equals(other.comment))
-            return false;
-        if (this.guid == null) {
-            if (other.guid != null)
-                return false;
-        }
-        else if (!this.guid.equals(other.guid))
-            return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result + ((this.date == null) ? 0 : this.date.hashCode());
-        result = prime * result + ((this.orderId == null) ? 0 : this.orderId.hashCode());
-        result = prime * result + ((this.masterId == null) ? 0 : this.masterId.hashCode());
-        result = prime * result + ((this.result == null) ? 0 : this.result.hashCode());
-        result = prime * result + ((this.sum == null) ? 0 : this.sum.hashCode());
-        result = prime * result + ((this.comment == null) ? 0 : this.comment.hashCode());
-        result = prime * result + ((this.guid == null) ? 0 : this.guid.hashCode());
-        return result;
     }
 
     @Override

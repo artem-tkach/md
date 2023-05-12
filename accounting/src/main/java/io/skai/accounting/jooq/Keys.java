@@ -6,6 +6,7 @@ package io.skai.accounting.jooq;
 
 import io.skai.accounting.jooq.tables.Brand;
 import io.skai.accounting.jooq.tables.Client;
+import io.skai.accounting.jooq.tables.Delivery;
 import io.skai.accounting.jooq.tables.Model;
 import io.skai.accounting.jooq.tables.Order;
 import io.skai.accounting.jooq.tables.OrderStatus;
@@ -13,6 +14,7 @@ import io.skai.accounting.jooq.tables.Repair;
 import io.skai.accounting.jooq.tables.User;
 import io.skai.accounting.jooq.tables.records.BrandRecord;
 import io.skai.accounting.jooq.tables.records.ClientRecord;
+import io.skai.accounting.jooq.tables.records.DeliveryRecord;
 import io.skai.accounting.jooq.tables.records.ModelRecord;
 import io.skai.accounting.jooq.tables.records.OrderRecord;
 import io.skai.accounting.jooq.tables.records.OrderStatusRecord;
@@ -41,6 +43,8 @@ public class Keys {
     public static final UniqueKey<BrandRecord> KEY_BRAND_PRIMARY = Internal.createUniqueKey(Brand.BRAND, DSL.name("KEY_brand_PRIMARY"), new TableField[] { Brand.BRAND.ID }, true);
     public static final UniqueKey<ClientRecord> KEY_CLIENT_E_MAIL = Internal.createUniqueKey(Client.CLIENT, DSL.name("KEY_client_e-mail"), new TableField[] { Client.CLIENT.EMAIL }, true);
     public static final UniqueKey<ClientRecord> KEY_CLIENT_PRIMARY = Internal.createUniqueKey(Client.CLIENT, DSL.name("KEY_client_PRIMARY"), new TableField[] { Client.CLIENT.ID }, true);
+    public static final UniqueKey<DeliveryRecord> KEY_DELIVERY_GUID = Internal.createUniqueKey(Delivery.DELIVERY, DSL.name("KEY_delivery_guid"), new TableField[] { Delivery.DELIVERY.GUID }, true);
+    public static final UniqueKey<DeliveryRecord> KEY_DELIVERY_PRIMARY = Internal.createUniqueKey(Delivery.DELIVERY, DSL.name("KEY_delivery_PRIMARY"), new TableField[] { Delivery.DELIVERY.ID }, true);
     public static final UniqueKey<ModelRecord> KEY_MODEL_PRIMARY = Internal.createUniqueKey(Model.MODEL, DSL.name("KEY_model_PRIMARY"), new TableField[] { Model.MODEL.ID }, true);
     public static final UniqueKey<OrderRecord> KEY_ORDER_GUID = Internal.createUniqueKey(Order.ORDER, DSL.name("KEY_order_guid"), new TableField[] { Order.ORDER.GUID }, true);
     public static final UniqueKey<OrderRecord> KEY_ORDER_PRIMARY = Internal.createUniqueKey(Order.ORDER, DSL.name("KEY_order_PRIMARY"), new TableField[] { Order.ORDER.ID }, true);
@@ -54,5 +58,6 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<DeliveryRecord, UserRecord> FK_DELIVERY_MANAGER_USER = Internal.createForeignKey(Delivery.DELIVERY, DSL.name("fk_delivery_manager_user"), new TableField[] { Delivery.DELIVERY.MANAGER_ID }, Keys.KEY_USER_PRIMARY, new TableField[] { User.USER.ID }, true);
     public static final ForeignKey<OrderRecord, UserRecord> FK_MANAGER_USER = Internal.createForeignKey(Order.ORDER, DSL.name("fk_manager_user"), new TableField[] { Order.ORDER.MANAGER_ID }, Keys.KEY_USER_PRIMARY, new TableField[] { User.USER.ID }, true);
 }

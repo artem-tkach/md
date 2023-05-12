@@ -11,18 +11,14 @@ import io.skai.accounting.jooq.tables.records.RepairRecord;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function8;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Records;
 import org.jooq.Row8;
 import org.jooq.Schema;
-import org.jooq.SelectField;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
@@ -61,7 +57,7 @@ public class Repair extends TableImpl<RepairRecord> {
     /**
      * The column <code>mobile_accounting.repair.date</code>.
      */
-    public final TableField<RepairRecord, LocalDateTime> DATE = createField(DSL.name("date"), SQLDataType.LOCALDATETIME(0).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<RepairRecord, LocalDateTime> DATE = createField(DSL.name("date"), SQLDataType.LOCALDATETIME(0), this, "");
 
     /**
      * The column <code>mobile_accounting.repair.order_id</code>.
@@ -156,11 +152,6 @@ public class Repair extends TableImpl<RepairRecord> {
         return new Repair(alias, this);
     }
 
-    @Override
-    public Repair as(Table<?> alias) {
-        return new Repair(alias.getQualifiedName(), this);
-    }
-
     /**
      * Rename this table
      */
@@ -177,14 +168,6 @@ public class Repair extends TableImpl<RepairRecord> {
         return new Repair(name, null);
     }
 
-    /**
-     * Rename this table
-     */
-    @Override
-    public Repair rename(Table<?> name) {
-        return new Repair(name.getQualifiedName(), null);
-    }
-
     // -------------------------------------------------------------------------
     // Row8 type methods
     // -------------------------------------------------------------------------
@@ -192,20 +175,5 @@ public class Repair extends TableImpl<RepairRecord> {
     @Override
     public Row8<Long, LocalDateTime, Long, Long, String, Double, String, String> fieldsRow() {
         return (Row8) super.fieldsRow();
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
-     */
-    public <U> SelectField<U> mapping(Function8<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super String, ? super Double, ? super String, ? super String, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
-     */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Long, ? super LocalDateTime, ? super Long, ? super Long, ? super String, ? super Double, ? super String, ? super String, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
     }
 }

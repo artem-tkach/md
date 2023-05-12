@@ -15,8 +15,8 @@ public class Model implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-    private Long brandId;
+    private Long   id;
+    private Long   brandId;
     private String name;
 
     public Model() {}
@@ -28,8 +28,8 @@ public class Model implements Serializable {
     }
 
     public Model(
-        Long id,
-        Long brandId,
+        Long   id,
+        Long   brandId,
         String name
     ) {
         this.id = id;
@@ -77,46 +77,6 @@ public class Model implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        final Model other = (Model) obj;
-        if (this.id == null) {
-            if (other.id != null)
-                return false;
-        }
-        else if (!this.id.equals(other.id))
-            return false;
-        if (this.brandId == null) {
-            if (other.brandId != null)
-                return false;
-        }
-        else if (!this.brandId.equals(other.brandId))
-            return false;
-        if (this.name == null) {
-            if (other.name != null)
-                return false;
-        }
-        else if (!this.name.equals(other.name))
-            return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result + ((this.brandId == null) ? 0 : this.brandId.hashCode());
-        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
-        return result;
     }
 
     @Override

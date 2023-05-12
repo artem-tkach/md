@@ -11,18 +11,14 @@ import io.skai.accounting.jooq.tables.records.OrderRecord;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function8;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Records;
 import org.jooq.Row8;
 import org.jooq.Schema;
-import org.jooq.SelectField;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
@@ -86,7 +82,7 @@ public class Order extends TableImpl<OrderRecord> {
     /**
      * The column <code>mobile_accounting.order.date</code>.
      */
-    public final TableField<OrderRecord, LocalDateTime> DATE = createField(DSL.name("date"), SQLDataType.LOCALDATETIME(0).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<OrderRecord, LocalDateTime> DATE = createField(DSL.name("date"), SQLDataType.LOCALDATETIME(0), this, "");
 
     /**
      * The column <code>mobile_accounting.order.guid</code>.
@@ -174,11 +170,6 @@ public class Order extends TableImpl<OrderRecord> {
         return new Order(alias, this);
     }
 
-    @Override
-    public Order as(Table<?> alias) {
-        return new Order(alias.getQualifiedName(), this);
-    }
-
     /**
      * Rename this table
      */
@@ -195,14 +186,6 @@ public class Order extends TableImpl<OrderRecord> {
         return new Order(name, null);
     }
 
-    /**
-     * Rename this table
-     */
-    @Override
-    public Order rename(Table<?> name) {
-        return new Order(name.getQualifiedName(), null);
-    }
-
     // -------------------------------------------------------------------------
     // Row8 type methods
     // -------------------------------------------------------------------------
@@ -210,20 +193,5 @@ public class Order extends TableImpl<OrderRecord> {
     @Override
     public Row8<Long, Long, Long, String, String, Long, LocalDateTime, String> fieldsRow() {
         return (Row8) super.fieldsRow();
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
-     */
-    public <U> SelectField<U> mapping(Function8<? super Long, ? super Long, ? super Long, ? super String, ? super String, ? super Long, ? super LocalDateTime, ? super String, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
-     */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Long, ? super Long, ? super Long, ? super String, ? super String, ? super Long, ? super LocalDateTime, ? super String, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
     }
 }

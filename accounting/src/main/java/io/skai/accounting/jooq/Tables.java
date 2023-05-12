@@ -6,6 +6,7 @@ package io.skai.accounting.jooq;
 
 import io.skai.accounting.jooq.tables.Brand;
 import io.skai.accounting.jooq.tables.Client;
+import io.skai.accounting.jooq.tables.Delivery;
 import io.skai.accounting.jooq.tables.Model;
 import io.skai.accounting.jooq.tables.Order;
 import io.skai.accounting.jooq.tables.OrderStatus;
@@ -28,6 +29,11 @@ public class Tables {
      * The table <code>mobile_accounting.client</code>.
      */
     public static final Client CLIENT = Client.CLIENT;
+
+    /**
+     * The table <code>mobile_accounting.delivery</code>.
+     */
+    public static final Delivery DELIVERY = Delivery.DELIVERY;
 
     /**
      * The table <code>mobile_accounting.model</code>.
