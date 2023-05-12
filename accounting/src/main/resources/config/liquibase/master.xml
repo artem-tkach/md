@@ -13,4 +13,5 @@
     <include file="/config/liquibase/changelog/00008_add_column_guid_to_order.xml"/>
     <include file="/config/liquibase/changelog/00009_add_table_repair.xml"/>
     <include file="/config/liquibase/changelog/00010_add_column_guid_to_repair.xml"/>
+    <include file="/config/liquibase/changelog/00011_add_table_delivery.xml"/>
 </databaseChangeLog>
