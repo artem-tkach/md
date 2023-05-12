@@ -7,6 +7,7 @@ def springVersion = '3.0.5'
 def mapStructVersion = '1.5.3.Final'
 def testContainersVersion = '1.18.0'
 def jooqVersion = '3.16.3'
+def cucumberVersion = '7.12.0'
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -39,6 +40,9 @@ dependencyResolutionManagement {
             library('wireMock','com.github.tomakehurst:wiremock:3.0.0-beta-8')
             library('contractStubRunner','org.springframework.cloud:spring-cloud-starter-contract-stub-runner:4.0.2')
             library('guava', 'com.google.guava:guava:31.1-jre')
+            library('cucumberJava', "io.cucumber:cucumber-java:$cucumberVersion")
+            library('cucumberSpring',"io.cucumber:cucumber-spring:$cucumberVersion")
+            library('cucmberJuplier', "io.cucumber:cucumber-junit-platform-engine:$cucumberVersion")
         }
     }
 }
